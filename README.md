@@ -1,1 +1,1 @@
-# SalesWorksConsultingGroup
+CopyRight SalesWorksConsultingGroup
