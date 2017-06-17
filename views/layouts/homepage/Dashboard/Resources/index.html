@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Stackster</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/creative.css" type="text/css">
+
+    <!--Fonts -->
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Abril+Fatface' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<style>
+    .btnfb {
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        line-height: 1.428571429;
+        font-size: 1.15rem;
+        padding: .6em 2em;
+        font-weight: 700;
+        color: #fff;
+        background-color: #3B5998;
+        border-color: #3B5998;
+        margin: 0;
+        vertical-align: middle;
+
+
+        width: 220px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .cta-text::before {
+        content: '';
+        background-image: url("https://www.lyft.com/images/vendor-lyft/icons/facebook-icon.b867728f.svg");
+        background-size: 100%;
+        background-repeat: no-repeat;
+        display: block;
+        width: 1.25em;
+        height: 1.25em;
+        position: absolute;
+        top: 10px;
+        margin-top: 0.1em;
+        margin-left:1.0em;
+        box-sizing: border-box;
+    }
+    .cta-text {
+        padding-left: 2.5em;
+    }
+
+/*Loading*/
+.overlay {
+    z-index: 100;
+    background: rgba(255,255,255,0.7);
+    border-radius: 3px;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.faOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+    color: #000;
+    font-size: 50px;
+}
+
+/*Or Spacer CSS*/
+.or-spacer {
+        width: 220px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+  //margin-top: 100px;
+  //margin-left: 100px;
+  width: 400px;
+  position: relative;
+}
+.or-spacer .mask {
+  overflow: hidden;
+  height: 20px;
+}
+.or-spacer .mask:after {
+  content: '';
+  display: block;
+  margin: -25px auto 0;
+  width: 100%;
+  height: 25px;
+  border-radius: 125px / 12px;
+  box-shadow: 0 0 8px black;
+}
+.or-spacer span {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  bottom: 100%;
+  margin-bottom: -25px;
+  left: 50%;
+  margin-left: -25px;
+  border-radius: 100%;
+  box-shadow: 0 2px 4px #999;
+  background: white;
+}
+.or-spacer span i {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  border-radius: 100%;
+  border: 1px dashed #aaa;
+  text-align: center;
+  line-height: 40px;
+  font-style: normal;
+  color: #999;
+}
+
+.or-spacer-vertical {
+  display: inline-block;
+  margin-top: 100px;
+  margin-left: 100px;
+  width: 100px;
+  position: relative;
+}
+.or-spacer-vertical .mask {
+  overflow: hidden;
+  width: 20px;
+  height: 200px;
+}
+.or-spacer-vertical.left .mask:after {
+  content: '';
+  display: block;
+  margin-left: -20px;
+  width: 20px;
+  height: 100%;
+  border-radius: 12px / 125px;
+  box-shadow: 0 0 8px black;
+}
+.or-spacer-vertical.right .mask:before {
+  content: '';
+  display: block;
+  margin-left: 20px;
+  width: 20px;
+  height: 100%;
+  border-radius: 12px / 125px;
+  box-shadow: 0 0 8px black;
+}
+</style>
+
+</head>
+
+<body id="page-top" style="overflow-x:hidden";>
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" style="font-family:'Tangerine'; font-size:27px;" href="#page-top">Stackster Account Creation Portal</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+<!--                     <li>
+                        <a class="page-scroll" href="#contact">Join the Revolution</a>
+                    </li> -->
+                    <li>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </li>
+                    <li>
+                        <a class="page-scroll" data-toggle="modal" href="#login">Login</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" data-toggle="modal" href="#register">Sign Up</a>
+                    </li>
+
+                    <!--
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#services">Services</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                    -->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <br>
+                <h2 style="font-family: 'Abril Fatface'; font-size:50px;">Your Stackster Application has been Approved!</h2>
+                <p style="color:white;"><b>Private Beta Access Now Open</b></p>
+                <br>
+                <a class="btn btn-primary btn-xl page-scroll" data-toggle="modal" href="#register">Create your private beta account today!</a>   
+            </div>
+        </div>
+    </header>
+
+    
+    <!-- Modals
+    ===================================================== -->
+    <!--Login Modal -->
+    <div class="modal fade" id="login">
+      <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="overlay">
+                  <i class="fa fa-refresh fa-spin faOverlay"></i>
+                </div>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title"><strong style="color: black">Login</strong> <small>to <strong style="color: grey">Stack</strong>ster</small></h4>
+          </div>
+          <div class="modal-body" style="padding-bottom: 0px;">
+            <br>
+            <button class="btn btn-primary btnfb"  onclick="fblogin();" type="button">
+                <i class="fa fa-facebook-official"></i><span> Sign in with Facebook</span>
+            </button>
+            <br><br>
+            <div class="or-spacer">  
+                <div class="mask"></div>  
+                <span><i>or</i></span>
+            </div>
+            <br>
+               <!-- form start -->
+                <form id="loginModalForm" class="form-horizontal" style="padding-left:50px; padding-right:50px;">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label for="inputEmailLogin"><small style="color:grey;">Email Address</small></label>
+                      <input type="email" class="form-control" id="inputEmailLogin" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPasswordLogin"><small style="color:grey;">Password</small></label>
+                      <input type="password" class="form-control" id="inputPasswordLogin" placeholder="Password">          
+                    </div>
+                  </div><!-- /.box-body -->
+                </form>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <a id="forgotPassword" style="cursor:pointer;" onclick="resetPassword();">Forgot Password?</a>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" form="loginModalForm" class="btn btn-primary">Login</button>
+            <div id="result">
+            </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+      
+    <!--Register Modal -->
+    <div class="modal fade" id="register">
+      <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="overlay">
+                  <i class="fa fa-refresh fa-spin faOverlay"></i>
+                </div>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title"><strong style="color: black">Private Beta</strong> <small> - <strong style="color: grey">Stack</strong>ster</small></h4>
+          </div>
+          <div class="modal-body" style="padding-bottom: 0px;">
+            <br>
+            <button class="btn btn-primary btnfb"  onclick="fbregister();" type="button">
+                <i class="fa fa-facebook-official"></i><span> Sign up with Facebook</span>
+            </button>
+            <br><br>
+            <div class="or-spacer">  
+                <div class="mask"></div>  
+                <span><i>or</i></span>
+            </div>
+            <br>
+            <form id="registerModalForm" class="form-horizontal" style="padding-left:50px; padding-right:50px;">
+              <div class="form-group">
+                <label for="inputName"><small style="color:grey;">Full Name</small></label>
+                <input type="text" class="form-control" id="fullname" placeholder="Enter Your First and Last Name">
+              </div>
+              <div class="form-group">
+                <label for="inputEmail"><small style="color:grey;">Email Address</small></label>
+                <input type="text" class="form-control" id="registerEmail" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <label for="inputPassword"><small style="color:grey;">Password</small></label>
+                  <input type="password" class="form-control" id="Password1" placeholder="Password">
+                  <input type="password" class="form-control" id="Password2" style="margin-top:5px;" placeholder="Enter Password Again">
+              </div>
+            </form>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button  type="submit" form="registerModalForm" class="btn btn-primary">Register</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+              
+    </div><!-- /.modal -->
+    
+    <!--Terms of Agreement Modal -->
+  <div class="modal fade" id="toa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Stackster's Terms of Agreement</h4>
+        </div>
+        <div class="modal-body">
+            <dl style="font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif; color:black;">
+                <dt>Welcome to Stackster!</dt>
+                <br/>
+                <dd>Thanks for using our products and services (“Services”). The Services are provided by Stackster Inc. (“Stackster”), located at <span itemprop="contentLocation">332386 Georgia Tech Station, Atlanta, GA 30332, United States</span>.</dd>
+                <br/>
+                <dd>By using our Services, you are agreeing to these terms. Please read them carefully.</dd>
+                <br/>
+                <dd>Our Services are very diverse, so sometimes additional terms or product requirements (including age requirements) may apply. Additional terms will be available with the relevant Services, and those additional terms become part of your agreement with us if you use those Services.</dd>
+                <br/>
+                <dt>Using our Services</dt>
+                <br/>
+                <dd>You must follow any policies made available to you within the Services.</dd>
+                <br/>
+                <dd>Don’t misuse our Services. For example, don’t interfere with our Services or try to access them using a method other than the interface and the instructions that we provide. You may use our Services only as permitted by law, including applicable export and re-export control laws and regulations. We may suspend or stop providing our Services to you if you do not comply with our terms or policies or if we are investigating suspected misconduct.</dd>
+                <br/>
+                <dd>Using our Services does not give you ownership of any intellectual property rights in our Services or the content you access. You may not use content from our Services unless you obtain permission from its owner or are otherwise permitted by law. These terms do not grant you the right to use any branding or logos used in our Services. Don’t remove, obscure, or alter any legal notices displayed in or along with our Services.</dd>
+                <br/>
+                <dd>Our Services display some content that is not Stackster's. This content is the sole responsibility of the entity that makes it available. We may review content to determine whether it is illegal or violates our policies, and we may remove or refuse to display content that we reasonably believe violates our policies or the law. But that does not necessarily mean that we review content, so please don’t assume that we do.</dd>
+                <br/>
+                <dd>In connection with your use of the Services, we may send you service announcements, administrative messages, and other information. You may opt out of some of those communications.</dd>
+                <br/>
+                <dt>Modifying and Terminating our Services</dt>
+                <br/>
+                <dd>We are constantly changing and improving our Services. We may add or remove functionalities or features, and we may suspend or stop a Service altogether.</dd>  
+                <br/>
+                <dd>You can stop using our Services at any time, although we’ll be sorry to see you go. Stackster may also stop providing Services to you, or add or create new limits to our Services at any time.</dd>  
+                <br/>
+                <dd>We believe that you own your data and preserving your access to such data is important. If we discontinue a Service, where reasonably possible, we will give you reasonable advance notice and a chance to get information out of that Service.</dd>    
+                <br/>
+                <dt>Our Warranties and Disclaimers</dt>
+                <br/>
+                <dd>We provide our Services using a commercially reasonable level of skill and care and we hope that you will enjoy using them. But there are certain things that we don’t promise about our Services.</dd>
+                <br/>
+                <dd>OTHER THAN AS EXPRESSLY SET OUT IN THESE TERMS OR ADDITIONAL TERMS, NEITHER Stackster NOR ITS SUPPLIERS OR DISTRIBUTORS MAKE ANY SPECIFIC PROMISES ABOUT THE SERVICES. FOR EXAMPLE, WE DON’T MAKE ANY COMMITMENTS ABOUT THE CONTENT WITHIN THE SERVICES, THE SPECIFIC FUNCTION OF THE SERVICES, OR THEIR RELIABILITY, AVAILABILITY, OR ABILITY TO MEET YOUR NEEDS. WE PROVIDE THE SERVICES “AS IS”.</dd>
+                <br/>
+                <dd>SOME JURISDICTIONS PROVIDE FOR CERTAIN WARRANTIES, LIKE THE IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. TO THE EXTENT PERMITTED BY LAW, WE EXCLUDE ALL WARRANTIES.</dd>
+                <br/>
+                <dt>Business uses of our Services</dt>
+                <br/>
+                <dd>If you are using our Services on behalf of a business, that business accepts these terms. It will hold harmless and indemnify Google and its affiliates, officers, agents, and employees from any claim, suit or action arising from or related to the use of the Services or violation of these terms, including any liability or expense arising from claims, losses, damages, suits, judgments, litigation costs and attorneys’ fees.</dd>
+                <br/>
+                <dt>About these Terms</dt>
+                <br/>
+                <dd>We may modify these terms or any additional terms that apply to a Service to, for example, reflect changes to the law or changes to our Services. You should look at the terms regularly. We’ll post notice of modifications to these terms on this page. We’ll post notice of modified additional terms in the applicable Service. Changes will not apply retroactively and will become effective no sooner than fourteen days after they are posted. However, changes addressing new functions for a Service or changes made for legal reasons will be effective immediately. If you do not agree to the modified terms for a Service, you should discontinue your use of that Service.</dd>
+                <br/>
+                <dd>If there is a conflict between these terms and the additional terms, the additional terms will control for that conflict.</dd>
+                <br/>
+                <dd>These terms control the relationship between Stackster and you. They do not create any third party beneficiary rights</dd>
+                <br/>
+                <dd>If you do not comply with these terms, and we don’t take action right away, this doesn’t mean that we are giving up any rights that we may have (such as taking action in the future).</dd>
+                <br/>
+                <dd>If it turns out that a particular term is not enforceable, this will not affect any other terms.</dd>
+                <br/>
+                <dd>The laws of Georgia, U.S.A., will apply to any disputes arising out of or relating to these terms or the Services.</dd>
+                <br/>
+                <dd>For information, please send email out to cding9@gatech.edu</dd>
+                <br/>
+            </dl>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+ 
+  <!--Privacy Modal -->
+  <div class="modal fade" id="privacy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Stackster's Privacy</h4>
+        </div>
+        <div class="modal-body">
+            <dl style="font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif; color:black;">
+                <dt>Privacy and Copyright Protection</dt>
+                <br/>
+                <dd>Stackster's privacy policies explain how we treat your personal data and protect your privacy when you use our Services. By using our Services, you agree that Stackster can use such data in accordance with our privacy policies.</dd>
+                <br/>
+                <dd>We respond to notices of alleged copyright infringement and terminate accounts of repeat infringers according to the process set out in the U.S. Digital Millennium Copyright Act.</dd>
+                <br/>
+                <dd>This is not for commercial use. All ideas are property of Stackster. Pictures and Images obtained from Google Images Search Engine, with sole exception of our Logo. We reserve all rights to our ideas and logo.</dd>
+                <br/>
+            </dl>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+<!--CoursesOffered Modal -->
+  <div class="modal fade" id="offeredCourses" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Stackster's Offered Courses</h4>
+        </div>
+        <div class="modal-body">
+                <object data="offeredCoursesmarch8.pdf" type="application/pdf" width="100%" height="800px">
+                    alt : <a href="offeredCoursesmarch8.pdf">test.pdf</a>
+                </object>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+    <!-- FOOTER -->
+
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.fittext.js"></script>
+    <script src="js/wow.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/creative.js"></script>
+
+    <!-- Firebase -->
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <!--Moment Time-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script>
+    /******* FIREBASE CODE - MOVE TO JS FILE *******/
+        $( document ).ready(function() {
+            //Prevent Login/Submit from Refreshing Page - Causes Bugs
+            $('#loginModalForm').submit(function () {
+             login();
+             return false;
+            });
+            $('#registerModalForm').submit(function () {
+             register();
+             return false;
+            });
+            // Register the callback to be fired every time auth state changes
+            var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+            ref.onAuth(authDataCallback);
+            $(".overlay").hide();
+            $("#errormessage").hide();
+        });
+        // Create a callback which logs the current auth state
+        function authDataCallback(authData) {
+          if (authData) {
+            console.log("User " + authData.uid + " is logged in with " + authData.provider);
+            if(authData.provider == "facebook"){
+                checkIfUserExistsRegister(authData.uid, authData);
+            }
+          } else {
+            console.log("User is logged out");
+          }
+        }
+
+        function fblogin(){
+            $(".overlay").show();
+            console.log("Executing FB Login...");
+            var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+            ref.authWithOAuthPopup("facebook", loginAuthHandler);
+            return false;
+        }
+        function login(){
+            $(".overlay").show();
+            console.log("Executing Traditional Login...");
+            var email = $('#inputEmailLogin').val();
+            var pass = $('#inputPasswordLogin').val();
+            var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+            ref.authWithPassword({
+              email    : email,
+              password : pass
+            }, loginAuthHandler);
+            return false;
+        }
+        // Create a callback to handle the result of the authentication
+        function loginAuthHandler(error, authData) {
+          if (error) {
+            if(error.code == "TRANSPORT_UNAVAILABLE"){
+                (new Firebase("https://ubertutoralpha.firebaseio.com")).authWithOAuthRedirect("facebook",fbLoginRetryWithOutPopUpsAuthHandler);
+            } else{
+                alert(error);
+                $(".overlay").hide();
+            }
+          } else {
+            checkIfUserExistsLogin(authData.uid, authData);
+          }
+          function fbLoginRetryWithOutPopUpsAuthHandler(errorRetry, authDataRetry){
+            if (errorRetry) {
+              console.log("Login Failed!", errorRetry);
+              alert(errorRetry);
+              $(".overlay").hide();
+            } else {
+                checkIfUserExistsLogin(authDataRetry.uid, authDataRetry);
+            }
+          }
+        }
+        function successLogin(authData){
+           
+            console.log("Authenticated successfully with payload:", authData);
+            //Succesfully Logged In - Go to Logged in home page
+             updateLoginLatLng(authData.uid); 
+        }
+        function failLogin(authData){
+            console.log("User: "+getName(authData)+" does not exist", authData);
+            var ref = new Firebase('https://ubertutoralpha.firebaseio.com');
+            ref.unauth();
+            alert("User: "+getName(authData)+" does not exist.");
+            $(".overlay").hide();
+        }
+
+        function fbregister(){
+            $(".overlay").show();
+            console.log("Executing FB Register...");
+            var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+            ref.authWithOAuthPopup("facebook", registerAuthHandler);
+        }
+        function register(){
+            $(".overlay").show();
+            console.log("Executing Traditional Register...");
+            /*Get UI Values*/
+            var email = $('#registerEmail').val();
+            var pass1 = $('#Password1').val();
+            var pass2 = $('#Password2').val();
+            if(pass1 != pass2){
+                alert("Passwords Do Not Match")
+                $(".overlay").hide();
+                return;
+            }
+            /*Authenticate First To see if user exists before registering*/
+            var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+            ref.authWithPassword({
+              email    : email,
+              password : pass2
+            }, registerAuthHandler);
+        }
+        // Create a callback to handle the result of the authentication
+        function registerAuthHandler(error, authData) {
+          if (authData){
+            if(authData.provider == "facebook"){
+                checkIfUserExistsRegister(authData.uid, authData);
+            }else{
+                //Other future support for Google Github login 
+            }
+          } else if (error == "Error: The specified user does not exist."){
+            persistNewUserDB("traditionalEmailPassword");
+          } else {
+            if(error.code=="TRANSPORT_UNAVAILABLE"){
+                (new Firebase("https://ubertutoralpha.firebaseio.com")).authWithOAuthRedirect("facebook", fbRegisterRetryAuthHandler);
+            } else {
+                alert(error);
+                $(".overlay").hide();
+            }
+          }
+          function fbRegisterRetryAuthHandler(errorRetry, authDataRetry){
+
+            if (authDataRetry){
+              if(authDataRetry.provider == "facebook"){
+                  checkIfUserExistsRegister(authDataRetry.uid, authDataRetry);
+              }else{
+                  //Other future support for Google Github login 
+              }
+            } else if (errorRetry == "Error: The specified user does not exist."){
+              persistNewUserDB("traditionalEmailPassword");
+            } else if (errorRetry) {
+              if(errorRetry.code=="TRANSPORT_UNAVAILABLE")
+                alert(errorRetry);
+                $(".overlay").hide();
+            }else {
+              console.log(errorRetry, authDataRetry);
+            }
+          }
+        }
+
+        /** HELPER FUNCTIONS **/
+        // find a suitable name based on the meta info given by each provider
+        function getName(authData) {
+          switch(authData.provider) {
+             case 'password':
+               return authData.password.email.replace(/@.*/, '');
+             case 'twitter':
+               return authData.twitter.displayName;
+             case 'facebook':
+               return authData.facebook.displayName;
+          }
+        }
+
+        /** Check if User Exist **/
+        // Tests to see if /users/<userId> has any data. 
+        function checkIfUserExistsLogin(userId, authData) {
+            var usersRef = new Firebase('https://ubertutoralpha.firebaseio.com/users');
+            usersRef.child(userId).once('value', function(snapshot) {
+            var exists = (snapshot.val() !== null);
+            if(exists == true){
+                successLogin(authData);
+            }else{
+                failLogin(authData);
+            }
+        });
+        }
+        function checkIfUserExistsRegister(userId, authData) {
+            var usersRef = new Firebase('https://ubertutoralpha.firebaseio.com/users');
+            usersRef.child(userId).once('value', function(snapshot) {
+            var exists = (snapshot.val() !== null);
+            if(exists == true){
+                //Just Log in the user for them...
+                updateLoginLatLng(authData.uid);
+                // console.log("User already exists! Please login instead.", authData);
+                // var ref = new Firebase('https://ubertutoralpha.firebaseio.com');
+                // ref.unauth();
+                // alert("User already exists. Please login instead.");
+                // $(".overlay").hide();
+            }else{
+                persistNewUserDB(authData);
+            }
+        });
+        }
+
+        function resetPassword(){
+            $(".overlay").show();
+            if(!$("#inputEmailLogin").val()){
+                alert("Please enter an Email Address.")
+                $(".overlay").hide();
+                return;
+            }
+            var resetPasswordRef = new Firebase("https://ubertutoralpha.firebaseio.com");
+            resetPasswordRef.resetPassword({
+              email: $("#inputEmailLogin").val()
+            }, function(error) {
+              if (error) {
+                switch (error.code) {
+                  case "INVALID_USER":
+                    alert("The specified user account does not exist.");
+                    break;
+                  default:
+                    alert("Error resetting password:", error);
+                }
+              } else {
+                alert("Password reset email sent successfully!");
+              }
+              $(".overlay").hide();
+            });
+        }
+
+        function updateLoginLatLng(uid){
+            $('#login').modal('show');
+            $(".overlay").show();
+            setTimeout(function(){ $("#errormessage").show(); $('#errormodal').modal('show')  ; }, 7000);
+            setTimeout(function(){ $("#errormessage").show(); window.location = 'USER/index.html'; }, 10000);
+            
+            console.log("login avigator.geolocation----------"+uid);
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function(position){
+                          console.log("login avigator.geolocation-----=======");
+                          console.log(position);
+                          var ref = new Firebase("https://ubertutoralpha.firebaseio.com/users");
+                          var spos="" + position.coords.latitude + "," + position.coords.longitude; 
+                          console.log("login spos="+spos);
+                          ref.child(uid).update({latlng:spos});     
+
+                          window.location = 'USER/index.html';
+
+                        });
+                    } else {
+                        alert("not support navigator.geolocation");
+                        $(".overlay").hide();
+                    }  
+        }
+        function persistNewUserDB(authData){
+            var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+            if (authData == "traditionalEmailPassword"){
+
+                var userObj = {};
+                userObj.email = $('#registerEmail').val();
+                userObj.pass = $('#Password1').val();
+
+                ref.createUser({
+                  email: userObj.email,
+                  password: userObj.pass
+                }, function(error, userData) {
+                  if (error) {
+                    switch (error.code) {
+                      case "EMAIL_TAKEN":
+                        console.log("The new user account cannot be created because the email is already in use.");
+                        break;
+                      case "INVALID_EMAIL":
+                        console.log("The specified email is not a valid email.");
+                        break;
+                      default:
+                        console.log("Error creating user:", error);
+                    }
+                  } else {
+                    console.log("Successfully created user account with uid:", userData.uid);
+                    //logs in newly created account
+                    loginAndPersist(userObj);
+                  }
+                });
+            } else if (authData) {
+                // FACEBOOK LOGIN DB PERSIST
+                ref.child("users").child(authData.uid).set({
+                    //facebook fields
+                    provider: authData.provider,
+                    name: getName(authData),
+                    imgUrl: authData.facebook.profileImageURL,
+                    displayName: authData.facebook.displayName,
+                    firstName:authData.facebook.cachedUserProfile.first_name,
+                    lastName: authData.facebook.cachedUserProfile.last_name,
+                    gender: authData.facebook.cachedUserProfile.gender,
+                    locale: authData.facebook.cachedUserProfile.locale,
+                    age: authData.facebook.cachedUserProfile.age_range.min+"",
+                    //universal fields
+                    uid:authData.uid,
+                    latlng: "37.8699047,-122.25114409999999",
+                    phoneNumber: "Not Specified",
+                    education: "Not Specifed",
+                    state: "City Not Specified",
+                    city: "State Not Specified",
+                    appointmentIDs: "",
+                    tutorRequests: "",
+                    freeSchedule: {
+                      monday: {
+                        freehours: ""
+                      },
+                      tuesday: {
+                        freehours: ""
+                      },
+                      wednesday: {
+                        freehours: ""
+                      },
+                      thursday: {
+                        freehours: ""
+                      },
+                      friday: {
+                        freehours: ""
+                      },
+                      saturday: {
+                        freehours: ""
+                      },
+                      sunday: {
+                        freehours: ""
+                      }
+                    },
+                    userType: "student",
+                    biography: "No Biography Yet",
+                    email:"Not Specified",
+                    joinDate: moment().format(),
+                    reviewAvgStars: "0",
+                    numOfReviews: "0",
+                    skills: "",
+                    courseExpertise: "",
+                    costHourly:"Not Set",
+                    linkedinUrl:"Not Specified",
+                    paypal:"Not Specified",
+                    venmo:"Not Specified",
+                    chasequickpay:"Not Specified"
+
+
+                    //todo add more fields
+
+
+
+                });
+                console.log("Succesfully created user account via FB with Payload: ", authData)
+
+
+                
+
+                //Succesfully Registered and Logged In - Go to Logged in home page
+                updateLoginLatLng(authData.uid);
+            }
+        }
+        function loginAndPersist(userObj){
+            var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+            ref.authWithPassword({
+              email    : userObj.email,
+              password : userObj.pass
+            }, loginAndPersistAuthHandler);
+        }
+        // Create a callback to handle the result of the authentication
+        function loginAndPersistAuthHandler(error, authData) {
+          var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+          if (error) {
+            console.log("Login Failed!", error);
+            alert(error);
+            $(".overlay").hide();
+          } else {
+            console.log("Successfully Created and Logged in. Payload:",authData);
+
+            /**UI Values**/
+            var userObj = {};
+            userObj.fullname = $('#fullname').val();
+            userObj.email = $('#registerEmail').val();
+            userObj.pass1 = $('#Password1').val();
+            userObj.pass2 = $('#Password2').val();
+
+            //Standard Email Password Login
+            ref.child("users").child(authData.uid).set({
+                //facebook fields
+                provider: authData.provider,
+                name: getName(authData),
+                imgUrl: "dist/img/img.png",
+                displayName: userObj.fullname || "Not Specified",
+                firstName: "Not Specified",
+                lastName: "Not Specified",
+                gender: "Not Specified",
+                locale: moment.locale(),
+                age: "Not Specified",
+                //universal fields
+                uid:authData.uid,
+                latlng: "37.8699047,-122.25114409999999",
+                phoneNumber: "Not Specified",
+                education: "Not Specifed",
+                state: "City Not Specified",
+                city: "State Not Specified",
+                appointmentIDs: "",
+                tutorRequests: "",
+                freeSchedule: {
+                  monday: {
+                    freehours: ""
+                  },
+                  tuesday: {
+                    freehours: ""
+                  },
+                  wednesday: {
+                    freehours: ""
+                  },
+                  thursday: {
+                    freehours: ""
+                  },
+                  friday: {
+                    freehours: ""
+                  },
+                  saturday: {
+                    freehours: ""
+                  },
+                  sunday: {
+                    freehours: ""
+                  }
+                },
+                userType: "student",
+                biography: "No Biography Yet",
+                email:userObj.email,
+                joinDate: moment().format(),
+                reviewAvgStars: "0",
+                numOfReviews: "0",
+                skills: "",
+                courseExpertise: "",
+                costHourly:"Not Set",
+                linkedinUrl:"Not Specified",
+                paypal:"Not Specified",
+                venmo:"Not Specified",
+                chasequickpay:"Not Specified"
+                //add more fields here
+            });
+
+            //Succesfully Registered and Logged In - Go to Logged in home page
+            updateLoginLatLng(authData.uid);
+          }
+        }
+    </script>
+   <!-- GOOGLE ANALYTICS -->
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72205238-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<script>
+$( document ).ready(function() {
+    $(".heightBugImages").height($("#firstImage").height());
+    $( window ).resize(function() {
+      $(".heightBugImages").height($("#firstImage").height());
+    });
+});
+</script>
+
+</body>
+
+</html>

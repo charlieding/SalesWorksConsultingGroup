@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Stackster</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+     <!-- bootstrap slider -->
+    <link rel="stylesheet" href="plugins/bootstrap-slider/slider.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+             <!--   <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css"> -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+  <style>
+    #classSelection {
+      top:8px;
+      left:50px;
+      right:60px;
+    }
+    @media screen and (min-width: 768px) {
+        #classSelection {
+          top:8px;
+          right:170px;
+          left:50px;
+        }
+    }
+  </style>
+  </head>
+  <!--
+  BODY TAG OPTIONS:
+  =================
+  Apply one or more of the following classes to get the
+  desired effect
+  |---------------------------------------------------------|
+  | SKINS         | skin-blue                               |
+  |               | skin-black                              |
+  |               | skin-purple                             |
+  |               | skin-yellow                             |
+  |               | skin-red                                |
+  |               | skin-green                              |
+  |---------------------------------------------------------|
+  |LAYOUT OPTIONS | fixed                                   |
+  |               | layout-boxed                            |
+  |               | layout-top-nav                          |
+  |               | sidebar-collapse                        |
+  |               | sidebar-mini                            |
+  |---------------------------------------------------------|
+  -->
+  <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+      <!-- Main Header -->
+      <header class="main-header">
+
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>S</b>T</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><small><b>Stack</b></small>ster</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+
+          <!-- Class Selection -->
+          <div id="classSelection" class="form-group" style="position:absolute;visibility: hidden;">
+            <select class="form-control select2" multiple="multiple" data-placeholder="Select a Course">
+              <option>CS 1001</option>
+              <option>Psyc 1001</option>
+              <option>Calc 2654</option>
+              <option>CS 2003</option>
+              <option>EE 3300</option>
+              <option>CS 2001</option>
+              <option>CS 2345</option>
+            </select>
+          </div><!-- /.form-group -->
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account Menu -->
+              <li class="dropdown user user-menu">
+                <!-- Menu Toggle Button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <!-- The user image in the navbar-->
+                  <img src="dist/img/l.gif" class="user-image userImage" alt="User Image">
+                  <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                  <span class="hidden-xs userName"></span>
+                </a>
+                <ul class="dropdown-menu" style="right:0px;">
+                  <!-- The user image in the menu -->
+                  <li class="user-header">
+                    <img src="dist/img/l.gif" class="img-circle userImage" alt="User Image">
+                    <p>
+                      <span class="userName"></span>
+                      <small id="memberSinceDateProfile"></small>
+                    </p>
+                  </li>
+                  <!-- Menu Body -->
+                  <li class="user-body">
+                    <div class="col-xs-6 text-center">
+                      <a href="help.html">Need Help?</a>
+                    </div>
+                    <div class="col-xs-6 text-center">
+                      <a href="index.html">Dashboard</a>
+                    </div>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="profile.html" class="btn btn-default btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      <a onclick="signOut();" class="btn btn-default btn-flat">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img style="height:45px;" src="dist/img/l.gif" class="img-circle userImage" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p class="userName"></p>
+              <!-- Status -->
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <ul class="sidebar-menu">
+            <li class="header">MENU</li>
+            <!-- Optionally, you can add icons to the links -->
+              <li><a href="#"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+              <li><a href="crawlsimulation.html"><i class="fa fa-bug"></i> <span>Crawl Simulation Test</span></a></li>
+              <li><a onclick="alert('Coming Soon...');" href="#"><i class="fa fa-key"></i> <span>Key Management</span></a></li>
+              <li class="active"><a href="payment.html"><i class="fa fa-money"></i> <span>Payment</span></a></li>
+              <li><a href="help.html"><i class="fa fa-question"></i> <span>Help</span></a></li>
+
+            <li class="header" style="position:absolute; bottom:0px; width:100%; font-size: 9.5px; text-align: center;"> <!-- To the right -->
+              <!-- Default to the left -->
+              <strong>Copyright &copy; 2015 <a href="#">Stackster</a>.</strong> All rights reserved.
+            </li>
+
+          </ul><!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div id="maincontentwrapper" class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1> Payment
+            <small>View and Edit Payment Methods</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+            <li class="active">Payment</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <!-- Your Page Content Here -->
+          <div class="row">
+            <div id="alertAddRow" class="col-md-12">
+              <!-- TABLE: LATEST ORDERS -->
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Latest Transactions and Billables</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="table-responsive">
+                    <table class="table no-margin table-hover">
+                      <thead>
+                        <tr>
+                          <th>Order ID</th>
+                          <th>Exit Node</th>
+                          <th>Status</th>
+                          <th>Date</th>
+                          <th>Duration</th>
+                          <th>Price</th>
+                        </tr>
+                      </thead>
+                      <tbody id="bookings">
+                      </tbody>
+                    </table>
+                  </div><!-- /.table-responsive -->
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                  <span href="index.html" class="pull-right">Total: $<span class="total_price" >0.00</span></span>
+                </div><!-- /.box-footer --> 
+              </div><!-- /.box -->
+            </div><!-- /.row -->
+            <div class="col-md-12">
+
+              <!-- Profile Image -->
+              <div class="box box-primary">
+                <div class="box-body box-profile">
+                  <form id="checkout" method="post" action="/checkout">
+                      <div id="payment-form"></div>
+                      <!--http://stackoverflow.com/questions/11869079/html-button-to-submit-a-form-elsewhere-on-the-page-->
+                  </form>
+                  <div style="margin:auto; width:50%;"><input id="button_checkout" type="submit" style="width:100%;" class="btn btn-lg btn-danger" form="checkout" value="Pay $0.00 Now"></div>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div>
+          </div>
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div class="control-sidebar-bg"></div>
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> Alpha 0.0.1
+        </div>
+        <strong>Follow Us!</strong>&nbsp;&nbsp;&nbsp;<i href"#ComingSoon" onclick="alert('Coming Soon...');" style="cursor:pointer" class="fa fa-facebook-official"> Facebook</i>&nbsp;&nbsp;&nbsp;<i href"#ComingSoon" onclick="alert('Coming Soon...');" style="cursor:pointer" class="fa fa-twitter-square"> Twitter</i>&nbsp;&nbsp;&nbsp;<i href"#ComingSoon" onclick="alert('Coming Soon...');"  style="cursor:pointer" class="fa fa-instagram"> Instagram</i>
+      </footer>
+    </div><!-- ./wrapper -->
+
+    <!-- REQUIRED JS SCRIPTS -->
+
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Firebase -->
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <!-- Braintree Payments-->
+    <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.min.js"></script>
+    <!-- Bootstrap slider -->
+    <script src="plugins/bootstrap-slider/bootstrap-slider.js"></script>
+    <!-- Select2 -->
+    <script src="plugins/select2/select2.full.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- SlimScroll -->
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="plugins/fastclick/fastclick.min.js"></script>
+    <!--Moment Time-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <!--Custom SMS Messaging Library that calls Node Js Server -->
+    <script src="smsMessage.js"></script>
+    <script>
+      $(function () {
+        /* BOOTSTRAP SLIDER */
+        $("#ex6").slider();
+        $("#ex6").on("slide", function(slideEvt) {
+          $("#ex6SliderVal").text(slideEvt.value);
+        });
+        /*Initialize Select2 Elements */
+        $(".select2").select2();
+      });
+
+      $( document ).ready(function() {
+      });
+    /******* FIREBASE CODE - MOVE TO JS FILE *******/
+      var loggedInUserLatLng = null;
+      var loggedInUserID = null;
+      $( document ).ready(function() {
+          $('#button_checkout').prop('disabled', true);
+          // Register the callback to be fired every time auth state changes
+          var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+          ref.onAuth(authDataCallback);
+
+          // Get a database reference to our posts
+          var authData = ref.getAuth();
+
+          if (authData) {
+            console.log("Authenticated user with uid:", authData.uid);
+
+            //Temporary Hack for anything
+            loggedInUserID = authData.uid;
+
+            //activateBraintree(authData.uid, 0);
+
+            var ref = new Firebase("https://ubertutoralpha.firebaseio.com/users/"+authData.uid);
+
+            // Attach an asynchronous callback to read the data at our posts reference
+            ref.on("value", function(snapshot) {
+              console.log(snapshot.val());
+              updateUserImages(snapshot.val().imgUrl);
+              updateUserName(snapshot.val().displayName);
+              $("#memberSinceDateProfile").text("Member since "+ moment(snapshot.val().creationDate).format("MMM. YYYY"));
+              loggedInUserID = snapshot.key();
+              loggedInUserLatLng = snapshot.val().latlng;
+              loadPendingPayments(snapshot);
+              //if(snapshot.val().userType == "tutor") window.location = 'mybookings.html';
+            }, function (errorObject) {
+              console.log("The read failed: " + errorObject.code);
+            });
+          }
+
+          // Create a callback which logs the current auth state
+          function authDataCallback(authData) {
+            if (authData) {
+              console.log("User " + authData.uid + " is logged in with " + authData.provider);
+            } else {
+              console.log("User is logged out");
+              window.location = '../../../../index.html'
+            }
+          }
+      });
+      function updateUserImages(imgURL){
+        if (imgURL){
+          $(".userImage").attr("src", imgURL);
+        }
+      }
+      function updateUserName(userName){
+        if(userName){
+          $(".userName").text(userName);
+        }
+      }
+      function signOut(){
+        var ref = new Firebase('https://ubertutoralpha.firebaseio.com');
+        ref.unauth();
+        window.location = '../../../../index.html';
+      }
+
+      /***************  My Payments Code ****************************/
+      var onUsersAppointmentChange = null;
+      var refAndOnAppointmentChangeMap = {};
+
+      function loadPendingPayments(currUserSnapshot){
+        //console.log(currUserSnapshot.key());
+        var usersRef = new Firebase("https://ubertutoralpha.firebaseio.com/users/"+currUserSnapshot.key()+"/appointmentIDs");
+        
+        //Remove listener if it already exists to prevent duplicate database calls
+        if(onUsersAppointmentChange){
+          console.log("Listener Removed");
+          usersRef.off('value', onUsersAppointmentChange);
+          onUsersAppointmentChange = null;
+        } 
+        //Remove listener if it already exists to prevent duplicate database calls
+        if(refAndOnAppointmentChangeMap){
+          $.each(refAndOnAppointmentChangeMap, function(key, value){
+            console.log("Listener Removed");
+            new Firebase(key).off('value',value);     
+          });
+          refAndOnAppointmentChangeMap = {}; 
+        } 
+
+        // Attach an asynchronous callback to read the data at our posts reference
+        console.log("LISTENER ADDED! ");
+        onUsersAppointmentChange = usersRef.on("value", function(snapshot) {
+          //console.log(snapshot.val());
+          var userAppointments = currUserSnapshot.val().appointmentIDs;
+          var allAppointments = snapshot.val();
+          var uids = "";
+
+          //console.log(userAppointments);
+          //console.log(allAppointments);
+
+
+          //Clear list and prices map before showing
+          $("#bookings").empty();
+          var paymentUidToCostMap = {};
+          //Go through every appointment for the user, map it to a real appointment, the display it all
+          if(userAppointments && allAppointments){
+            $.each(userAppointments, function(uid, appointmentMapObj){
+              console.log(uid);
+              //Get the entire Appointment Obj from Mapping
+              var ref = new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+uid);
+              console.log("LISTENER ADDED! ");
+              refAndOnAppointmentChangeMap[ref] = ref.on("value", function(appointmentSnapshot) {
+                //console.log("LISTENER ADDED! "); //Listers are added here as well as any child changed object will trigger this
+                if(appointmentSnapshot && appointmentSnapshot.val() && appointmentSnapshot.val().status == "Pending Payment"){
+                  //Default Unknown Status Style
+                  var statusStyle = "bg-gray-active color-palette";
+                  var actionItem = "None";
+
+                  if(appointmentSnapshot.val().status == "Awaiting Response"){
+                    var statusStyle = "label-primary";
+                    var actionItem = "<span onclick='cancelAppointment(this);' class='btn btn-sm btn btn-danger label' style='cursor:pointer;'><i class='fa fa-comments-o'> Cancel</i></span>";
+                  }
+                  if(appointmentSnapshot.val().status == "In Session"){
+                    var statusStyle = "label-info";
+                  }
+                  if(appointmentSnapshot.val().status == "Pending Payment"){
+                    var statusStyle = "label-warning";
+                    var actionItem = "<span onclick='cancelAppointment(this);' class='btn btn-sm btn btn"+statusStyle.replace("label","")+" label' style='cursor:pointer;'><i class='fa fa-comments-o'> Pay Now</i></span>";
+                  }
+                  if(appointmentSnapshot.val().status == "Finished"){
+                    var statusStyle = "label-success";
+                    var actionItem = "<span onclick='cancelAppointment(this);' class='btn btn-sm btn btn"+statusStyle.replace("label","")+" label' style='cursor:pointer;'><i class='fa fa-comments-o'> Leave Feedback</i></span>";
+                  }
+                  if(appointmentSnapshot.val().status == "Cancelled"){
+                    var statusStyle = "label-danger";
+                  }
+
+                  //Update Actual Bookings on UI
+                  if(uids.indexOf(uid) > -1){
+                    //Already Exist, just remove all and readd everything
+                    loadPendingPayments(currUserSnapshot);
+                  } else {
+                    //Doesn't Exist yet, just add
+                    uids = uids+uid;
+                    // $("#bookings").prepend("<tr><td class='col-md-1'><div class='sparkbar' data-color='#00a65a' data-height='20'><span currentUserID='"+currUserSnapshot.key()+"' = tutorID='"+appointmentSnapshot.val().tutorID+"' studentID='"+appointmentSnapshot.val().studentID+"' onclick='initializeChat(this);' class='btn btn-sm btn"+statusStyle.replace("label","")+" label' style='cursor:pointer;'><i class='fa fa-comments-o'> Chat</i></span></div></td><td>"+appointmentSnapshot.val().tutorDisplayName+"</td><td class='col-md-2'><span href="+"TBA-TODO"+">"+moment(appointmentSnapshot.val().creationDate).format("M/D/YY h:mm a")+"</span></td><td class='col-md-3'>"+appointmentSnapshot.val().latlngAddress+"</td><td>"+appointmentSnapshot.val().courses+"</td><td><span class='label "+statusStyle+"'>"+appointmentSnapshot.val().status+"</span></td><td>"+actionItem+"</td></tr>");
+                    $("#bookings").prepend("<tr>"+
+                        "<td><a href='#'>"+uid+"</a></td>"+
+                        "<td>"+appointmentSnapshot.val().courses+"</td>"+
+                        "<td><span class='label label-warning'>Pending Payment</span></td>"+
+                        "<td><div class='sparkbar' data-color='#00a65a' data-height='20'>"+appointmentSnapshot.val().tutorDisplayName+"</div></td>"+
+                        "<td>"+appointmentSnapshot.val().duration+" hour(s)</td>"+
+                        "<td>$"+round_nearest_tenth(parseFloat(appointmentSnapshot.val().cost))+"</td>"+
+                      "</tr>");
+                    paymentUidToCostMap[uid] = appointmentSnapshot.val().cost;
+                    updateTotalPricesCheckout(paymentUidToCostMap);
+                    isBookingsEmpty();
+                  }
+                } else if(uids.indexOf(uid) > -1) {
+                  //It just switched out of Payment Object
+                  loadPendingPayments(currUserSnapshot);
+                } else{
+                  //Object that has never been in Payment Pending
+                  isBookingsEmpty();
+                }
+
+              },function (errorObject) {
+                console.log("The read failed: " + errorObject.code);
+              });
+            });
+          } else{
+            isBookingsEmpty();
+          }
+        }, function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        });
+      }
+      function isBookingsEmpty(){
+        $("#emptyMsg").remove();
+        if($("#bookings").children().size() > 0){
+          return false;
+        } else {
+          $("#bookings").prepend("<tr id='emptyMsg'><td>"+"Empty"+"</td><td>"+
+            "</td><td><span class='label label-info'>"+
+            "</span></td><td><div class='sparkbar' data-color='#00a65a' data-height='20'>"+
+            "<a href="+"/STUDENT/index.html"+">"+""+"</a>"+"</div></td><td></td><td></td></tr>");  
+          $(".total_price").text(0);
+          $("#button_checkout").attr("value", "Nothing to Pay");
+          $('#button_checkout').prop('disabled', true);
+          $("#checkout").empty();
+          return true;
+        }
+      }
+      function updateTotalPricesCheckout(paymentUidToCostMap){
+        if(paymentUidToCostMap){
+          var total = 0;
+          $.each(paymentUidToCostMap, function(key, value){
+            console.log(key, value);
+            total = total + parseFloat(value);  
+          });
+          total = round_nearest_tenth(parseFloat(total));
+          $(".total_price").text(total);
+          $('#button_checkout').prop('disabled', false);
+          $("#button_checkout").attr("value", "Pay $"+total+" Now");
+          activateBraintree(loggedInUserID, total, paymentUidToCostMap);
+        } 
+      }
+
+      /*************** BRAINTREE SANDBOX CODE ************************/
+      // We generated a client token for you so you can test out this code
+      // immediately. In a production-ready integration, you will need to
+      // generate a client token on your server (see section below).
+      function activateBraintree(uid, total_price, paymentUidToCostMap){
+        $("#checkout").empty();
+        $("#checkout").prepend("<div id='payment-form'></div>");
+        $('#button_checkout').prop('disabled', true);
+        $.post( "http://52.23.157.36/api/v1/token",{customerId: uid})
+          .done(function( data ) {
+            console.log( "Data Loaded: ", data );
+            if(!data || !data.client_token) {
+              alert("Server Latency Issues. Reloading page...");
+              location.reload();
+            }
+            var clientToken = data.client_token;
+            //Hard coded Hack to allow this button to be clickable only after Braintree is loaded
+            setTimeout(function(){
+              $('#button_checkout').prop('disabled', false);
+              if($("#payment-form").children().size() > 1){
+                $("#payment-form").find('iframe:not(:last)').remove();
+              }
+            }, 1300);
+            braintree.setup(clientToken, "dropin", {
+              container: "payment-form",
+              paypal: {
+                singleUse: true,
+                amount: total_price,
+                currency: 'USD'
+              },
+              paymentMethodNonceReceived: function (event, nonce) {
+                console.log(nonce);
+                $.post( "http://52.23.157.36/api/v1/process", {amount: total_price,payment_method_nonce: nonce, customerId: uid })
+                  .done(function( data ) {
+                    console.log( "Data Loaded: ", data );
+                    console.log(data.success);
+                    if(data.success && paymentUidToCostMap){
+                      $.each(paymentUidToCostMap, function(key, value){
+                        (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+key+"/status")).set('Finished');
+                        sendSmsMessageToTutor(key,"Student has paid, and your payment is now processing!");
+                      });
+                      isBookingsEmpty();
+
+                      //Added Alert with Timer to Redirect
+                      $("#alertAddRow").prepend(" "+
+                        "<div class='alert alert-success alert-dismissable'>"+
+                          "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>"+
+                          "<h4>  <i class='icon fa fa-check'></i> Success! Thanks for your payment.</h4>"+
+                          "Feel free to now leave your tutor a review under My Bookings' Past Tutor Sessions! Redirecting in <a id='secondCountDown'></a> Seconds!"+
+                        "</div>");
+                      $("#secondCountDown").text("10");
+                      setInterval(function(){ 
+                        var second = parseInt($("#secondCountDown").text());
+                        $("#secondCountDown").text(second-1+""); 
+                        if(second == 0){
+                          window.location = 'mybookings.html';
+                        }
+                      }, 1000);
+                    } else {
+                      alert("Something went wrong. Please refresh your page and try again.");
+                    }
+                  });
+              },
+              onError: function (err) {
+                alert("Something went wrong. Please refresh your page and try again.");
+                console.log(err);
+              }
+            });
+
+
+          });
+      }
+    function round_nearest_tenth(num) {
+      return Math.round(num * 100) / 100;
+    }
+    </script>
+
+    <!-- Optionally, you can add Slimscroll and FastClick plugins.
+         Both of these plugins are recommended to enhance the
+         user experience. Slimscroll is required when using the
+         fixed layout. -->
+  </body>
+</html>

@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AsapTutor - 1:1 Tutoring</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/creative.css" type="text/css">
+
+    <!--Fonts -->
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Abril+Fatface' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<style>
+    .btnfb {
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        line-height: 1.428571429;
+        font-size: 1.15rem;
+        padding: .6em 2em;
+        font-weight: 700;
+        color: #fff;
+        background-color: #3B5998;
+        border-color: #3B5998;
+        margin: 0;
+        vertical-align: middle;
+
+
+        width: 220px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .cta-text::before {
+        content: '';
+        background-image: url("https://www.lyft.com/images/vendor-lyft/icons/facebook-icon.b867728f.svg");
+        background-size: 100%;
+        background-repeat: no-repeat;
+        display: block;
+        width: 1.25em;
+        height: 1.25em;
+        position: absolute;
+        top: 10px;
+        margin-top: 0.1em;
+        margin-left:1.0em;
+        box-sizing: border-box;
+    }
+    .cta-text {
+        padding-left: 2.5em;
+    }
+
+/*Loading*/
+.overlay {
+    z-index: 100;
+    background: rgba(255,255,255,0.7);
+    border-radius: 3px;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.faOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+    color: #000;
+    font-size: 50px;
+}
+
+/*Or Spacer CSS*/
+.or-spacer {
+        width: 220px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+  //margin-top: 100px;
+  //margin-left: 100px;
+  width: 400px;
+  position: relative;
+}
+.or-spacer .mask {
+  overflow: hidden;
+  height: 20px;
+}
+.or-spacer .mask:after {
+  content: '';
+  display: block;
+  margin: -25px auto 0;
+  width: 100%;
+  height: 25px;
+  border-radius: 125px / 12px;
+  box-shadow: 0 0 8px black;
+}
+.or-spacer span {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  bottom: 100%;
+  margin-bottom: -25px;
+  left: 50%;
+  margin-left: -25px;
+  border-radius: 100%;
+  box-shadow: 0 2px 4px #999;
+  background: white;
+}
+.or-spacer span i {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  border-radius: 100%;
+  border: 1px dashed #aaa;
+  text-align: center;
+  line-height: 40px;
+  font-style: normal;
+  color: #999;
+}
+
+.or-spacer-vertical {
+  display: inline-block;
+  margin-top: 100px;
+  margin-left: 100px;
+  width: 100px;
+  position: relative;
+}
+.or-spacer-vertical .mask {
+  overflow: hidden;
+  width: 20px;
+  height: 200px;
+}
+.or-spacer-vertical.left .mask:after {
+  content: '';
+  display: block;
+  margin-left: -20px;
+  width: 20px;
+  height: 100%;
+  border-radius: 12px / 125px;
+  box-shadow: 0 0 8px black;
+}
+.or-spacer-vertical.right .mask:before {
+  content: '';
+  display: block;
+  margin-left: 20px;
+  width: 20px;
+  height: 100%;
+  border-radius: 12px / 125px;
+  box-shadow: 0 0 8px black;
+}
+</style>
+
+</head>
+
+<body id="page-top" style="overflow-x:hidden";>
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" style="font-family:'Tangerine'; font-size:27px;" href="#page-top">AsapTutor</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#contact">Join the Revolution</a>
+                    </li>
+             <!--        <li>
+                        <a class="page-scroll" data-toggle="modal" href="#login">Login</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" data-toggle="modal" href="#register">Sign Up</a>
+                    </li> -->
+                    <!--
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#services">Services</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                    -->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <br>
+                <h2 style="font-family: 'Abril Fatface'; font-size:50px;">A Tutor is Only A Click Away</h2>
+                <p style="color:white;"><b>Private On Demand 1:1 Tutoring</b></p>
+                <br>
+                <a class="btn btn-primary btn-xl page-scroll" href="#contact">Apply Now!</a>
+                <br><br>
+                <p style="color:white;"><b>Now accepting applications for our Alpha Launch.</b></p>
+                
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-primary" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Meet Peer Tutors At School - In Minutes, In Person!</h2>
+                    <hr class="light">
+                    <p class="text-faded">Who can better understand your struggles with studying other than your peers? Those who aced the subject definitely have some tips and tricks on how to study for that class! AsapTutor provides a platform for students to find a local, qualified peer tutor for any class subjects and at any time when tutors are available. AsapTutor is the perfect solution for bringing together students and tutors in a community. Don't waste countless time and money to find the right tutor - they are only a click away at AsapTutor!</p>
+                    <a class="btn btn-default btn-xl btn-block" href="#contact">Apply For Our Alpha Launch!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+        <div class="container text-center">
+            <div class="call-to-action">
+                <h2>How AsapTutor Works</h2>
+                <p>If you are looking for tutors in your area, AsapTutor is here for you. Just follow the simple, four-step process after creating an account with us and you’ll have the tutor you need.</p>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-search wow bounceIn text-primary"></i>
+                        <h3>1) Search for tutors near you</h3>
+                        <p class="text-muted">Stuck with a homework or stressed with your upcoming exam? Find a tutor near you that can help you with your subject! Qualified tutors are only a few clicks away, you choose the time!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-map-marker wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                        <h3>2) Meet Up with Tutor</h3>
+                        <p class="text-muted">Arrange on a place to meet and tell your tutor what you need help with, get updates when your tutor is on their, and then study away!</p>
+                        <br><br>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-book wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                        <h3>3) Easy Payment Online</h3>
+                        <p class="text-muted">After the session is finished, easily pay your tutor from the website using credit card or PayPal. Now you can study with a qualified tutor and payment is done automatically from the website after the session has ended.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                        <h3>4) Succeed</h3>
+                        <p class="text-muted">Now go get that A+ you deserve! Don't let procrastination ever get in the way of success again. You got this.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="no-padding" id="portfolio">
+        <div class="container-fluid">
+            <div class="row no-gutter">
+                <div class="col-lg-3 col-sm-6">
+                    <a class="portfolio-box">
+                        <img id="firstImage"src="img/portfolio/1.png" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Full Map View, Course and Date Time Selection
+                                </div>
+                                <div class="project-name">
+                                    Find Tutors Near You
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <a class="portfolio-box">
+                        <img src="img/portfolio/2.png" class="img-responsive heightBugImages" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    View Profile, Rating, Distance, Price of Tutor
+                                </div>
+                                <div class="project-name">
+                                    Requesting Tutor
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <a class="portfolio-box">
+                        <img src="img/portfolio/4.png" class="img-responsive heightBugImages" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Track Status, Chat, Send Pictures and Documents
+                                </div>
+                                <div class="project-name">
+                                    Meeting with Tutor
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <a class="portfolio-box">
+                        <img src="img/portfolio/6.png" class="img-responsive heightBugImages" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Are you rich and famous? Book Worldwide!
+                                </div>
+                                <div class="project-name">
+                                    Coming Soon
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <aside class="bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">AsapTutor Platform Features</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
+                        <h3>The Best Peer Tutors</h3>
+                        <p class="text-muted">We use a vigorous screening process to select our tutors, making sure they are the cream of the crop. They know how to study well and can now teach their methods to you!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                        <h3>Flexible Scheduling</h3>
+                        <p class="text-muted">Our platform allows you to schedule with a tutor anytime, now or in the future whenever you need them, even if it’s right before an upcoming exam.</p>
+                        <br> <br>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-comments-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                        <h3>Chat With Your Tutor</h3>
+                        <p class="text-muted">You can chat and send documents to each other before your session, all through our platform, so tutors can better prepare for the session!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-mobile-phone wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                        <h3>Get Notifications</h3>
+                        <p class="text-muted">Get text messaging and email alerts when tutor is on their way, accepts your appointment, or cancelled due to an emergency.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-github-alt wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                        <h3>Made by Students Like You</h3>
+                        <p class="text-muted">We've been in your shoes and we know about all the struggles students face, and that's what makes us different. We've designed this platform to be as hassle-free as possible that fits naturally into your everyday lives.</p>
+                    </div>
+                </div>
+            </div>
+    </aside>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Be a part of the Education Revolution!</h2>
+                    <hr class="primary">
+                    <p>We are getting ready for our <b>Alpha</b> Launch soon for select classes at <b>Emory University, UW, and UC Berkeley</b>. <br><b>Get notified when we launch!</b></p>
+                   Help us help you! Let us know what classes/skills you want us to bring to you, and we'll let you know once we make it happen.
+                </div>
+<!-- Begin MailChimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+    /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup" class="col-lg-8 col-lg-offset-2 text-center">
+<form action="//charlesding.us12.list-manage.com/subscribe/post?u=ef701449d78f687747520d92d&amp;id=a5bc3d9414" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    
+<div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+<div class="mc-field-group">
+    <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+</label>
+    <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+</div>
+<div class="mc-field-group">
+    <label for="mce-MMERGE2">Courses/Skills You Want To Learn or Teach  <span class="asterisk">*</span>
+</label>
+    <input type="text" value="" name="MMERGE2" class="required" id="mce-MMERGE2">
+</div>
+<div class="mc-field-group input-group">
+    <strong>You're interested in being a...  <span class="asterisk">*</span>
+</strong>
+    <ul><li><input type="radio" value="Student" name="MMERGE3" id="mce-MMERGE3-0"><label for="mce-MMERGE3-0">Student</label></li>
+<li><input type="radio" value="Tutor" name="MMERGE3" id="mce-MMERGE3-1"><label for="mce-MMERGE3-1">Tutor</label></li>
+</ul>
+</div>
+<div class="mc-field-group">
+    <label for="mce-MMERGE5">What School are you attending?  <span class="asterisk">*</span>
+</label>
+    <select name="MMERGE5" class="required" id="mce-MMERGE5">
+    <option selected="selected" value="Emory University">Emory University</option>
+<option value="Berkeley University">University of California, Berkeley</option>
+<option value="Georgia Tech">Georgia Tech</option>
+<option value="Georgia Tech">University of Washington</option>
+<option value="Other School">Other School</option>
+
+    </select>
+</div>
+<div class="mc-field-group">
+    <label for="mce-FNAME">(If Other School, then what is it's name?) </label>
+    <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+</div>
+<div class="mc-field-group">
+    <label for="mce-MMERGE7">Anything else you'd like us to know? (Enter Promo Code Here As Well If You Have) </label>
+    <input type="text" value="" name="MMERGE7" class="" id="mce-MMERGE7">
+</div>
+    <div id="mce-responses" class="clear">
+        <div class="response" id="mce-error-response" style="display:none"></div>
+        <div class="response" id="mce-success-response" style="display:none"></div>
+    </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_ef701449d78f687747520d92d_a5bc3d9414" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" style="width:300px;" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+                    <b>Be sure to check your Spam Email!</b>
+    </div>
+    </div>
+</form>
+</div>
+<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[2]='MMERGE2';ftypes[2]='text';fnames[3]='MMERGE3';ftypes[3]='radio';fnames[5]='MMERGE5';ftypes[5]='dropdown';fnames[1]='FNAME';ftypes[1]='text';fnames[7]='MMERGE7';ftypes[7]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+<!--End mc_embed_signup-->
+            </div>
+        </div>
+    </section>
+<!--
+    <div class="modal fade in" id="myModal" aria-hidden="false" style="display: block;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+
+          </div>
+          <div class="modal-body" style="padding-bottom: 0px;">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" onclick="alert('Username and Password not Recognized. Please check and try again.')" class="btn btn-primary">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>  -->
+
+    <!-- Modals
+    ===================================================== -->
+    <!--Login Modal -->
+    <div class="modal fade" id="login">
+      <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="overlay">
+                  <i class="fa fa-refresh fa-spin faOverlay"></i>
+                </div>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title"><strong style="color: black">Login</strong> <small>to <strong style="color: grey">Asap</strong>Tutor</small></h4>
+          </div>
+          <div class="modal-body" style="padding-bottom: 0px;">
+            <br>
+            <button class="btn btn-primary btnfb"  onclick="fblogin();" type="button">
+                <i class="fa fa-facebook-official"></i><span> Sign in with Facebook</span>
+            </button>
+            <br><br>
+            <div class="or-spacer">  
+                <div class="mask"></div>  
+                <span><i>or</i></span>
+            </div>
+            <br>
+               <!-- form start -->
+                <form class="form-horizontal" style="padding-left:50px; padding-right:50px;">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label for="inputEmailLogin"><small style="color:grey;">Email Address</small></label>
+                      <input type="email" class="form-control" id="inputEmailLogin" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPasswordLogin"><small style="color:grey;">Password</small></label>
+                      <input type="password" class="form-control" id="inputPasswordLogin" placeholder="Password">          
+                    </div>
+                  </div><!-- /.box-body -->
+                </form>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <a id="forgotPassword" style="cursor:pointer;" onclick="resetPassword();">Forgot Password?</a>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" onclick="login();" class="btn btn-primary">Login</button>
+            <div id="result">
+            </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+      
+    <!--Register Modal -->
+    <div class="modal fade" id="register">
+      <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="overlay">
+                  <i class="fa fa-refresh fa-spin faOverlay"></i>
+                </div>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title"><strong style="color: black">Register</strong> <small>for <strong style="color: grey">Asap</strong>Tutor</small></h4>
+          </div>
+          <div class="modal-body" style="padding-bottom: 0px;">
+            <br>
+            <button class="btn btn-primary btnfb"  onclick="fbregister();" type="button">
+                <i class="fa fa-facebook-official"></i><span> Sign up with Facebook</span>
+            </button>
+            <br><br>
+            <div class="or-spacer">  
+                <div class="mask"></div>  
+                <span><i>or</i></span>
+            </div>
+            <br>
+            <form class="form-horizontal" style="padding-left:50px; padding-right:50px;">
+              <div class="form-group">
+                <label for="inputName"><small style="color:grey;">Full Name</small></label>
+                <input type="text" class="form-control" id="fullname" placeholder="Enter Your First and Last Name">
+              </div>
+              <div class="form-group">
+                <label for="inputEmail"><small style="color:grey;">Email Address</small></label>
+                <input type="text" class="form-control" id="registerEmail" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <label for="inputPassword"><small style="color:grey;">Password</small></label>
+                  <input type="password" class="form-control" id="Password1" placeholder="Password">
+                  <input type="password" class="form-control" id="Password2" style="margin-top:5px;" placeholder="Enter Password Again">
+              </div>
+            </form>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" onclick="register();" class="btn btn-primary">Register</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+              
+    </div><!-- /.modal -->
+    
+    <!--Terms of Agreement Modal -->
+  <div class="modal fade" id="toa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">AsapTutor's Terms of Agreement</h4>
+        </div>
+        <div class="modal-body">
+            <dl style="font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif; color:black;">
+                <dt>Welcome to AsapTutor!</dt>
+                <br/>
+                <dd>Thanks for using our products and services (“Services”). The Services are provided by AsapTutor Inc. (“AsapTutor”), located at <span itemprop="contentLocation">332386 Georgia Tech Station, Atlanta, GA 30332, United States</span>.</dd>
+                <br/>
+                <dd>By using our Services, you are agreeing to these terms. Please read them carefully.</dd>
+                <br/>
+                <dd>Our Services are very diverse, so sometimes additional terms or product requirements (including age requirements) may apply. Additional terms will be available with the relevant Services, and those additional terms become part of your agreement with us if you use those Services.</dd>
+                <br/>
+                <dt>Using our Services</dt>
+                <br/>
+                <dd>You must follow any policies made available to you within the Services.</dd>
+                <br/>
+                <dd>Don’t misuse our Services. For example, don’t interfere with our Services or try to access them using a method other than the interface and the instructions that we provide. You may use our Services only as permitted by law, including applicable export and re-export control laws and regulations. We may suspend or stop providing our Services to you if you do not comply with our terms or policies or if we are investigating suspected misconduct.</dd>
+                <br/>
+                <dd>Using our Services does not give you ownership of any intellectual property rights in our Services or the content you access. You may not use content from our Services unless you obtain permission from its owner or are otherwise permitted by law. These terms do not grant you the right to use any branding or logos used in our Services. Don’t remove, obscure, or alter any legal notices displayed in or along with our Services.</dd>
+                <br/>
+                <dd>Our Services display some content that is not AsapTutor's. This content is the sole responsibility of the entity that makes it available. We may review content to determine whether it is illegal or violates our policies, and we may remove or refuse to display content that we reasonably believe violates our policies or the law. But that does not necessarily mean that we review content, so please don’t assume that we do.</dd>
+                <br/>
+                <dd>In connection with your use of the Services, we may send you service announcements, administrative messages, and other information. You may opt out of some of those communications.</dd>
+                <br/>
+                <dt>Modifying and Terminating our Services</dt>
+                <br/>
+                <dd>We are constantly changing and improving our Services. We may add or remove functionalities or features, and we may suspend or stop a Service altogether.</dd>  
+                <br/>
+                <dd>You can stop using our Services at any time, although we’ll be sorry to see you go. AsapTutor may also stop providing Services to you, or add or create new limits to our Services at any time.</dd>  
+                <br/>
+                <dd>We believe that you own your data and preserving your access to such data is important. If we discontinue a Service, where reasonably possible, we will give you reasonable advance notice and a chance to get information out of that Service.</dd>    
+                <br/>
+                <dt>Our Warranties and Disclaimers</dt>
+                <br/>
+                <dd>We provide our Services using a commercially reasonable level of skill and care and we hope that you will enjoy using them. But there are certain things that we don’t promise about our Services.</dd>
+                <br/>
+                <dd>OTHER THAN AS EXPRESSLY SET OUT IN THESE TERMS OR ADDITIONAL TERMS, NEITHER AsapTutor NOR ITS SUPPLIERS OR DISTRIBUTORS MAKE ANY SPECIFIC PROMISES ABOUT THE SERVICES. FOR EXAMPLE, WE DON’T MAKE ANY COMMITMENTS ABOUT THE CONTENT WITHIN THE SERVICES, THE SPECIFIC FUNCTION OF THE SERVICES, OR THEIR RELIABILITY, AVAILABILITY, OR ABILITY TO MEET YOUR NEEDS. WE PROVIDE THE SERVICES “AS IS”.</dd>
+                <br/>
+                <dd>SOME JURISDICTIONS PROVIDE FOR CERTAIN WARRANTIES, LIKE THE IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. TO THE EXTENT PERMITTED BY LAW, WE EXCLUDE ALL WARRANTIES.</dd>
+                <br/>
+                <dt>Business uses of our Services</dt>
+                <br/>
+                <dd>If you are using our Services on behalf of a business, that business accepts these terms. It will hold harmless and indemnify Google and its affiliates, officers, agents, and employees from any claim, suit or action arising from or related to the use of the Services or violation of these terms, including any liability or expense arising from claims, losses, damages, suits, judgments, litigation costs and attorneys’ fees.</dd>
+                <br/>
+                <dt>About these Terms</dt>
+                <br/>
+                <dd>We may modify these terms or any additional terms that apply to a Service to, for example, reflect changes to the law or changes to our Services. You should look at the terms regularly. We’ll post notice of modifications to these terms on this page. We’ll post notice of modified additional terms in the applicable Service. Changes will not apply retroactively and will become effective no sooner than fourteen days after they are posted. However, changes addressing new functions for a Service or changes made for legal reasons will be effective immediately. If you do not agree to the modified terms for a Service, you should discontinue your use of that Service.</dd>
+                <br/>
+                <dd>If there is a conflict between these terms and the additional terms, the additional terms will control for that conflict.</dd>
+                <br/>
+                <dd>These terms control the relationship between AsapTutor and you. They do not create any third party beneficiary rights</dd>
+                <br/>
+                <dd>If you do not comply with these terms, and we don’t take action right away, this doesn’t mean that we are giving up any rights that we may have (such as taking action in the future).</dd>
+                <br/>
+                <dd>If it turns out that a particular term is not enforceable, this will not affect any other terms.</dd>
+                <br/>
+                <dd>The laws of Georgia, U.S.A., will apply to any disputes arising out of or relating to these terms or the Services.</dd>
+                <br/>
+                <dd>For information, please send email out to cding9@gatech.edu</dd>
+                <br/>
+            </dl>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+ 
+  <!--Privacy Modal -->
+  <div class="modal fade" id="privacy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">AsapTutor's Privacy</h4>
+        </div>
+        <div class="modal-body">
+            <dl style="font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif; color:black;">
+                <dt>Privacy and Copyright Protection</dt>
+                <br/>
+                <dd>AsapTutor's privacy policies explain how we treat your personal data and protect your privacy when you use our Services. By using our Services, you agree that AsapTutor can use such data in accordance with our privacy policies.</dd>
+                <br/>
+                <dd>We respond to notices of alleged copyright infringement and terminate accounts of repeat infringers according to the process set out in the U.S. Digital Millennium Copyright Act.</dd>
+                <br/>
+                <dd>This is not for commercial use. All ideas are property of AsapTutor. Pictures and Images obtained from Google Images Search Engine, with sole exception of our Logo. We reserve all rights to our ideas and logo.</dd>
+                <br/>
+            </dl>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <!--Privacy Modal -->
+  <div class="modal fade" id="returns" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">AsapTutor's Privacy</h4>
+        </div>
+        <div class="modal-body">
+            <dl style="font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif; color:black;">
+                <dt>Returns and Pricing</dt>
+                <br/>
+                <dd>Pricing is set by Tutors. It will vary depending on time and type of service.</dd>
+                <br/>
+                <dd>Your satisfaction is guaranteed. If you are not happy with the service you receive, you can dispute at any time and we will work with you and get your money back!</dd>
+                <br/>
+                <dd>This is not for commercial use. All ideas are property of AsapTutor. Pictures and Images obtained from Google Images Search Engine, with sole exception of our Logo. We reserve all rights to our ideas and logo.</dd>
+                <br/>
+            </dl>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+    <!-- FOOTER -->
+    <footer>
+        <p class="pull-right"><a>Back to top</a></p>
+        <p>&copy; <meta itemprop="DatePublished" content="2015-03-14"><span onclick="window.location='homePage.html';">2018 AsapTutor, Inc.</span> &middot; <a data-toggle="modal" href="#privacy">Privacy</a> &middot; <a data-toggle="modal" href="#toa">Terms of Agreement</a> &middot; <a data-toggle="modal" href="#returns">Returns and Pricing</a></p>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.fittext.js"></script>
+    <script src="js/wow.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/creative.js"></script>
+
+    <!-- Firebase -->
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <!--Moment Time-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+
+   <!-- GOOGLE ANALYTICS -->
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72205238-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<script>
+$( document ).ready(function() {
+    $(".heightBugImages").height($("#firstImage").height());
+    $( window ).resize(function() {
+      $(".heightBugImages").height($("#firstImage").height());
+    });
+});
+</script>
+
+</body>
+
+</html>

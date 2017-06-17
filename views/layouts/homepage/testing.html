@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Firebase -->
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <!--Moment Time-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script>
+
+
+/**FIREBASE**/
+    $( document ).ready(function() {
+
+          // Register the callback to be fired every time auth state changes
+          var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+          ref.onAuth(authDataCallback);
+
+          // Get a database reference to our posts
+          var authData = ref.getAuth();
+
+          if (authData) {
+            console.log("Authenticated user with uid:", authData.uid);
+            loggedInUserID = authData.uid;
+            var ref = new Firebase("https://ubertutoralpha.firebaseio.com/users/"+authData.uid);
+
+            // Attach an asynchronous callback to read the data at our posts reference
+            ref.on("value", function(snapshot) {
+              console.log(snapshot.val());
+              //updateUserImages(snapshot.val().imgUrl);
+              //updateUserName(snapshot.val().displayName);
+              $("#userDisplayName").text(snapshot.val().displayName);
+              //$("#memberSinceDateProfile").text("Member since "+ moment(snapshot.val().creationDate).format("MMM. YYYY"));
+            }, function (errorObject) {
+              console.log("The read failed: " + errorObject.code);
+            });
+          }
+
+          // Create a callback which logs the current auth state
+          function authDataCallback(authData) {
+            if (authData) {
+              console.log("User " + authData.uid + " is logged in with " + authData.provider);
+            } else {
+              console.log("User is logged out");
+              window.location = '../index.html'
+            }
+          }
+      });
+
+
+$(document).ready(function(){
+    // $("#one").click(function(){
+    //     $.post("../../../sanitycheck",
+    //     {
+    //       name: "Donald Duck",
+    //       url_string: $("#oneText").val()
+    //     },
+    //     function(data,status){
+    //         console.log("Completed Call! " + "\nStatus: " + status);
+    //         $("#webview").append(data);
+    //         $("#htmltext").text(""+data+"");
+    //     });
+    // });
+    // $("#two").click(function(){
+    //     $.post("../../../fakehttp",
+    //     {
+    //       name: "Donald Duck",
+    //       url_string: $("#twoText").val()
+    //     },
+    //     function(data,status){
+    //         console.log("Completed Call! " + "\nStatus: " + status);
+    //         $("#webview").append(data);
+    //         $("#htmltext").text(""+data+"");
+    //     });
+    // });
+    // $("#three").click(function(){
+    //     $.post("../../../fakehttps",
+    //     {
+    //       name: "Donald Duck",
+    //       url_string: $("#threeText").val()
+    //     },
+    //     function(data,status){
+    //         console.log("Completed Call! " + "\nStatus: " + status);
+    //         $("#webview").append(data);
+    //         $("#htmltext").text(""+data+"");
+    //     });
+    // });
+    $("#four").click(function(){
+        $.post("../../../http",
+        {
+          xapikey: 123,
+          clientid: 123,
+          ipEndPoint: $("#httpIP").val(),
+          options: {
+            name: "Daffy Duck",
+            removeRefererHeader: true,
+            uri: $("#fourText").val(),
+            method: "GET",
+            headers: {
+                'User-Agent': 'request', 
+                'Accept': $("#httpAccept").val(),
+                'Accept-Language': $("#httpAccept-Language").val(),
+                'Accept-Encoding': $("#httpAccept-Encoding").val(),
+                'X-Requested-With': $("#httpX-Requested-With").val(),
+                'Connection': $("#httpConnection").val(),
+                'cookie': $("#httpCookies").val(),
+                'referer': $("#httpReferer").val()
+            }
+          }  
+        },
+        function(data,status){
+            console.log("Completed Call! " + "\nStatus: " + status);
+            $("#webview").append(data);
+            $("#htmltext").text(""+data+"");
+        });
+    });
+});
+
+    /******* FIREBASE CODE *******/
+        function signOut(){
+            var ref = new Firebase('https://ubertutoralpha.firebaseio.com');
+            ref.unauth();
+            window.location = '../index.html';
+        }
+</script>
+</head>
+<body>
+<span> Hello there! You are currently signed in as <b><span id="userDisplayName">NOBODY! YOU ARE UNAUTHORIZED!</span></b>.</span>
+<button style="color:red;" onclick="signOut();">CLICK HERE TO SIGN OUT</button><hr>
+
+<!-- URL:<input id="oneText" type="text" placeholder="(Optional)" value="http://google.com"><br>
+<button id="one">Send an HTTP POST SANITY request to a page and get the result back (No Routing)</button><hr>
+URL:<input id="twoText" type="text" placeholder="(Optional)" value="http://google.com"><br>
+<button id="two">Send an HTTP POST request to a page and get the result back (Routing)</button><hr>
+URL:<input id="threeText" type="text" placeholder="(Optional)" value="https://amazon.com"><br>
+<button id="three">Send an HTTPS POST request to a page and get the result back (Routing)</button><hr>
+<br> -->
+URL:<input id="fourText" style="width:100%" type="text" value="http://www.walmart.com/ip/Safavieh-CY2653-Courtyard-Rug/26132896"><br>
+User-Agent:<input id="httpUser-Agent" style="width:100%" type="text" placeholder="(Optional)" value="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0"><br>
+Accept:<input id="httpAccept" style="width:100%" type="text" placeholder="(Optional)" value="*/*"><br>
+Accept-Language:<input id="httpAccept-Language" style="width:100%" type="text" placeholder="(Optional)" value="en-US,en;q=0.5"><br>
+Accept-Encoding:<input id="httpAccept-Encoding" style="width:100%" type="text" placeholder="(Optional) Eg: gzip, deflate"><br>
+X-Requested-With:<input id="httpX-Requested-With" style="width:100%" type="text" placeholder="(Optional)" value="XMLHttpRequest"><br>
+Connection:<input id="httpConnection" style="width:100%" type="text" placeholder="(Optional)" value="keep-alive"><br>
+IP Endpoint:<input id="httpIP" style="width:100%" type="text" placeholder="(Optional)" value="http://216.155.19.6:443"><br>
+Referer:<input id="httpReferer" style="width:100%" type="text" placeholder="(Optional)" value="http://www.walmart.com/ip/Safavieh-CY2653-Courtyard-Rug/26132896"><br>
+Cookies <br>
+<textarea id="httpCookies" type="text" style="width:100%; height:200px;" placeholder="Cookies (Optional)">enableHTTPS=0; SSLB=1; SSID=CAD6VR1GAAAAAACqDp9X-BTBDqoOn1cBAAAAAADWnMZXqg6fVwCg-CcJAANDIwEAqg6fVwEAJAkAA2AiAQCqDp9XAQAuCQABViQBAKoOn1cBACwJAAEAJAEAqg6fVwEAKAkAAYMjAQCqDp9XAQA; SSSC=2.G6313781326151488760.1|2340.74336-2343.74563-2344.74627-2348.74752-2350.74838; SSRT=qw6fVwADAQ; AID=wmlspartner%253D0%253Areflectorid%253D0000000000000000000000%253Alastupd%253D1470041770949; com.wm.reflector="reflectorid:0000000000000000000000@lastupd:1470041770949@firstcreate:1470041770949"; NSID=4303.2-5945.5-4140.5-2091.6-2814.6-4161.7-5854.7-2907.8-5615.8-3397.9-3235.9-1590.9-3311.10-1511.13-3163.14-1996.14-5932.14-1680.16-2591.16-2987.18; DL=33142%252C25.812393188476562%252C-80.24009704589844%252Cip%252C33142%252CUSA%252CFL; prefper=PREFSTORE~14303~2PREFCITY~1Miami~2PREFFULLSTREET~13200%2520Nw%252079Th%2520Street~2PREFSTATE~1FL~2PREFZIP~133142; SP=t; exp=0%252B1470041770%252B%252B0%252B; akaau_P3=1470043571~id=a96c36d2903e635fe1e397add5900585; vtc=edLaGwSPTzb1XUOvAi2Mqw; bstc=edLaGwSPTzb1XUOvAi2Mqw; TBV=a0zye; ssReviewPhotoQty=0</textarea>
+<br>
+<button id="four">Send an HTTP POST request to a page with custom headers and get the result back (Routing)</button>
+<div id="webview"></div>
+<br>
+<div id="htmltext"></div>
+
+</body>
+</html>
+

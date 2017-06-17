@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AsapTutor | 1:1 Tutoring</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+     <!-- bootstrap slider -->
+    <link rel="stylesheet" href="plugins/bootstrap-slider/slider.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+             <!--   <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css"> -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!--Star Rating-->
+    <link href="dist/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+  <style>
+    #classSelection {
+      top:8px;
+      left:50px;
+      right:60px;
+    }
+    .direct-chat-messages{
+      height:calc(100vh - 270px);
+    }
+    @media screen and (min-width: 768px) {
+        #classSelection {
+          top:8px;
+          right:170px;
+          left:50px;
+        }
+        .direct-chat-messages{
+          height:calc(100vh - 215px);
+        }
+    }
+  .msgUploads{
+    font-weight: bold;
+  }
+  /* unvisited link */
+  .msgUploads:link {
+      color: #fffbce;
+  }
+
+  /* visited link */
+  .msgUploads:visited {
+      color: green;
+  }
+
+  /* mouse over link */
+  .msgUploads:hover {
+      color: #ce6700;
+  }
+
+  /* selected link */
+  .msgUploads:active {
+      color: #c33000;
+  }
+  .hoverOpaque:hover {
+      opacity: 0.7;
+      filter: alpha(opacity=70); /* For IE8 and earlier */
+  }
+
+  #file-chooser {
+    display: block;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+  </style>
+  </head>
+  <!--
+  BODY TAG OPTIONS:
+  =================
+  Apply one or more of the following classes to get the
+  desired effect
+  |---------------------------------------------------------|
+  | SKINS         | skin-blue                               |
+  |               | skin-black                              |
+  |               | skin-purple                             |
+  |               | skin-yellow                             |
+  |               | skin-red                                |
+  |               | skin-green                              |
+  |---------------------------------------------------------|
+  |LAYOUT OPTIONS | fixed                                   |
+  |               | layout-boxed                            |
+  |               | layout-top-nav                          |
+  |               | sidebar-collapse                        |
+  |               | sidebar-mini                            |
+  |---------------------------------------------------------|
+  -->
+  <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+      <!-- Main Header -->
+      <header class="main-header">
+
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>A</b>T</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><small>ASAP</small><b>Tutor</b></span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+
+          <!-- Class Selection -->
+          <div id="classSelection" class="form-group tutorRemoveItems" style="position:absolute; visibility: hidden;">
+            <select class="form-control select2" multiple="multiple" data-placeholder="Select a Course">
+              <option>CS 1001</option>
+              <option>Psyc 1001</option>
+              <option>Calc 2654</option>
+              <option>CS 2003</option>
+              <option>EE 3300</option>
+              <option>CS 2001</option>
+              <option>CS 2345</option>
+            </select>
+          </div><!-- /.form-group -->
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account Menu -->
+              <li class="dropdown user user-menu">
+                <!-- Menu Toggle Button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <!-- The user image in the navbar-->
+                  <img src="dist/img/l.gif" class="user-image userImage" alt="User Image">
+                  <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                  <span class="hidden-xs userName"></span>
+                </a>
+                <ul class="dropdown-menu" style="right:0px;">
+                  <!-- The user image in the menu -->
+                  <li class="user-header">
+                    <img src="dist/img/l.gif" class="img-circle userImage" alt="User Image">
+                    <p>
+                      <span class="userName"></span>
+                      <small id="memberSinceDateProfile"></small>
+                    </p>
+                  </li>
+                  <!-- Menu Body -->
+                  <li class="user-body">
+                    <div class="col-xs-6 text-center">
+                      <a href="help.html">Need Help?</a>
+                    </div>
+                    <div class="col-xs-6 text-center">
+                      <a class="tutorRemoveItems" href="becometutor.html">Become a Tutor</a>
+                    </div>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="profile.html" class="btn btn-default btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      <a onclick="signOut();" class="btn btn-default btn-flat">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img style="height:45px;" src="dist/img/l.gif" class="img-circle userImage" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p class="userName"></p>
+              <!-- Status -->
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <ul class="sidebar-menu">
+            <li class="header">MENU</li>
+            <!-- Optionally, you can add icons to the links -->
+            <li class="tutorRemoveItems"><a href="index.html"><i class="fa fa-book"></i> <span>Find Tutors</span></a></li>
+            <li class="active"><a href="mybookings.html"><i class="fa fa-calendar"></i> <span>My Bookings</span></a></li>
+            <li class="tutorRemoveItems"><a href="payment.html"><i class="fa fa-money"></i> <span>Payment</span></a></li>
+            <li><a href="help.html"><i class="fa fa-question"></i> <span>Help</span></a></li>
+            <li class="tutorRemoveItems"><a href="becometutor.html"><i class="fa fa-graduation-cap"></i> <span>Become a Tutor</span></a></li>
+
+          </ul><!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div id="maincontentwrapper" class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1> My Bookings
+            <small>View Your Tutor Sessions</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li class="tutorRemoveItems"><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+            <li class="active">My Bookings</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section id="mainContentSection" class="content">
+
+         <!-- SAMPLE TOP HEADER -->
+     <!-- <div class="row"> 
+            <div class="col-md-8 center-block" style="float:none;">
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h1 class="box-title" ><b>On The Way</b> $20/hr</h1>
+                  <div class="box-tools pull-right">
+                    <button onclick="cancelAppointment(this);" class="btn btn-sm btn-danger" style="cursor:pointer;">Cancel</button>
+                  </div>
+                </div>
+                <div class="box-body">
+                  <div class="table-responsive">
+                    <table class="table no-margin table-hover">
+                      <tbody>
+                        <tr>
+                          <td><img src="dist/img/l.gif" class="img-circle userImage" style="height:65px;" alt="User Image"></td>
+                          <td>
+                            <div><b id="mainCourse">CS 1234</b> on <b id="mainDate">Jan 3, 5:00PM</b></div>
+                            <div>with <b id="mainTutor">Inez Raharjo</b>, 1hr(s)</div>
+                            <span class="btn btn-sm btn-primary label" style="cursor:pointer;"><i class="fa fa-comments-o"> Chat</i></span>
+                            <span data-toggle="tooltip" title="" class="badge bg-yellow">3</span>
+                          </td>
+                          <td>
+                            <div>Location</div>
+                            <div>2288 Piedmont Avenue</div>
+                            <div>Berkley, CA 91245</div>
+                          </td>
+                      </tbody>
+                    </table> -->
+                  <!-- </div>/.table-responsive -->
+                <!-- </div>/.box-body -->
+              <!-- </div>/.box -->
+            <!-- </div>bookingsdiv -->
+          <!-- </div>/.row -->
+
+          <!-- Upcoming Sessions -->
+          <div class="row">
+            <!--Bookings-->
+            <div class="col-md-11 center-block" style="float:none;">
+              <!-- TABLE: LATEST ORDERS -->
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Upcoming Tutor Sessions</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="table-responsive">
+                    <table class="table no-margin table-hover">
+                      <thead>
+                        <tr>
+                          <th>Message</th>
+                          <th class="userTypeOpposite">Tutor</th>
+                          <th>Date</th>
+                          <th>Location</th>
+                          <th>Class</th>
+                          <th>Status</th>
+                          <th>Duration / Price</th>
+                          <th>Action Item(s)</th>
+                        </tr>
+                      </thead>
+                      <tbody id="upcomingBookings">
+    <!--                     <tr>
+                          <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                          <td>CS 1001</td>
+                          <td><span class="label label-info">In Session</span></td>
+                          <td><div class="sparkbar" data-color="#00a65a" data-height="20">Julie Holmes</div></td>
+                        </tr>
+                        <tr>
+                          <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                          <td>Math 3001</td>
+                          <td><span class="label label-warning">Pending Payment</span></td>
+                          <td><div class="sparkbar" data-color="#f39c12" data-height="20">Brian Oliasko</div></td>
+                        </tr> -->
+                      </tbody>
+                    </table>
+                  </div><!-- /.table-responsive -->
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div> <!-- /.bookings -->
+          </div><!-- /.row -->
+
+          <!-- Past Ttutor Sessions Here -->
+          <div class="row">
+            <!--Bookings-->
+            <div class="col-md-11 center-block" style="float:none;">
+              <!-- TABLE: LATEST ORDERS -->
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Past Tutor Sessions</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="table-responsive">
+                    <table class="table no-margin table-hover">
+                      <thead>
+                        <tr>
+                          <th class="userTypeOpposite">Tutor</th>
+                          <th>Date</th>
+                          <th>Location</th>
+                          <th>Class</th>
+                          <th>Status</th>
+                          <th id="tutorPastPriceDisplay" >Duration / Price</th>
+                          <th>Action Item(s)</th>
+                        </tr>
+                      </thead>
+                      <tbody id="pastBookings">
+                      </tbody>
+                    </table>
+                  </div><!-- /.table-responsive -->
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div> <!-- /.bookings -->
+          </div><!-- /.row -->
+
+
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+
+
+
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div class="control-sidebar-bg"></div>
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> Alpha 0.0.1
+        </div>
+        <strong>Follow Us!</strong>&nbsp;&nbsp;&nbsp;<i href"#ComingSoon" onclick="alert('Coming Soon...');" style="cursor:pointer" class="fa fa-facebook-official"> Facebook</i>&nbsp;&nbsp;&nbsp;<i href"#ComingSoon" onclick="alert('Coming Soon...');" style="cursor:pointer" class="fa fa-twitter-square"> Twitter</i>&nbsp;&nbsp;&nbsp;<i href"#ComingSoon" onclick="alert('Coming Soon...');"  style="cursor:pointer" class="fa fa-instagram"> Instagram</i>
+      </footer>
+
+
+     <!-- Control Sidebar -->
+      <aside id="rightsidebaraside" class="control-sidebar control-sidebar-dark" style="position:fixed;">
+        <!-- Create the tabs -->
+        <ul id="rightsidetabs" class="nav nav-tabs nav-justified control-sidebar-tabs">
+          <li id="tutorProfileRightBar"><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-user"></i></a></li>
+          <li><a href="#" onclick="closeChat();" style="cursor:pointer"><i class="fa fa-close"></i></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div id="righttabcontent" class="tab-content" style="padding-left:0px; padding-right:0px;">
+          <!-- Chat tab content -->
+          <div class="tab-pane" id="control-sidebar-settings-tab">
+           <!-- Left col -->
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- DIRECT CHAT -->
+                  <div class="box box-warning direct-chat direct-chat-warning">
+                    <div class="box-header with-border">
+                      <h3 class="box-title" id="boxtitle">Direct Chat</h3>
+                      <div class="box-tools pull-right">
+                        <!--<span data-toggle="tooltip" title="" class="badge bg-yellow">3</span>-->
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></button>
+                        <!--<button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
+                      </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                      <!-- Conversations are loaded here -->
+                      <div class="direct-chat-messages" id='chatMessages'>
+                        <!-- Message. Default to the left -->
+                        <div class="direct-chat-msg">
+                          <div class="direct-chat-info clearfix">
+                            <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                            <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                          </div><!-- /.direct-chat-info -->
+                          <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                          <div class="direct-chat-text">
+                            Is this template really for free? That's unbelievable!
+                          </div><!-- /.direct-chat-text -->
+                        </div><!-- /.direct-chat-msg -->
+
+                        <!-- Message to the right -->
+                        <div class="direct-chat-msg right">
+                          <div class="direct-chat-info clearfix">
+                            <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                            <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                          </div><!-- /.direct-chat-info -->
+                          <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                          <div class="direct-chat-text">
+                            You better believe it!
+                          </div><!-- /.direct-chat-text -->
+                        </div><!-- /.direct-chat-msg -->
+
+                        
+
+                      </div><!--/.direct-chat-messages-->
+
+                      <!-- Contacts are loaded here -->
+                      <div class="direct-chat-contacts">
+
+
+<div id="status"></div>
+<ul id="objects"></ul>
+                        <ul class="contacts-list">
+                          <li>
+                            <a href="#">
+                              <img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+                              <div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Count Dracula
+                                  <small class="contacts-list-date pull-right">2/28/2015</small>
+                                </span>
+                                <span class="contacts-list-msg">How have you been? I was...</span>
+                              </div><!-- /.contacts-list-info -->
+                            </a>
+                          </li><!-- End Contact Item -->
+                          <li>
+                            <a href="#">
+                              <img class="contacts-list-img" src="dist/img/user7-128x128.jpg">
+                              <div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Sarah Doe
+                                  <small class="contacts-list-date pull-right">2/23/2015</small>
+                                </span>
+                                <span class="contacts-list-msg">I will be waiting for...</span>
+                              </div><!-- /.contacts-list-info -->
+                            </a>
+                          </li><!-- End Contact Item -->
+                          <li>
+                            <a href="#">
+                              <img class="contacts-list-img" src="dist/img/user3-128x128.jpg">
+                              <div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Nadia Jolie
+                                  <small class="contacts-list-date pull-right">2/20/2015</small>
+                                </span>
+                                <span class="contacts-list-msg">I'll call you back at...</span>
+                              </div><!-- /.contacts-list-info -->
+                            </a>
+                          </li><!-- End Contact Item -->
+                          <li>
+                            <a href="#">
+                              <img class="contacts-list-img" src="dist/img/user5-128x128.jpg">
+                              <div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Nora S. Vans
+                                  <small class="contacts-list-date pull-right">2/10/2015</small>
+                                </span>
+                                <span class="contacts-list-msg">Where is your new...</span>
+                              </div><!-- /.contacts-list-info -->
+                            </a>
+                          </li><!-- End Contact Item -->
+                          <li>
+                            <a href="#">
+                              <img class="contacts-list-img" src="dist/img/user6-128x128.jpg">
+                              <div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  John K.
+                                  <small class="contacts-list-date pull-right">1/27/2015</small>
+                                </span>
+                                <span class="contacts-list-msg">Can I take a look at...</span>
+                              </div><!-- /.contacts-list-info -->
+                            </a>
+                          </li><!-- End Contact Item -->
+                          <li>
+                            <a href="#">
+                              <img class="contacts-list-img" src="dist/img/user8-128x128.jpg">
+                              <div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Kenneth M.
+                                  <small class="contacts-list-date pull-right">1/4/2015</small>
+                                </span>
+                                <span class="contacts-list-msg">Never mind I found...</span>
+                              </div><!-- /.contacts-list-info -->
+                            </a>
+                          </li><!-- End Contact Item -->
+                        </ul><!-- /.contatcts-list -->
+                      </div><!-- /.direct-chat-pane -->
+                    </div><!-- /.box-body -->
+                    <div class="box-footer">
+                      <form action="#" method="post">
+                        <div class="input-group">
+                          <input type="text" name="message" placeholder="Type Message ..." class="form-control" id="msg" onkeydown="msgkeydwn(event);">
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-warning btn-flat" onclick="sendMsg();"><i class="fa fa-send"></i></button>
+                          </span>
+                        </div>
+                        <input type="file" onchange="uploadTrigger()" id="file-chooser"/>
+                        <div class="pull-right" style="color:black;">
+                          &nbsp;<a><i class="fa fa-camera uploadClick"></i></a>&nbsp;
+                          <a><i class="fa fa-paperclip uploadClick"></i></a>&nbsp;
+                        </div>
+                          <div class="progress xs" style="width:140px; background-color:#FFD9D9;position:absolute; bottom:-5px; left:10px;">
+                            <div id="uploadProgressBar" class="progress-bar progress-bar-yellow" style="width: 0%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                              <span class="sr-only">80% Complete</span>
+                            </div><div id="results"></div>
+                          </div>
+                      </form>
+                    </div><!-- /.box-footer-->
+                  </div><!--/.direct-chat -->
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.col -->
+          </div><!-- /.tab-pane -->
+        </div>
+      </aside><!-- /.control-sidebar -->
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div id="controlsidebarbg" class="control-sidebar-bg"></div>
+
+    </div><!-- ./wrapper -->
+
+    <!-- Modals
+    ===================================================== -->
+    <!--Feedback Modal -->
+    <div class="modal fade" id="feedback">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title"><strong style="color: black">Feedback</strong> <small> How good was your<strong style="color: grey"> AsapTutor?</strong></small></h4>
+          </div>
+          <div class="modal-body" style="padding-bottom: 0px; text-align:center;">
+            <h1 id="feedbackTutorName" >No One Selected</h1>
+            <div style="margin: auto; width: 278px;">
+              <input id="input-id" type="number" data-show-clear="false" data-show-caption="false" class="rating" min=0 max=5 step=0.5 data-size="lg" >
+            </div>
+            <div style="margin: auto; width: 70%; text-align:center;" class="form-group">
+              <label for="comment">Comments</label>
+              <textarea id="feedbackTextArea" class="form-control" rows="5"></textarea>
+            </div>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="submitFeedbackBtn" type="button" class="btn btn-primary">Submit</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- REQUIRED JS SCRIPTS -->
+
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Firebase -->
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.min.js"></script>
+    <!-- Bootstrap slider -->
+    <script src="plugins/bootstrap-slider/bootstrap-slider.js"></script>
+    <!-- Select2 -->
+    <script src="plugins/select2/select2.full.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demoNoInject.js"></script>
+    <!-- SlimScroll -->
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="plugins/fastclick/fastclick.min.js"></script>
+    <!--Moment Time-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <!--Star Rating-->
+    <script src="dist/js/star-rating.js" type="text/javascript"></script>
+
+    <script src="ChatBoxFireManager.js" type="text/javascript"></script>
+
+    <!-- AWS!!-->
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.28.min.js"></script>
+    <script type="text/javascript">
+      // See the Configuring section to configure credentials in the SDK
+      //AWS.config.credentials = new AWS.Credentials('AKIAJ3LLAJ64NQGWA3IA', 'fnZES6FVWmuToD/e4xzckkjyDbeq1jr/BJM5FByj');
+      AWS.config.update({accessKeyId: 'AKIAJ2MWV4MLXEZNKWWQ', secretAccessKey: 'qCotF8dTiZhTlv+bGngoRstk6gaHr9iMLnjOBARK'});
+
+      // Configure your region
+      AWS.config.region = 'us-east-1';
+    </script>
+
+    <!--Custom SMS Messaging Library that calls Node Js Server -->
+    <script src="smsMessage.js"></script>
+
+
+<script type="text/javascript">
+  // var bucket = new AWS.S3({params: {Bucket: 'asaptutor.us'}});
+  // bucket.listObjects(function (err, data) {
+  //   if (err) {
+  //     document.getElementById('status').innerHTML =
+  //       'Could not load objects from S3';
+  //   } else {
+  //     document.getElementById('status').innerHTML =
+  //       'Loaded ' + data.Contents.length + ' items from S3';
+  //     for (var i = 0; i < data.Contents.length; i++) {
+  //       document.getElementById('objects').innerHTML +=
+  //         '<li>' + data.Contents[i].Key + '</li>';
+  //     }
+  //   }
+  // });
+</script>
+
+    <script>
+      $(function () {
+        /* BOOTSTRAP SLIDER */
+        $("#ex6").slider();
+        $("#ex6").on("slide", function(slideEvt) {
+          $("#ex6SliderVal").text(slideEvt.value);
+        });
+        /*Initialize Select2 Elements */
+        $(".select2").select2();
+        /*Initialize Star Rating*/
+        $("#input-id").rating();
+      });
+
+      $( document ).ready(function() {
+        $('.uploadClick').click(function(){
+            $('#file-chooser').click();
+        });
+      });
+      function uploadTrigger(){
+        /** AWS UPLOAD FILES/IMAGES FOR CHATTING **/
+        var params = {Bucket: 'asaptutor.us/UPLOADFILES/'+loggedInUserID, Expires:3153600000};
+        var bucket = new AWS.S3({params: params});
+
+        var fileChooser = document.getElementById('file-chooser');
+        var results = document.getElementById('results');
+          var file = fileChooser.files[0];
+          if (file) {
+            results.innerHTML = '';
+            //uploadProgressBar
+            var params = {Key: file.name, ContentType: file.type, Body: file};
+            bucket.upload(params).on('httpUploadProgress', function(evt) {
+              console.log("Uploaded :: " + parseInt((evt.loaded * 100) / evt.total)+'%');
+              $("#uploadProgressBar").width(parseInt((evt.loaded * 100) / evt.total)+"%");
+              }).send(function(err, data) {
+              results.innerHTML = err ? 'ERROR!' : 'UPLOADED.';
+              console.log(data);
+              console.log(data.Location);
+              console.log(data.key);
+              var isImage = false;
+              if (file.name.match(/\.(jpg|jpeg|png|gif)$/)){
+                //alert('IS an image');
+                isImage = true;
+              }    
+              sendDynamicMsg(data.Location+","+data.key+","+isImage + "," + "uploadedfile1234567890");
+            });
+          }
+      }
+    /******* FIREBASE CODE - MOVE TO JS FILE *******/
+      var loggedInUserLatLng = null;
+      var loggedInUserID = null;
+      var isLoggedInUserTutor = false;
+      $( document ).ready(function() {
+
+          $(".sidebar-menu").hide();
+          // Register the callback to be fired every time auth state changes
+          var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+          ref.onAuth(authDataCallback);
+
+          // Get a database reference to our posts
+          var authData = ref.getAuth();
+
+          if (authData) {
+            //console.log("Authenticated user with uid:", authData.uid);
+            loggedInUserID = authData.uid;
+            var ref = new Firebase("https://ubertutoralpha.firebaseio.com/users/"+authData.uid);
+
+            // Attach an asynchronous callback to read the data at our posts reference
+            ref.on("value", function(snapshot) {
+              //console.log(snapshot.val());
+              updateUserImages(snapshot.val().imgUrl);
+              updateUserName(snapshot.val().displayName);
+              $("#memberSinceDateProfile").text("Member since "+ moment(snapshot.val().creationDate).format("MMM. YYYY"));
+              loggedInUserID = snapshot.key();
+              loggedInUserLatLng = snapshot.val().latlng;
+              isLoggedInUserTutor = (snapshot.val().userType == "tutor");
+              if(isLoggedInUserTutor) {
+                $(".userTypeOpposite").text("Student");
+                $(".tutorRemoveItems").remove();
+                $(".sidebar-menu").show();
+              }else{
+                $(".sidebar-menu").show();
+              }
+              
+              loadBookings(snapshot);
+            }, function (errorObject) {
+              console.log("The read failed: " + errorObject.code);
+            });
+          }
+
+          // Create a callback which logs the current auth state
+          function authDataCallback(authData) {
+            if (authData) {
+              console.log("User " + authData.uid + " is logged in with " + authData.provider);
+            } else {
+              console.log("User is logged out");
+              window.location = '../index.html'
+            }
+          }
+      });
+      function updateUserImages(imgURL){
+        if (imgURL){
+          $(".userImage").attr("src", imgURL);
+        }
+      }
+      function updateUserName(userName){
+        if(userName){
+          $(".userName").text(userName);
+        }
+      }
+      function signOut(){
+        var ref = new Firebase('https://ubertutoralpha.firebaseio.com');
+        ref.unauth();
+        window.location = '../index.html';
+      }
+
+    /******* MyBooking CODE - MOVE TO JS FILE *******/
+      var totalChats = 0;
+      var onUsersAppointmentChange = null;
+      var refAndOnAppointmentChangeMap = {};
+
+      function loadBookings(currUserSnapshot){
+        $("#chatMessages").empty();
+        //console.log(currUserSnapshot.key());
+
+        var usersRef = new Firebase("https://ubertutoralpha.firebaseio.com/users/"+currUserSnapshot.key()+"/appointmentIDs");
+        
+        //Remove listener if it already exists to prevent duplicate database calls
+        if(onUsersAppointmentChange){
+          console.log("Listener Removed");
+          usersRef.off('value', onUsersAppointmentChange);
+          onUsersAppointmentChange = null;
+        } 
+        //Remove listener if it already exists to prevent duplicate database calls
+        if(refAndOnAppointmentChangeMap){
+          $.each(refAndOnAppointmentChangeMap, function(key, value){
+            console.log("Listener Removed DEEP");
+            new Firebase(key).off('value',value);
+          });
+          refAndOnAppointmentChangeMap = {};
+        } 
+
+        // Attach an asynchronous callback to read the data at our posts reference
+        onUsersAppointmentChange = usersRef.once("value", function(snapshot) {
+          console.log("Listener Added");
+          //console.log(snapshot.val());
+          var userAppointments = currUserSnapshot.val().appointmentIDs;
+          var allAppointments = snapshot.val();
+          var uids = "";
+          totalChats = 0;
+          waitTime = 600; //85 works 50% of the time
+          //console.log(userAppointments);
+          //console.log(allAppointments);
+
+
+          //Clear lists before showing
+          $("#upcomingBookings").empty();
+          $("#pastBookings").empty();
+          $(".refreshable").remove();
+
+          //Go through every appointment for the user, map it to a real appointment, the display it all
+          if(userAppointments && allAppointments){
+            $.each(userAppointments, function(uid, appointmentMapObj){
+              console.log(uid);
+              //Get the entire Appointment Obj from Mapping
+              var ref = new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+uid);
+
+              refAndOnAppointmentChangeMap[ref] = ref.on("value", function(appointmentSnapshot) {
+                console.log("LISTENER ADDED DEEP "); //Listers are added here as well as any child changed object will trigger this
+
+                //Default Unknown Status Style
+                var statusStyle = "bg-gray-active color-palette";
+                var actionItem = "None";
+                var upcomingPastOrNow = "#pastBookings";
+                var paymentText = "Price Estimate";
+                var appointmentDisplayName = appointmentSnapshot.val().tutorDisplayName || "Not Defined";
+                var appointmentDisplayStatus = appointmentSnapshot.val().status;
+                var durationPriceDisplay = appointmentSnapshot.val().duration+"hr(s) @ $"+appointmentSnapshot.val().costHourly+"/hr";
+                if (isLoggedInUserTutor){
+                  appointmentDisplayName = appointmentSnapshot.val().studentDisplayName;
+                  //alert(appointmentDisplayName);
+                  //Edge Case Bug, If Tutor somehow books appointment, then everything is screwed up :P
+                }
+                if(appointmentSnapshot.val().status == "Finished" || appointmentSnapshot.val().status == "Declined" || appointmentSnapshot.val().status == "Cancelled"){
+                  durationPriceDisplay = "$"+round_nearest_tenth(parseFloat(appointmentSnapshot.val().cost));
+                }
+                $("#tutorPastPriceDisplay").text("Amount");
+
+                if(appointmentSnapshot.val().status == "Awaiting Response"){
+                  upcomingPastOrNow = "#upcomingBookings";
+                  statusStyle = "label-primary";
+                  actionItem = "<span onclick='cancelAppointment(this);' appointmentId='"+appointmentSnapshot.key()+"' class='btn btn-sm btn btn-danger label' style='cursor:pointer;'><i class='fa fa-times-circle-o'> Cancel</i></span>";
+                  if(isLoggedInUserTutor){
+                    actionItem = "<span onclick='acceptTutorRequest(this);' appointmentId='"+appointmentSnapshot.key()+"' class='btn btn-sm btn btn-success label' style='cursor:pointer;'><i class='fa fa-check'> Accept</i></span>";
+                    actionItem = actionItem + "<span onclick='rejectAppointment(this);' appointmentId='"+appointmentSnapshot.key()+"' class='btn btn-sm btn btn-danger label' style='cursor:pointer;'><i class='fa fa-times'> Decline</i></span>";
+                  }
+
+                }
+                if(appointmentSnapshot.val().status == "Accepted"){
+                  upcomingPastOrNow = "#upcomingBookings";
+                  statusStyle = "label-info";
+                  actionItem = "<span appointmentId='"+appointmentSnapshot.key()+"' onclick='cancelAppointment(this);' class='btn btn-sm btn btn-danger label' style='cursor:pointer;'><i class='fa fa-times'> Cancel</i></span>";
+                  if(isLoggedInUserTutor){ 
+                    actionItem = "<span appointmentId='"+appointmentSnapshot.key()+"' onclick='alertStudentYourOnTheWay(this);' class='btn btn-sm btn btn-success label' style='cursor:pointer;'><i class='fa fa-car'> I'm Enroute</i></span>" + actionItem;
+                  }
+                }
+                if(appointmentSnapshot.val().status == "On the Way"){
+                  upcomingPastOrNow = "#mainContentSection";
+                  statusStyle = "label-info";
+                  actionItem = "<button class='btn btn-box-tool' data-widget='collapse'><i class='fa fa-minus'></i></button>";
+                  if(isLoggedInUserTutor){ 
+                    actionItem = "<span appointmentId='"+appointmentSnapshot.key()+"' onclick='beginTutorSession(this);' class='btn btn-sm btn btn-success label' style='cursor:pointer;'><i class='fa fa-clock-o'> Begin Tutoring</i></span>" + actionItem;
+                  }
+                }
+                if(appointmentSnapshot.val().status == "In Session"){
+                  upcomingPastOrNow = "#mainContentSection";
+                  statusStyle = "label-info";
+                  actionItem = "<button class='btn btn-box-tool' data-widget='collapse'><i class='fa fa-minus'></i></button>";
+                  if(isLoggedInUserTutor){ 
+                    actionItem = "<span appointmentId='"+appointmentSnapshot.key()+"' onclick='endTutorSession(this);' class='btn btn-sm btn btn-danger label' style='cursor:pointer;'><i class='fa fa-clock-o'> Finish Tutoring</i></span>" + actionItem;
+                  }
+                }
+                if(appointmentSnapshot.val().status == "Pending Payment"){
+
+                  upcomingPastOrNow = "#mainContentSection";
+                  paymentText = "Amount Due";
+                  statusStyle = "label-warning";
+                  if(isLoggedInUserTutor){
+                    paymentText = "To Be Paid Amount";
+                    actionItem = "";
+                  } else {
+                    actionItem = "<span onclick='goToPayments();' class='btn btn-sm btn btn"+statusStyle.replace("label","")+" label' style='cursor:pointer;'><i class='fa fa-comments-o'> Pay Now</i></span>";
+                  }
+                }
+                if(appointmentSnapshot.val().status == "Finished"){
+                  upcomingPastOrNow = "#pastBookings";
+                  statusStyle = "label-success";
+                  if(appointmentSnapshot.val().feedbackLeft == "true"){
+                    actionItem = "Feedback Left <i class='fa fa-check-circle'></i>";
+                    if(isLoggedInUserTutor) actionItem = "None <i class='fa fa-check-circle'></i>";
+                  } else {
+                    actionItem = "<span appointmentId='"+appointmentSnapshot.key()+"' tutorId='"+appointmentSnapshot.val().tutorID+"' tutorDisplayName='"+appointmentDisplayName+"' onclick='leaveFeedback(this);' class='btn btn-sm btn btn"+statusStyle.replace("label","")+" label' style='cursor:pointer;'><i class='fa fa-pencil-square-o'> Leave Feedback</i></span>";
+                    if(isLoggedInUserTutor) actionItem = "None <i class='fa fa-check-circle'></i>";
+                  }
+                  if(isLoggedInUserTutor && "False"==appointmentSnapshot.val().isTutorPaid){ 
+                    appointmentDisplayStatus = "Processing";
+                    statusStyle = "label-warning";
+                  } else {
+                    appointmentDisplayStatus = "Paid";
+                    statusStyle = "label-success";
+                  }
+                }
+                if(appointmentSnapshot.val().status == "Cancelled"){
+                  statusStyle = "label-danger";
+                }
+                if(appointmentSnapshot.val().status == "Declined"){
+                  statusStyle = "label-danger";
+                }
+
+                //Update Actual Bookings on UI
+                if(uids.indexOf(uid) > -1){
+                  //Already Exist, just remove all and readd everything
+                  loadBookings(currUserSnapshot);
+                } else {
+                  //Doesn't Exist yet, just add
+                  uids = uids+uid;
+
+                  if(upcomingPastOrNow == "#mainContentSection"){
+                    (new Firebase("https://ubertutoralpha.firebaseio.com/users/"+appointmentSnapshot.val().tutorID+"/imgUrl")).once('value', function (imgUrlSnapshot) {
+                      var imgUrl = imgUrlSnapshot.val();
+totalChats++;
+//alert("Initialized, Total Chats:" + totalChats);
+//setTimeout(function(){
+
+                      //Initialize Chat Room Unread Messages for everyone - HACK FIX -- For Chat to Show up
+                      var mainchatuid=fireChatBox.AddChatRoom(appointmentSnapshot.val().tutorID,appointmentSnapshot.val().studentID,currUserSnapshot.key());
+
+                      fireChatBox.FireChatRooms(null);
+                     
+        $(upcomingPastOrNow).prepend(""+
+          "<div class='row refreshable'>"+
+            "<div class='col-md-8 center-block' style='float:none;'>"+
+              "<div class='box box-info'>"+
+                "<div class='box-header with-border'>"+
+                  "<h1 class='box-title' ><b>"+appointmentDisplayStatus+"</b> - "+paymentText+": $"+round_nearest_tenth(parseFloat(appointmentSnapshot.val().cost))+"</h1>"+
+                  "<div class='box-tools pull-right'>"+
+                    actionItem+
+                  "</div>"+
+                "</div>"+
+                "<div class='box-body'>"+
+                  "<div class='table-responsive'>"+
+                    "<table class='table no-margin table-hover'>"+
+                      "<tbody>"+
+                        "<tr>"+
+                          "<td><img src='"+imgUrl+"' class='img-circle userImage' style='height:65px;' alt='User Image'></td>"+
+                          "<td>"+
+                            "<div><b>"+appointmentSnapshot.val().courses+"</b> on <b>"+moment(appointmentSnapshot.val().creationDate).format("MMM D, h:mmA")+"</b></div>"+
+                            "<div>with <b>"+appointmentDisplayName+"</b>, "+round_nearest_tenth(parseFloat(appointmentSnapshot.val().duration))+"hr(s) - $"+appointmentSnapshot.val().costHourly+"/hr</div>"+
+                            "<span chatuid='"+mainchatuid+"' currentUserID='"+currUserSnapshot.key()+"' = tutorID='"+appointmentSnapshot.val().tutorID+"' studentID='"+appointmentSnapshot.val().studentID+"' onclick='initializeChat(this);' class='btn btn-sm btn-primary label' style='cursor:pointer;'><i class='fa fa-comments-o'> Chat</i></span>"+
+                            " <span data-toggle='tooltip' title='' class='badge bg-yellow'></span>"+
+                          "</td>"+
+                          "<td>"+
+                            "<div>Location</div>"+
+                            "<div>"+appointmentSnapshot.val().latlngAddress+"</div>"+
+                          "</td>"+
+                      "</tbody>"+
+                    "</table>"+
+                  "</div>"+
+                "</div>"+
+              "</div>"+
+            "</div>"+
+          "</div>");
+
+//Bug Hack to display unread messages after status changes
+(new Firebase("https://ubertutoralpha.firebaseio.com/chat/"+mainchatuid+"/stats")).once('value', function (unreadMessagesSnapshot) {
+  var leftOrRight = 1; //0 is Left
+
+  var arr=[appointmentSnapshot.val().tutorID, appointmentSnapshot.val().studentID];
+  arr.sort()
+  if (loggedInUserID == arr[0]){
+    leftOrRight = 0;
+  }
+  if(unreadMessagesSnapshot.val()) chatBoxNotification(mainchatuid,unreadMessagesSnapshot.val()[leftOrRight]);
+});
+
+//}, totalChats*waitTime-waitTime);
+                    }, function (err) {
+                      // code to handle read error
+                      console.log(err);
+                    });
+
+
+
+
+                  } else if(upcomingPastOrNow == "#upcomingBookings"){
+                    totalChats++;
+                    //aalert("Initialized, Total Chats:" + totalChats);
+                    //setTimeout(function(){
+
+                    //Initialize Chat Room Unread Messages for everyone - HACK FIX Messages dont show the first time...
+                    var upcomingchatuid=fireChatBox.AddChatRoom(appointmentSnapshot.val().tutorID,appointmentSnapshot.val().studentID,currUserSnapshot.key());
+                    fireChatBox.FireChatRooms(null);
+
+                    $(upcomingPastOrNow).prepend("<tr><td class='col-md-1'><div class='sparkbar' data-color='#00a65a' data-height='20'><span chatuid='"+upcomingchatuid+"' currentUserID='"+currUserSnapshot.key()+"' = tutorID='"+appointmentSnapshot.val().tutorID+"' studentID='"+appointmentSnapshot.val().studentID+"' onclick='initializeChat(this);' class='btn btn-sm btn-primary label' style='cursor:pointer;'><i class='fa fa-comments-o'> Chat</i></span>"+"<span data-toggle='tooltip' title='' class='badge bg-yellow'></span>"+"</div></td><td>"+appointmentDisplayName.split(" ")[0]+"</td><td><span href="+"TBA-TODO"+">"+moment(appointmentSnapshot.val().creationDate).format("MMM D, h:mm a")+"</span></td><td>"+appointmentSnapshot.val().latlngAddress.split(",")[0]+"</td><td>"+appointmentSnapshot.val().courses+"</td><td><span class='label "+statusStyle+"'>"+appointmentDisplayStatus+"</span></td><td>"+durationPriceDisplay+"</td><td>"+actionItem+"</td></tr>");
+
+//Bug Hack to display unread messages after status changes
+(new Firebase("https://ubertutoralpha.firebaseio.com/chat/"+upcomingchatuid+"/stats")).once('value', function (unreadMessagesSnapshot) {
+  var leftOrRight = 1; //0 is Left
+
+  var arr=[appointmentSnapshot.val().tutorID, appointmentSnapshot.val().studentID];
+  arr.sort()
+  if (loggedInUserID == arr[0]){
+    leftOrRight = 0;
+  }
+  if(unreadMessagesSnapshot.val()) chatBoxNotification(upcomingchatuid,unreadMessagesSnapshot.val()[leftOrRight]);
+});
+
+                  //}, totalChats*waitTime-waitTime);
+                  } else if(upcomingPastOrNow == "#pastBookings"){
+                    $(upcomingPastOrNow).prepend("<tr><td>"+appointmentDisplayName.split(" ")[0]+"</td><td><span href="+"TBA-TODO"+">"+moment(appointmentSnapshot.val().creationDate).format("MMM D, h:mm a")+"</span></td><td>"+appointmentSnapshot.val().latlngAddress.split(",")[0]+"</td><td>"+appointmentSnapshot.val().courses+"</td><td><span class='label "+statusStyle+"'>"+appointmentDisplayStatus+"</span></td><td>"+durationPriceDisplay+"</td><td>"+actionItem+"</td></tr>");
+                  }
+                }
+
+              },function (errorObject) {
+                console.log("The read failed: " + errorObject.code);
+              });
+            });
+          } else{
+            $("#upcomingBookings").prepend("<tr><td>"+"Empty"+"</td><td>"+
+              "</td><td><span class='label label-info'>"+
+              "</span></td><td><div class='sparkbar' data-color='#00a65a' data-height='20'>"+
+              "<a href="+"/STUDENT/index.html"+">"+""+"</a>"
+              +"</div></td></tr>");
+          }
+        }, function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        });
+    }
+    function initializeChat(_this){
+      console.log("TutorID: "+ _this.getAttribute("tutorID"));
+      console.log("StudentID: "+ _this.getAttribute("studentID"));
+      console.log("CurrentUserID: " + _this.getAttribute("currentUserID"));
+      
+      $.AdminLTE.controlSidebar.open();
+      $('#rightsidetabs a[href="#control-sidebar-settings-tab"]').tab('show');
+
+      //pass info to chatbox
+      chatBox(_this);
+      //chatBox(_this);
+    }
+    function goToPayments(){
+      window.location ='payment.html';
+    }
+    function cancelAppointment(_this){
+      //Send Message to Tutor and Student Notifying them of the Cancellation
+      notifyAppointmentCancellation(_this.getAttribute("appointmentId"));
+    
+      (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+_this.getAttribute("appointmentId")+"/status")).set('Cancelled');
+    }
+    function leaveFeedback(_this){
+      //pop up modal and set tutor name
+      $('#feedback').modal(); 
+      var tutName = _this.getAttribute("tutorDisplayName");
+      $("#feedbackTutorName").text(tutName);
+      $("#submitFeedbackBtn").attr("appointmentId", _this.getAttribute('appointmentId'));
+      $("#submitFeedbackBtn").attr("tutorId", _this.getAttribute('tutorId'));
+
+      $("#submitFeedbackBtn").click(function() {
+        //get stars, feedback message
+        var appId = $("#submitFeedbackBtn").attr("appointmentId");
+        var stars = $("#input-id").rating().val();
+        var msg = $("#feedbackTextArea").val();
+        var tutorId = $("#submitFeedbackBtn").attr("tutorId");
+        console.log(tutorId);
+
+        //set feedbackLeft to true, and persist message and stars
+        console.log("Submit Button Clicked", msg, stars);
+        (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appId+"/feedbackLeft")).set('true');
+        (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appId+"/feedbackMessage")).set(msg);
+        (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appId+"/feedbackRating")).set(stars);
+
+        (new Firebase("https://ubertutoralpha.firebaseio.com/users/"+tutorId+"/numOfReviews")).once('value', function (numOfReviewsSnapshot) {
+          (new Firebase("https://ubertutoralpha.firebaseio.com/users/"+tutorId+"/reviewAvgStars")).once('value', function (reviewAvgStarsSnapshot) {
+            console.log(numOfReviewsSnapshot.val());
+            console.log(reviewAvgStarsSnapshot.val());
+            var numOfReviews = parseInt((numOfReviewsSnapshot.val()));
+            var reviewAvgStars = parseFloat((reviewAvgStarsSnapshot.val()));
+            var newAvgStars = ((reviewAvgStars * numOfReviews) + parseFloat(stars))/ (numOfReviews+1);
+            (new Firebase("https://ubertutoralpha.firebaseio.com/users/"+tutorId+"/reviewAvgStars")).set(newAvgStars+"");
+            (new Firebase("https://ubertutoralpha.firebaseio.com/users/"+tutorId+"/numOfReviews")).set(numOfReviews+1+"");
+            $('#feedback').modal('toggle');
+          }, function (err) {
+            // code to handle read error
+            console.log(err);
+          });
+        }, function (err) {
+          // code to handle read error
+          console.log(err);
+        });
+      });
+    }
+    function persistFeedback(_this){
+
+    }
+    function closeChat(){
+      $.AdminLTE.controlSidebar.close();
+      //Close Chat Listeners
+      //fireChatBox.CloseChatBox(); //needs chatuid
+    }
+    function round_nearest_tenth(num) {
+      return Math.round(num * 100) / 100;
+    }
+
+
+/******* CHATBOX CODE - MOVE TO JS FILE : ChatBoxFireManager.js *******/
+
+
+      var fireChatBox=new ChatBoxFireManager();
+
+      //Click on Chat Button
+      function chatBox(chatElem){
+          $("#chatMessages").empty();
+          $(chatElem).next().text("");
+
+          var chatuid=$(chatElem).attr("chatuid");          
+
+          function initChatBoxFunc(chatuid){              
+                  var targetUserName=fireChatBox.GetChatboxInfo(chatuid).getTargetName();
+                  $("#boxtitle").text(targetUserName)
+                      .attr("chatuid",chatuid);
+                  //return this;
+          };
+          var options={currentChatUid:chatuid, initChatBoxFunc:initChatBoxFunc};
+
+          fireChatBox.FireChatRooms(options);
+
+          fireChatBox.ClearMyStats(chatuid);
+      };
+      function test(chatElem){
+
+          var tutorID=$(chatElem).attr("tutorID"),
+          studentID=$(chatElem).attr("studentID"),
+          currentUserID=$(chatElem).attr("currentUserID");
+          console.log("wei",tutorID,studentID,currentUserID);
+
+
+          var chatuid=fireChatBox.SetChatRoom(tutorID,studentID,currentUserID);
+
+          $(chatElem).attr("chatuid",chatuid);//.next().text("");
+      }
+
+      fireChatBox.SetNotifications(chatBoxNotification); //Call Back whenever there is a new message - Defaults to update message
+      function chatBoxNotification(chatuid,count){        
+          //alert(count);
+          if(!count) count="";
+          var btn=$("span[chatuid='"+chatuid+"']");
+          //btn.css("background-color","#ff0000");
+
+          $(btn).next().attr("title",count+" New Message(s)");
+          $(btn).next().text(count);//.css("background-color","#ff0000");
+          var pa=$(btn).parent();
+          pa.find(".badge").css("background-color","#ff0000").text(count);
+          console.log("fireChatBox.SetNotifications="+chatuid,"count=",count);
+          //alert("CALL BACK UI");
+  
+      }
+
+
+      //add new message using set
+      function sendMsg(){
+        var currChatuid=$("#boxtitle").attr("chatuid");
+
+        var msg=$("#msg").val();
+        msg=$.trim(msg);
+        if(msg.length===0)return;
+
+        // //Figure out who the message is going to and send it as Text Message as well :)
+        var sendDynamicTextTo = "";
+        if(!isLoggedInUserTutor){
+          sendDynamicTextFrom = "Student"
+        }else{
+          sendDynamicTextFrom = "Tutor"
+        }
+        if(currChatuid.split("_")[0] == loggedInUserID){
+          sendSmsMessage(currChatuid.split("_")[1],"You've received a new message from your "+sendDynamicTextFrom+": " + msg);
+        }else{
+          sendSmsMessage(currChatuid.split("_")[0],"You've received a new message from your "+sendDynamicTextFrom+": " + msg);
+        }
+
+        //var ownerIdIndx=mfcb.chatboxInfo.data.ownerIdIndx;
+        var datetime=moment().format();
+        console.log(datetime);
+        //chatRef.child(datetime).set({msg:msg, ownerIdIndx:ownerIdIndx});
+        fireChatBox.SendMsg(currChatuid, msg);
+        //Clears UI and Server Unread Messages when you send a message
+        fireChatBox.ClearMyStats(currChatuid);
+        chatBoxNotification(currChatuid,0);
+        $("#msg").val('');
+      };
+      //add new message using set
+      function sendDynamicMsg(msg){
+        var currChatuid=$("#boxtitle").attr("chatuid");
+
+        msg=$.trim(msg);
+        if(msg.length===0)return;
+
+        // //Figure out who the message is going to and send it as Text Message as well :)
+        var sendDynamicTextTo = "";
+        if(!isLoggedInUserTutor){
+          sendDynamicTextFrom = "Student"
+        }else{
+          sendDynamicTextFrom = "Tutor"
+        }
+        if(currChatuid.split("_")[0] == loggedInUserID){
+          sendSmsMessage(currChatuid.split("_")[1],"You've received a new file from your "+sendDynamicTextFrom+"! Come view on our website!");
+        }else{
+          sendSmsMessage(currChatuid.split("_")[0],"You've received a new file from your "+sendDynamicTextFrom+"! Come view on our website!");
+        }
+
+        //var ownerIdIndx=mfcb.chatboxInfo.data.ownerIdIndx;
+        var datetime=moment().format();
+        console.log(datetime);
+        //chatRef.child(datetime).set({msg:msg, ownerIdIndx:ownerIdIndx});
+        fireChatBox.SendMsg(currChatuid, msg);
+        //Clears UI and Server Unread Messages when you send a message
+        fireChatBox.ClearMyStats(currChatuid);
+        chatBoxNotification(currChatuid,0);
+        $("#msg").val('');
+      };
+      function msgkeydwn(e){
+        //console.log(e);
+        if(e.keyCode===13 || e.which===13){
+           sendMsg();
+        };
+
+        return true;
+      };
+      fireChatBox.Set_FireMsg2Chatbox(Msg2Box);
+
+      function Msg2Box(chatUid, datetime, msg, snder, boxsides,bScroolToView){
+            var currChatuid=$("#boxtitle").attr("chatuid");
+            if( currChatuid!=chatUid){
+              return;
+            }
+            //console.error(currChatuid);
+            //OPENS chat box, Clears UI and Server Unread Messages when you reveive a message and have chatbox open
+            if(totalChats == 1){
+              $.AdminLTE.controlSidebar.open();
+              $('#rightsidetabs a[href="#control-sidebar-settings-tab"]').tab('show');
+              fireChatBox.ClearMyStats(chatUid);
+              chatBoxNotification(chatUid,0);
+            }
+            ////following is the sample codes.
+            var chatMsg='<div class="direct-chat-msg '+boxsides[0]+'">'+
+                            '<div class="direct-chat-info clearfix">'+
+                              '<span class="direct-chat-name pull-'+boxsides[0]+'">'+snder.displayName+'</span> '+
+                              '<span class="direct-chat-timestamp pull-'+boxsides[1]+'"> '+datetime+'</span>'+
+                            '</div><!-- /.direct-chat-info -->'+
+                            '<img class="direct-chat-img" src="'+snder.imgUrl+'" alt="message user image"><!-- /.direct-chat- img  -->'+
+                            '<div class="direct-chat-text">'+
+                              msg.msg+
+                            '</div><!-- /.direct-chat-text -->'+
+                        '</div><!-- /.direct-chat-msg -->';
+
+            if (msg.msg.indexOf("uploadedfile1234567890") > -1){
+
+              //message is a uploaded file
+              var arr = msg.msg.split(",");
+              var isImage = arr[2];
+              var key = arr[1];
+              var location = arr[0];
+              if (isImage == "true"){
+                chatMsg = '<div class="direct-chat-msg '+boxsides[0]+'">'+
+                            '<div class="direct-chat-info clearfix">'+
+                              '<span class="direct-chat-name pull-'+boxsides[0]+'">'+snder.displayName+'</span> '+
+                              '<span class="direct-chat-timestamp pull-'+boxsides[1]+'"> '+datetime+'</span>'+
+                            '</div><!-- /.direct-chat-info -->'+
+                            '<img class="direct-chat-img" src="'+snder.imgUrl+'" alt="message user image"><!-- /.direct-chat- img  -->'+
+                            '<div class="direct-chat-text">'+
+                    "<div class='attachment'>"+
+                      "<h4>Attachments:</h4>"+
+                      "<p class='filename'>"+
+                        '<a href="'+location+'" target="_blank">'+
+                          '<img class="hoverOpaque" src="'+location+'" alt="Download Image" style="width:100%;border:0;">'+
+                        '</a>'+
+                      "</p>"+
+                    "</div>"+
+                            '</div>'+
+                        '</div>';
+              } else {
+                chatMsg = '<div class="direct-chat-msg '+boxsides[0]+'">'+
+                            '<div class="direct-chat-info clearfix">'+
+                              '<span class="direct-chat-name pull-'+boxsides[0]+'">'+snder.displayName+'</span> '+
+                              '<span class="direct-chat-timestamp pull-'+boxsides[1]+'"> '+datetime+'</span>'+
+                            '</div><!-- /.direct-chat-info -->'+
+                            '<img class="direct-chat-img" src="'+snder.imgUrl+'" alt="message user image"><!-- /.direct-chat- img  -->'+
+                            '<div class="direct-chat-text">'+
+                    "<div class='attachment'>"+
+                      "<h4>Attachments:</h4>"+
+                      "<p class='filename'>"+
+                        "<i class='fa fa-file-text-o'></i> "+"<a target='_blank' class='msgUploads' href='"+location+"'>"+key+"</a>"+
+                      "</p>"+
+                    "</div>"+
+                            '</div>'+
+                        '</div>';
+              }
+            }
+
+           var ele=$(chatMsg).appendTo("#chatMessages");
+           if(bScroolToView){
+             ele[0].scrollIntoView();
+           }
+       };
+
+  $(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+
+
+
+/**********TUTOR CODE APIs *************/
+function rejectAppointment(_this){
+  //console.log("appointmentId:" + _this.getAttribute("appointmentId"));
+  (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+_this.getAttribute("appointmentId")+"/status")).set('Declined');
+  sendSmsMessageToStudent(_this.getAttribute("appointmentId"), 
+    "Your Appointment Request has been REJECTED for AppointmendID: '"+_this.getAttribute("appointmentId")+"'");
+}
+function acceptTutorRequest(_this){
+  var appointmentId = _this.getAttribute("appointmentId");
+  (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appointmentId+"/status")).set("Accepted");
+  sendSmsMessageToStudent(_this.getAttribute("appointmentId"), 
+    "Your Appointment Request has been ACCEPTED for AppointmendID: '"+_this.getAttribute("appointmentId")+"'");
+}
+function alertStudentYourOnTheWay(_this){
+  var appointmentId = _this.getAttribute("appointmentId");
+  (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appointmentId+"/status")).set("On the Way");
+  sendSmsMessageToStudent(_this.getAttribute("appointmentId"), 
+    "Your Tutor is on the way for AppointmendID: '"+_this.getAttribute("appointmentId")+"'");
+}
+function beginTutorSession(_this){
+  var appointmentId = _this.getAttribute("appointmentId");
+  (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appointmentId+"/sessionStartTime")).set(moment().format());
+  (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appointmentId+"/status")).set("In Session");
+  sendSmsMessageToStudent(_this.getAttribute("appointmentId"), 
+    "Your Tutor session has begun for AppointmendID: '"+_this.getAttribute("appointmentId")+"'");
+}
+function endTutorSession(_this){
+  var appointmentId = _this.getAttribute("appointmentId");
+  (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appointmentId+"/sessionStartTime")).once('value', function (sessionStartTimeSnapshot) {
+    (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appointmentId+"/costHourly")).once('value', function (costHourlySnapshot) {
+      var startTime = sessionStartTimeSnapshot.val();
+      var endTime = moment();
+
+      var duration = moment.duration(endTime.diff(startTime));
+      var hours = duration.asHours();
+
+      var totalCost = parseFloat(costHourlySnapshot.val()) * hours;
+
+      //Update Appointment with new Duration, new Total Price, and session End Time
+      (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appointmentId+"/duration")).set(hours+"");
+      (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appointmentId+"/cost")).set(totalCost+"");
+      (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appointmentId+"/sessionEndTime")).set(endTime.format());
+      (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appointmentId+"/status")).set("Pending Payment");
+      (new Firebase("https://ubertutoralpha.firebaseio.com/appointments/"+appointmentId+"/isTutorPaid")).set("False");
+      
+    });
+  });
+  sendSmsMessageToStudent(_this.getAttribute("appointmentId"), 
+    "Your Tutor session has finished! Please login website to pay! Thanks for using AsapTutor!");
+}
+
+
+    </script>
+
+    <!-- Optionally, you can add Slimscroll and FastClick plugins.
+         Both of these plugins are recommended to enhance the
+         user experience. Slimscroll is required when using the
+         fixed layout. -->
+  </body>
+</html>

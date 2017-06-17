@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<!--
+SAVE ONTO AWS: aws s3 cp . s3://charlesding.info/Projects/asaptutor --recursive
+
+aws s3 rm s3://asaptutor.us --recursive
+
+aws s3 cp . s3://asaptutor.us --recursive
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AsapTutor | 1:1 Tutoring</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+     <!-- bootstrap slider -->
+    <link rel="stylesheet" href="plugins/bootstrap-slider/slider.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+             <!--   <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css"> -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+  <style>
+    #mainbox {
+      //position:absolute; 
+      //bottom:0px; 
+      //width:calc(100% - 30px);
+      background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+      background: rgba(255, 255, 255, 0.8);
+    }
+    #classSelection {
+      top:8px;
+      left:50px;
+      right:60px;
+    }
+    @media screen and (min-width: 768px) {
+        #mainbox {
+          //margin-top:100px;
+          //position:absolute; 
+          //bottom:0px; 
+          //width:calc(100% - 260px);
+          background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+          background: rgba(255, 255, 255, 0.8);
+        }
+        #classSelection {
+          top:8px;
+          right:170px;
+          left:50px;
+        }
+    }
+    .mainbox-footer {
+      background: rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+      background: rgba(255, 255, 255, 0);
+    }
+
+/*Loading*/
+.overlay {
+    z-index: 9000;
+    background: rgba(255,255,255,0.7);
+    border-radius: 3px;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.faOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+    color: #000;
+    font-size: 50px;
+}
+  </style>
+  </head>
+  <!--
+  BODY TAG OPTIONS:
+  =================
+  Apply one or more of the following classes to get the
+  desired effect
+  |---------------------------------------------------------|
+  | SKINS         | skin-blue                               |
+  |               | skin-black                              |
+  |               | skin-purple                             |
+  |               | skin-yellow                             |
+  |               | skin-red                                |
+  |               | skin-green                              |
+  |---------------------------------------------------------|
+  |LAYOUT OPTIONS | fixed                                   |
+  |               | layout-boxed                            |
+  |               | layout-top-nav                          |
+  |               | sidebar-collapse                        |
+  |               | sidebar-mini                            |
+  |---------------------------------------------------------|
+  -->
+  <body class="hold-transition skin-blue sidebar-mini" style="overflow:hidden">
+    <div id="redirecting" class="overlay">
+      <i class="fa fa-refresh fa-spin faOverlay"></i>
+    </div>
+    <div id="globalwrapper" class="wrapper">
+
+      <!-- Main Header -->
+      <header class="main-header">
+
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>A</b>T</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><small>ASAP</small><b>Tutor</b></span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+
+          <!-- Class Selection -->
+          <div id="classSelection" class="form-group" style="position:absolute;">
+            <select id="select2ClassSelection" class="form-control select2" multiple="multiple" data-placeholder="Select a Course">
+            </select>
+          </div><!-- /.form-group -->
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account Menu -->
+              <li class="dropdown user user-menu">
+                <!-- Menu Toggle Button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <!-- The user image in the navbar-->
+                  <img id="userImageNavbar" src="dist/img/l.gif" class="user-image" alt="User Image">
+                  <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                  <span class="hidden-xs studentName"></span>
+                </a>
+                <ul class="dropdown-menu" style="right:0px;">
+                  <!-- The user image in the menu -->
+                  <li class="user-header">
+                    <img id="userImageHeader" src="dist/img/l.gif" class="img-circle" alt="User Image">
+                    <p>
+                      <span class="studentName"></span>
+                      <small id="memberSinceDateProfile"></small>
+                    </p>
+                  </li>
+                  <!-- Menu Body -->
+                  <li class="user-body">
+                    <div class="col-xs-6 text-center">
+                      <a href="help.html">Need Help?</a>
+                    </div>
+                    <div class="col-xs-6 text-center">
+                      <a href="becometutor.html">Become a Tutor</a>
+                    </div>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="profile.html" class="btn btn-default btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="#" class="btn btn-default btn-flat" onclick="signOut();">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside id="mainleftsidebar" class="main-sidebar">
+        <div id="mainleftsidebardiv">
+          <!-- sidebar: style can be found in sidebar.less -->
+          <section class="sidebar">
+
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+              <div class="pull-left image">
+                <img style="height:45px;" id="userImagePanel" src="dist/img/l.gif" class="img-circle" alt="User Image">
+              </div>
+              <div class="pull-left info">
+                <p class="studentName"></p>
+                <!-- Status -->
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu">
+              <li class="header">MENU</li>
+              <!-- Optionally, you can add icons to the links -->
+              <li class="active"><a href="#"><i class="fa fa-book"></i> <span>Find Tutors</span></a></li>
+              <li><a href="mybookings.html"><i class="fa fa-calendar"></i> <span>My Bookings</span></a></li>
+              <li><a href="payment.html"><i class="fa fa-money"></i> <span>Payment</span></a></li>
+              <li><a href="help.html"><i class="fa fa-question"></i> <span>Help</span></a></li>
+              <li><a href="becometutor.html"><i class="fa fa-graduation-cap"></i> <span>Become a Tutor</span></a></li>
+              <br>
+
+              <li class="header" style="position:fixed; bottom:0px; width:230px; font-size: 9.5px; text-align: center;"> <!-- To the right -->
+                <!-- Default to the left -->
+                <strong>Copyright &copy; 2015 <a href="#">AsapTutor</a>.</strong> All rights reserved.
+              </li>
+
+            </ul><!-- /.sidebar-menu -->
+          </section>
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div id="maincontentwrapper" class="content-wrapper")>
+        <div id="googleMap" style="position:absolute; width:100%;height:134px;"></div>
+        <!-- Content Header (Page header) -- NOT NEEDED -- 
+        <section class="content-header">
+          <h1>
+            <small></small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+            <li class="active">Here</li>
+          </ol>
+        </section>-->
+
+        <!-- Main content -->
+        <section class="content">
+          <!-- Your Page Content Here -->
+          <div id="paddingTop"></div>
+          <div style="float:right;">
+            <div class="btn-group-vertical">
+              <button type="button" id='resetMap' class="btn btn-primary"><i class="fa fa-location-arrow"></i></button>
+            </div>
+          </div>
+          <br><br>
+          <div id="mainbox" class="box box-primary col-md-12"> <!--
+                <div class="box-header with-border">
+                  <h3 class="box-title">Header</h3>
+                </div> -->
+                <!-- form start -->
+                <form role="form">
+                  <div class="box-body">
+                    <!-- text input 
+                    <div class="form-group">
+                      <input id="topicQuestion" type="text" class="form-control" placeholder="[OPTIONAL] General Topic/Question   Eg:Calculus Matrix Multiplications">
+                    </div> -->
+                    <div style="float:left; width:60%;">
+                      <div class="input-group">
+                        <input type="text" id='eventPos' class="form-control" placeholder="Where to meet? Eg: Library (Default: Your Current Location)">
+                        <span style="cursor:pointer" id="cursorChange" class="input-group-addon"><i class="fa fa-map-pin"></i></span>
+                      </div>
+                    </div>
+                    <div id="durationDiv" style="float:right; width:35%; text-align:center;">
+                      <input id="durationSlider" type="text" data-slider-min="1" data-slider-id="red" data-slider-tooltip="hide" data-slider-max="10" data-slider-step="1" data-slider-value="2"/>
+                      <span class="text-black" style="font-weight: bold;">Meet <span id="duration">1</span> Hour(s)</span>
+                    </div>
+                  </div><!-- /.box-body -->
+                  <div class="box-footer mainbox-footer">
+                    <button type="submit" href="#control-sidebar-home-tab" data-toggle="tab" class="btn btn-primary" style="float: right; width:73%;" onclick="findTutors();">Find Tutors!</button>
+                    <button type="submit" onclick="asap();" class="btn btn-danger disabled" style="float: left; width:25%;" > <b><i>ASAP</i></b> <i class="fa fa-bolt"></i></button>
+                  </div>
+                </form>
+              </div>
+
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+      <!-- Control Sidebar -->
+      <aside id="rightsidebaraside" class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul id="rightsidetabs" class="nav nav-tabs nav-justified control-sidebar-tabs">
+          <li id="searchTutorsRightBar"><a href="#control-sidebar-home-tab" data-toggle="tab" onclick="findTutors();"><i class="fa fa-search"></i></a></li>
+          <li id="tutorProfileRightBar"><a href="#control-sidebar-settings-tab" data-toggle="tab" onclick="setTutorProfileTabActive();" ><i class="fa fa-user"></i></a></li>
+          <li><a href="#" onclick="$.AdminLTE.controlSidebar.close();" style="cursor:pointer"><i class="fa fa-close"></i></a></li>
+        </ul>
+        <!-- Date and time range & time Picker-->
+        <div class="bootstrap-timepicker">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </div>
+              <input id="tutorDay" type="text" name="birthdate" value="" class="form-control pull-right" id="reservationtime"/>
+            </div><!-- /.input group -->
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-clock-o"></i>
+              </div>
+              <input id="tutorTime" type="text" class="form-control timepicker">
+            </div><!-- /.input group -->
+          </div><!-- /.form group -->
+        </div>
+        <h3 id="rightBarHeaderName" style="padding:0px 10px 0px 10px; text-align:center;" class="control-sidebar-heading">Tutors Near You</h3>
+        <!-- Tab panes -->
+        <div id="righttabcontent" class="tab-content" style="padding-left:10px; padding-right:10px;">
+          <!-- Home tab content -->
+          <div class="tab-pane" id="control-sidebar-home-tab">
+            <ul id="tutorsList" class="control-sidebar-menu">
+            </ul><!-- /.control-sidebar-menu -->
+          </div><!-- /.tab-pane -->
+          <!-- Settings tab content -->
+          <div class="tab-pane" id="control-sidebar-settings-tab">
+                  <div class="hideTutorProfileWhenNoTutorSelected" style="text-align:center;">
+                    <img id="tutorProfileImageHeader" src="dist/img/img.png" style="width:70%; cursor:pointer;" class="user-image img-circle" alt="User Image">
+                    <p>
+                      <h4 id="tutorProfileName" style="cursor:pointer" class="control-sidebar-subheading">No Tutor Selected</h4>
+                      <p style="margin-top: -8px;"><i id="tutorProfileStar1" class="fa fa-star"></i><i id="tutorProfileStar2" class="fa fa-star"></i><i id="tutorProfileStar3" class="fa fa-star"></i><i id="tutorProfileStar4" class="fa fa-star"></i><i id="tutorProfileStar5" class="fa fa-star"></i><span id="tutorProfileNumOfReviews">(0)</span></p>
+                      <p id="tutorProfileMembership" style="font-size:11px; margin-top:-10px;"></p>
+                    </p>
+                    <h4 class="control-sidebar-subheading">Pricing</h4>
+                    <p style="padding-left:10px; padding-right:10px; margin-top:-10px;"> 
+                      $<span id="bookingCostTotal" >_</span> for <span id="bookingDuration" >_</span> Hour(s) @ $<span id="bookingHourlyCost">_</span>/hr 
+                    </p>
+                    <h4 class="control-sidebar-subheading">Availability - 24hr</h4>
+                    <p style="padding-left:10px; padding-right:10px; margin-top:-10px;"> 
+                      <p id="freeSchedule1" >Mon:</p>
+                      <p id="freeSchedule2" >Tue:</p>
+                      <p id="freeSchedule3" >Wed:</p>
+                      <p id="freeSchedule4" >Th:</p>
+                      <p id="freeSchedule5" >Fri:</p>
+                      <p id="freeSchedule6" >Sat:</p>
+                      <p id="freeSchedule7" >Sun:</p>
+                    </p>
+                    <h4 class="control-sidebar-subheading"><i class="fa fa-pencil"></i> Skills</h4>
+                    <p id="skillsPane">
+                      <span class="label label-danger">None</span>
+                    </p>
+                    <h4 class="control-sidebar-subheading"><i class="fa fa-book"></i> Courses Expertise</h4>
+                    <p id="courseExpertisePane">
+                      <span class="label label-danger">None</span>
+                    </p>
+                  </div>
+          </div><!-- /.tab-pane -->
+        </div>
+        <div id="tutorPageDecals" style="text-align:center; border-top: 1px solid white;" >
+          <h4 class="control-sidebar-subheading">Start Time Flexiblity</h4>
+          <div id="flexibilitySliderDiv" style="text-align:center; padding-left:30px; padding-right:30px;">
+            <input id="flexibilitySlider" data-slider-id="blue" type="text" data-slider-min="0" data-slider-tooltip="hide" data-slider-max="125" data-slider-step="5" data-slider-value="0"/>
+            <p><span id="flexibility">0</span> Minutes(s)</p>
+          </div>
+          <div class="box-footer mainbox-footer">
+            <button id="confirmTutorButton" type="button" class="btn btn-default" style="width:100%;" onclick="requestAppointment();">Confirm & Request!</button>
+          </div>
+        </div>
+      </aside><!-- /.control-sidebar -->
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div id="controlsidebarbg" class="control-sidebar-bg"></div>
+    </div><!-- ./wrapper -->
+
+    <!-- Modals
+    ===================================================== -->
+    <!--Feedback Modal -->
+    <div class="modal fade" id="tutorProfileModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title"><strong style="color: black">Tutor Profile</strong> <small> Asap<strong style="color: grey">Tutor </strong></small></h4>
+          </div>
+          <div class="modal-body" style="padding-bottom: 0px; text-align:center;">
+
+
+
+
+            <div class="row">
+              <div class="col-md-12">
+
+                <!-- Profile Image -->
+                <div class="box box-primary">
+                  <div class="box-body box-profile">
+                    <img id="tutorImageModal" class="profile-user-img img-responsive img-circle userImage" src="dist/img/l.gif" alt="User profile picture">
+                    <h3 id="tutorNameModal" class="profile-username text-center userName"></h3>
+                    <p id="currentStatusModal" class="text-muted text-center"></p>
+                    <p id="starsModal" class="text-muted text-center"></p>
+                  </div><!-- /.box-body -->
+                </div><!-- /.box -->
+              </div>
+              <div class="col-md-12">
+                <!-- About Me Box -->
+                <div class="box box-primary">
+                  <div class="box-header with-border">
+                    <h3 class="box-title">About Me</h3>
+                  </div><!-- /.box-header -->
+                  <div class="box-body">
+                    <strong><i class="fa fa-university margin-r-5"></i>  Education</strong>
+                    <p id="educationModal" class="text-muted">
+                    </p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+                    <p id="locationModal" class="text-muted"></p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+                    <p id="skillsModal">
+                      <span class="label label-danger">UI Design</span>
+                      <span class="label label-success">Coding</span>
+                      <span class="label label-info">Javascript</span>
+                      <span class="label label-warning">PHP</span>
+                      <span class="label label-primary">Node.js</span>
+                    </p>
+                    <hr>
+                    <strong><i class="fa fa-book margin-r-5"></i> Courses Expertise</strong>
+                    <p id="courseExpertiseModal">
+                      <span class="label label-danger">CS 1001</span>
+                      <span class="label label-success">PSYC 2001</span>
+                      <span class="label label-info">MATH 3001</span>
+                      <span class="label label-warning">MATH 2001</span>
+                      <span class="label label-primary">CS 2001</span>
+                    </p>
+                    <hr>
+
+                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Biography</strong>
+                    <p id="biographyModal" ></p>
+                    <ul class="list-group list-group-unbordered">
+                      <li class="list-group-item">
+                        <b class="pull-left">Phone Number</b>.<a style="cursor:pointer;" id="phoneNumberModal" class="pull-right"></a>
+                      </li>
+                      <li class="list-group-item">
+                        <b class="pull-left">Email</b>.<a style="cursor:pointer;" id="emailModal" class="pull-right"></a>
+                      </li>
+                    </ul>
+                  </div><!-- /.box-body -->
+                </div><!-- /.box -->
+              </div>
+            </div>
+
+
+
+
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- REQUIRED JS SCRIPTS -->
+
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.js"></script>
+    <!-- Bootstrap slider -->
+    <script src="plugins/bootstrap-slider/bootstrap-slider.js"></script>
+    <!-- Select2 -->
+    <script src="plugins/select2/select2.full.min.js"></script>
+    <!--Google Maps-->
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+     <!-- Firebase -->
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <!-- Dad's Map Implementation -->
+    <script src="charliemap.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demoNoInject.js"></script>
+    <!-- Optionally, you can add Slimscroll and FastClick plugins.
+         Both of these plugins are recommended to enhance the
+         user experience. Slimscroll is required when using the
+         fixed layout. -->
+    <!-- SlimScroll -->
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="plugins/fastclick/fastclick.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap time picker -->
+    <script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <!--UI Main Js -->
+    <script src="homePageUI.js"></script>
+    <!--Custom SMS Messaging Library that calls Node Js Server -->
+    <script src="smsMessage.js"></script>
+    <script>
+    /******* FIREBASE CODE - MOVE TO JS FILE *******/
+      var isTutorSelected = false;
+      var loggedInUserLatLng = null;
+      var selectedTutorID = null;
+      var loggedInUserID = null;
+      $( document ).ready(function() {
+          $("#redirecting").show();
+          $(".sidebar-menu").hide();
+          emptyTutorLogic();
+          $(".hideTutorProfileWhenNoTutorSelected").hide();
+
+          //Bind Date/Time Changes to Update Map and Tutors
+          $( "#tutorDay" ).change(function() {
+            findTutors();
+          });
+          $( "#tutorTime" ).change(function() {
+            findTutors();
+          });
+
+          // Register the callback to be fired every time auth state changes
+          var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+          ref.onAuth(authDataCallback);
+
+          // Get a database reference to our posts
+          var authData = ref.getAuth();
+
+          if (authData) {
+            console.log("Authenticated user with uid:", authData.uid);
+            loggedInUserID = authData.uid;
+            var ref = new Firebase("https://ubertutoralpha.firebaseio.com/users/"+authData.uid);
+
+            // Attach an asynchronous callback to read the data at our posts reference
+            ref.child("latlng").on("value", function(snapshot) {
+              loggedInUserLatLng = snapshot.val();
+            }, function (errorObject) {
+              console.log("The read failed: " + errorObject.code);
+            });
+
+            ref.once("value", function(snapshot) {
+              console.log(snapshot.val());
+              updateUserImages(snapshot.val().imgUrl);
+              updateUserName(snapshot.val().displayName);
+              $("#memberSinceDateProfile").text("Member since "+ moment(snapshot.val().creationDate).format("MMM. YYYY"));
+              loggedInUserLatLng = snapshot.val().latlng;
+              updateCoursesSkillsSelection();
+              if(snapshot.val().userType == "tutor") {
+                window.location = 'mybookings.html';
+              }else{
+                $("#redirecting").hide();
+                $(".sidebar-menu").show();
+                findTutors();
+              }
+
+              startGMap(loggedInUserLatLng);
+            }, function (errorObject) {
+              console.log("The read failed: " + errorObject.code);
+            });
+          }
+
+          // Create a callback which logs the current auth state
+          function authDataCallback(authData) {
+            if (authData) {
+              console.log("User " + authData.uid + " is logged in with " + authData.provider);
+            } else {
+              console.log("User is logged out");
+              window.location = '../index.html'
+            }
+          }
+          $("#duration").on('change',function(){
+               //Manual Listener to change spans to match - Angular woulda helped here. Bug ,this is called way too many times
+               $("#bookingDuration").text($("#duration").text());
+               var hourly = parseInt($("#bookingHourlyCost").text());
+               var duration = parseFloat($("#duration").text());
+               if(hourly && duration){
+                  var finalCost = hourly * duration;
+                  if(finalCost){
+                    $("#bookingCostTotal").text(hourly * duration);
+                  }
+               }
+          });
+      });
+      function updateUserImages(imgURL){
+        if (imgURL){
+          $("#userImagePanel").attr("src", imgURL);
+          $("#userImageNavbar").attr("src", imgURL);
+          $("#userImageHeader").attr("src", imgURL);
+        }
+      }
+      function updateUserName(userName){
+        if(userName){
+          $(".studentName").text(userName);
+        }
+      }
+      function updateCoursesSkillsSelection(){
+          //Populate Dropdown with all unique skills and courses
+          (new Firebase("https://ubertutoralpha.firebaseio.com/users")).once('value', function (coursesSnapshot) {
+            var coursesArray=[];
+            //Go through every user
+            $.each(coursesSnapshot.val(), function(uid, userObj){
+              //Loop through each course skill and add them to array if they are tutor
+              if(userObj.userType == "tutor"){
+                var skillsArr = userObj.skills.split(",");
+                var coursesArr = userObj.courseExpertise.split(",");
+                if(coursesArr){
+                  $.each(coursesArr, function(index, value){
+                    if(value) coursesArray.push(value);
+                  });
+                }
+                if(skillsArr){
+                  $.each(skillsArr, function(index, value){
+                    if(value) coursesArray.push(value);
+                  });
+                }
+              }
+            });
+
+            //add all uniqueue skills and courses to the course selector
+            coursesArray = $.unique(coursesArray);
+            $.each(coursesArray, function(index, value){
+              $("#select2ClassSelection").append($('<option>', {value: value, text: value}));
+            });
+
+          });
+      }
+      function signOut(){
+        var ref = new Firebase('https://ubertutoralpha.firebaseio.com');
+        ref.unauth();
+        window.location = '../index.html';
+      }
+      var onFindTutorChange = null;
+
+      function tutorFreeSchedule(dayOfWeek, userObj){
+        var freeScheduleString = "";
+        //freeScheduleString += userObj.freeSchedule[dayOfWeek].freehours.split(",");
+
+        var start = -1;
+        var end = -1;
+        $.each(userObj.freeSchedule[dayOfWeek].freehours.split(","),function(){
+          if(start === -1){
+            start = this;
+          }else if(end === -1){
+            end = this;
+          }else if(this === (end+1)){
+            end = this;
+          } else if((end-start) > 0){
+            //Add continuity
+            freeScheduleString += ", "+start +"-" + end;
+            start = -1;
+            end = -1;
+          }else {
+            //Add Single Digits
+            freeScheduleString += ", "+start+", "+end;
+            start = -1;
+            end = -1;
+          }
+        });
+        return freeScheduleString.substring(1);//freeScheduleString.replace(/,/g ,", ");;
+      }
+
+      function isTutorAvailableOnFreeSchedule(isTutorFree, userObj){
+        var duration = $("#duration").text();
+        var hour = parseInt(moment($("#tutorDay").val()+" "+$("#tutorTime").val()).format("H"));
+        var day = moment($("#tutorDay").val()+" "+$("#tutorTime").val()).format("dddd").toLowerCase();
+
+              var freeHoursArr = userObj.freeSchedule[day].freehours.split(",");
+              for(var a = 0; a<duration; a++){
+                if(hour+a<24 && $.inArray(hour+a+"", freeHoursArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+                  isTutorFree = false;
+                }
+                if(hour+a>=24 && day=="monday"){
+                  var freeHoursNextDayArr = userObj.freeSchedule["tuesday"].freehours.split(",");
+                  if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+                    isTutorFree = false;
+                  }                  
+                }
+                if(hour+a>=24 && day=="tuesday"){
+                  var freeHoursNextDayArr = userObj.freeSchedule["wednesday"].freehours.split(",");
+                  if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+                    isTutorFree = false;
+                  }                  
+                }
+                if(hour+a>=24 && day=="wednesday"){
+                  var freeHoursNextDayArr = userObj.freeSchedule["thursday"].freehours.split(",");
+                  if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+                    isTutorFree = false;
+                  }                  
+                }
+                if(hour+a>=24 && day=="thursday"){
+                  var freeHoursNextDayArr = userObj.freeSchedule["friday"].freehours.split(",");
+                  if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+                    isTutorFree = false;
+                  }                  
+                }
+                if(hour+a>=24 && day=="friday"){
+                  var freeHoursNextDayArr = userObj.freeSchedule["saturday"].freehours.split(",");
+                  if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+                    isTutorFree = false;
+                  }  
+                }
+                if(hour+a>=24 && day=="saturday"){
+                  var freeHoursNextDayArr = userObj.freeSchedule["sunday"].freehours.split(",");
+                  if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+                    isTutorFree = false;
+                  } 
+                }
+                if(hour+a>=24 && day=="sunday"){
+                  var freeHoursNextDayArr = userObj.freeSchedule["monday"].freehours.split(",");
+                  if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+                    isTutorFree = false;
+                  }               
+                }
+              }
+        return isTutorFree;
+      }
+      function findTutors(){
+        
+        // Show Find Tutor as Header
+        setSearchTutorsTabActive();
+
+        //Forces Open Right Bar
+        $.AdminLTE.controlSidebar.open();
+        
+        //get my location, duration, date, time, and match it with free schedule tutors
+        var location = $("#eventPos").val();
+        var duration = $("#duration").text();
+        var hour = parseInt(moment($("#tutorDay").val()+" "+$("#tutorTime").val()).format("H"));
+        var day = moment($("#tutorDay").val()+" "+$("#tutorTime").val()).format("dddd").toLowerCase();
+
+        var coursesArr = ($("#select2ClassSelection").select2('val')+"").split(",");
+
+        var ref = new Firebase("https://ubertutoralpha.firebaseio.com/users");
+
+        //Stop listener if there is already is one to prevent unneeded database calls.
+        if(onFindTutorChange){
+          ref.off('value', onFindTutorChange);
+        }
+
+        // Attach an asynchronous callback to read the data at our posts reference
+        onFindTutorChange = ref.on("value", function(snapshot) {
+          var userArr = snapshot.val();
+
+          //Clear list before showing
+          $("#tutorsList").empty();
+          //Go through every user, and if they are tutor, and if is available, show on map/search
+          $.each(userArr, function(uid, userObj){
+            if(userObj.userType == "tutor"){
+              var isTutorFree = false;
+              if(coursesArr[0] != "null")
+              {
+                //Only show Tutors that match Courses Selected when selected courses is not empty
+                $.each(coursesArr, function(index, value){
+                  // console.log("skills: ", userObj.skills );
+                  // console.log(" value: ",value);
+                  // console.log(" course: " , userObj.courseExpertise);
+                  if($.inArray(value,userObj.courseExpertise.split(","))== -1 && $.inArray(value,userObj.skills.split(","))== -1){
+                    //do nothing... do not display tutor, because his courses do not match selected courses
+                  }else{
+                    isTutorFree = true;
+                  }
+                });
+              } else {
+                //Show all tutors, as no courses are selected
+                isTutorFree = true;
+              }
+              //isTutorFree = true;//isTutorAvailableOnFreeSchedule(isTutorFree, userObj);
+              
+              // var freeHoursArr = userObj.freeSchedule[day].freehours.split(",");
+              // for(var a = 0; a<duration; a++){
+              //   if(hour+a<24 && $.inArray(hour+a+"", freeHoursArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+              //     isTutorFree = false;
+              //   }
+              //   if(hour+a>=24 && day=="monday"){
+              //     var freeHoursNextDayArr = userObj.freeSchedule["tuesday"].freehours.split(",");
+              //     if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+              //       isTutorFree = false;
+              //     }                  
+              //   }
+              //   if(hour+a>=24 && day=="tuesday"){
+              //     var freeHoursNextDayArr = userObj.freeSchedule["wednesday"].freehours.split(",");
+              //     if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+              //       isTutorFree = false;
+              //     }                  
+              //   }
+              //   if(hour+a>=24 && day=="wednesday"){
+              //     var freeHoursNextDayArr = userObj.freeSchedule["thursday"].freehours.split(",");
+              //     if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+              //       isTutorFree = false;
+              //     }                  
+              //   }
+              //   if(hour+a>=24 && day=="thursday"){
+              //     var freeHoursNextDayArr = userObj.freeSchedule["friday"].freehours.split(",");
+              //     if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+              //       isTutorFree = false;
+              //     }                  
+              //   }
+              //   if(hour+a>=24 && day=="friday"){
+              //     var freeHoursNextDayArr = userObj.freeSchedule["saturday"].freehours.split(",");
+              //     if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+              //       isTutorFree = false;
+              //     }  
+              //   }
+              //   if(hour+a>=24 && day=="saturday"){
+              //     var freeHoursNextDayArr = userObj.freeSchedule["sunday"].freehours.split(",");
+              //     if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+              //       isTutorFree = false;
+              //     } 
+              //   }
+              //   if(hour+a>=24 && day=="sunday"){
+              //     var freeHoursNextDayArr = userObj.freeSchedule["monday"].freehours.split(",");
+              //     if($.inArray(hour+a-24+"", freeHoursNextDayArr) == -1){ //-1 if doesn't exist, returns the index otherwise
+              //       isTutorFree = false;
+              //     }               
+              //   }
+              // }
+
+              if(isTutorFree == true){
+                  addTutorToDisplay(userObj, uid)
+              }
+            }
+          });
+        }, function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        });
+          startGMap(loggedInUserLatLng);
+      }
+      function addTutorToDisplay(userObj, uid){
+        //User Image Loaction
+        var userImg = userObj.imgUrl;
+        //Distance
+        var distance = Math.floor(Math.random()*10)+"."+Math.floor(Math.random()*10);
+        if (loggedInUserLatLng && loggedInUserLatLng.split(",")[0]) {
+            var lat1 = loggedInUserLatLng.split(",")[0];
+            var lng1 = loggedInUserLatLng.split(",")[1];
+
+            if (userObj && userObj.latlng && userObj.latlng.split(",")[0]) {
+                var lat2 = userObj.latlng.split(",")[0];
+                var lng2 = userObj.latlng.split(",")[1];
+                distance = calcDistance(lat1,lng1,lat2,lng2,"M");
+                distance = Math.ceil(distance * 100) / 100;
+            }
+        }
+
+        //Display Name
+        var displayName = userObj.displayName;
+        //Stars Get From User Obj
+        var stars = userObj.reviewAvgStars; 
+        var numOfReview = userObj.numOfReviews  || "0";
+        var starsHtml = "No Reviews Yet";
+        var price = userObj.costHourly ||"Not Set" ;
+        if(parseFloat(stars) < 0.75){
+          //0.5
+          starsHtml = "<i class='fa fa-star-half-o' onclick></i><i class='fa fa-star-o'></i><i class='fa fa-star-o'></i><i class='fa fa-star-o'></i><i class='fa fa-star-o'></i>";
+        }
+        if(parseFloat(stars) >= 0.75 && parseFloat(stars) < 1.25){
+          //1.0
+          starsHtml = "<i class='fa fa-star' onclick></i><i class='fa fa-star-o'></i><i class='fa fa-star-o'></i><i class='fa fa-star-o'></i><i class='fa fa-star-o'></i>";
+        }
+        if(parseFloat(stars) >= 1.25 && parseFloat(stars) < 1.75){
+          //1.5
+          starsHtml = "<i class='fa fa-star' onclick></i><i class='fa fa-star-half-o'></i><i class='fa fa-star-o'></i><i class='fa fa-star-o'></i><i class='fa fa-star-o'></i>";
+        }
+        if(parseFloat(stars) >= 1.75 && parseFloat(stars) < 2.25){
+          //2.0
+          starsHtml = "<i class='fa fa-star' onclick></i><i class='fa fa-star'></i><i class='fa fa-star-o'></i><i class='fa fa-star-o'></i><i class='fa fa-star-o'></i>";
+
+        }
+        if(parseFloat(stars) >= 2.25 && parseFloat(stars) < 2.75){
+          //2.5
+          starsHtml = "<i class='fa fa-star' onclick></i><i class='fa fa-star'></i><i class='fa fa-star-half-o'></i><i class='fa fa-star-o'></i><i class='fa fa-star-o'></i>";
+        }
+        if(parseFloat(stars) >= 2.75 && parseFloat(stars) < 3.25){
+          //3.0
+          starsHtml = "<i class='fa fa-star' onclick></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star-o'></i><i class='fa fa-star-o'></i>";
+        }
+        if(parseFloat(stars) >= 3.25 && parseFloat(stars) < 3.75){
+          //3.5
+          starsHtml = "<i class='fa fa-star' onclick></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star-half-o'></i><i class='fa fa-star-o'></i>";
+        }
+        if(parseFloat(stars) >= 3.75 && parseFloat(stars) < 4.25){
+          //4.0
+          starsHtml = "<i class='fa fa-star' onclick></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star-o'></i>";
+        }
+        if(parseFloat(stars) >= 4.25 && parseFloat(stars) < 4.75){
+          //4.5
+          starsHtml = "<i class='fa fa-star' onclick></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star-half-o'></i>";
+        }
+        if(parseFloat(stars) >= 4.75){
+          //5.0
+          starsHtml = "<i class='fa fa-star' onclick></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i>";
+        }
+        if(numOfReview == "0" || numOfReview == 0){
+          starsHtml = "No Reviews";
+        }
+
+        var rowLocation = -1;
+        var distanceArray = $("#tutorsList").children().find("b").each(function () {
+            //alert(this.innerHTML); // Prints out each Distance
+            var rowDistance = parseInt(this.innerHTML);
+            if(rowDistance < distance){
+              rowLocation++;
+            }
+        });
+        if($("#tutorsList").children().size() == 0 || rowLocation == -1){
+          $("#tutorsList").prepend("<li class='tutorRow' style='cursor:pointer;' onclick='setTutorProfileTabActive();'><a userObj='"+JSON.stringify(userObj).replace(/["]/g,"&#34;").replace(/[']/g,"&#39;")+"' onclick='updateTutorProfile(this)'><img src='"+userImg+"' class='user-image menu-icon' alt='User Image'><div class='menu-info'><h4 class='control-sidebar-subheading'>"+displayName+" <span style='font-size:10px; color:grey;'> &nbsp;<b class='distanceOrdering'>"+distance+"</b> mile(s)</span></h4><p>"+starsHtml+" ("+numOfReview+" ) - $"+price+"/hr </p> </div></a></li>");
+        }else{
+          $("#tutorsList li:eq("+rowLocation+")").after("<li class='tutorRow' style='cursor:pointer;' onclick='setTutorProfileTabActive();'><a userObj='"+JSON.stringify(userObj).replace(/["]/g,"&#34;").replace(/[']/g,"&#39;")+"' onclick='updateTutorProfile(this)'><img src='"+userImg+"' class='user-image menu-icon' alt='User Image'><div class='menu-info'><h4 class='control-sidebar-subheading'>"+displayName+" <span style='font-size:10px; color:grey;'> &nbsp;<b class='distanceOrdering'>"+distance+"</b> mile(s)</span></h4><p>"+starsHtml+" ("+numOfReview+" ) - $"+price+"/hr </p> </div></a></li>");
+        }
+      }
+      //Fix Window OnResize Bug for Right Side Bar LOL
+      var rightsidebaraside = 70;
+      var righttabcontent = 235;
+      function setTutorProfileTabActive(){
+        //Hide Find Tutor Header Name
+        isTutorSelected = true;
+        emptyTutorLogic();
+        rightsidebaraside = 150;
+        righttabcontent = 315;
+        fixSideBars();
+
+        //Finished Updating Tutor Profile, Show it Now
+        $(".hideTutorProfileWhenNoTutorSelected").show();
+        $('#rightsidetabs a[href="#control-sidebar-settings-tab"]').tab('show');
+      }
+      function setSearchTutorsTabActive(){
+        rightsidebaraside = 70;
+        righttabcontent = 235;
+        fixSideBars();
+
+        $("#rightBarHeaderName").text("Tutors Near You");
+        $("#rightBarHeaderName").show();
+        $("#tutorPageDecals").hide();
+        $('#rightsidetabs a[href="#control-sidebar-home-tab"]').tab('show');
+      }
+      function emptyTutorLogic(){
+        if(isTutorSelected == false){
+          $('#rightBarHeaderName').text('No Tutor Selected');
+          $("#tutorPageDecals").hide();
+        }else{
+          $('#rightBarHeaderName').hide();
+          $("#tutorPageDecals").show();
+        }
+      }
+      function updateTutorProfile(_this){
+        //BUG HERE - TODO - YOU CAN NOT STORE DOUBLE OR SINGLE QUOTES INTO STRING
+        var usrObj=JSON.parse($(_this).attr("userobj"));
+        console.log(usrObj);
+        updateTutorProfileByObject(usrObj);
+
+      }
+      var onUpdateTutorProfileChange = null;
+      function updateTutorProfileByObject(tutorObj){
+        selectedTutorID = tutorObj.uid;
+        var updateTutorProfileRef = new Firebase("https://ubertutoralpha.firebaseio.com/users/");
+
+        //Stop listener if there is already is one to prevent unneeded database calls.
+        if(onUpdateTutorProfileChange){
+          updateTutorProfileRef.off('value', onUpdateTutorProfileChange);
+        }
+
+        onUpdateTutorProfileChange = updateTutorProfileRef.child(tutorObj.uid).on("value",function(usrObjSnapshot){
+            var usrObj=usrObjSnapshot.val();
+            var joinDate = moment(usrObj.joinDate).format("MMM. YYYY") || "Unknown";
+            var numOfReviews = usrObj.numOfReviews || "0";
+            var stars = parseFloat(usrObj.reviewAvgStars);
+
+            //Update Tutor Profile
+            $("#bookingDuration").text($("#duration").text());
+            $("#bookingHourlyCost").text(usrObj.costHourly || "Not Set");
+            $("#bookingCostTotal").text(parseFloat($("#bookingDuration").text())*parseInt($("#bookingHourlyCost").text()));
+            $("#tutorProfileImageHeader").attr("src", usrObj.imgUrl);
+            $("#tutorProfileName").text(usrObj.displayName);
+            $("#tutorProfileNumOfReviews").text(" ("+numOfReviews+")");
+            $("#tutorProfileMembership").text("Tutor since " + joinDate);
+            //$("#tutorBiography").text(usrObj.biography);
+            $("#tutorProfileStar1").text("");
+
+            if(usrObj.skills) $("#skillsPane").empty();
+            if(usrObj.courseExpertise) $("#courseExpertisePane").empty();
+            var skillsArray = usrObj.skills.split(",");
+            var courseExpertiseArray = usrObj.courseExpertise.split(",");
+            console.log(skillsArray);
+            console.log(courseExpertiseArray);
+            $.each(skillsArray, function(index, value){
+              $("#skillsPane").prepend(getRandomSpan(value));
+            });
+            $.each(courseExpertiseArray, function(index, value){
+              $("#courseExpertisePane").prepend(getRandomSpan(value));
+            });
+
+            //Free Schedule
+              $("#freeSchedule1").show();
+              $("#freeSchedule2").show();
+              $("#freeSchedule3").show();
+              $("#freeSchedule4").show();
+              $("#freeSchedule5").show();
+              $("#freeSchedule6").show();
+              $("#freeSchedule7").show();
+
+              var monFreeScheduleString = tutorFreeSchedule("monday",tutorObj);
+              var tueFreeScheduleString = tutorFreeSchedule("tuesday",tutorObj);
+              var wedFreeScheduleString = tutorFreeSchedule("wednesday",tutorObj);
+              var thuFreeScheduleString = tutorFreeSchedule("thursday",tutorObj);
+              var friFreeScheduleString = tutorFreeSchedule("friday",tutorObj);
+              var satFreeScheduleString = tutorFreeSchedule("saturday",tutorObj);
+              var sunFreeScheduleString = tutorFreeSchedule("sunday",tutorObj);
+
+              if( !monFreeScheduleString)  $("#freeSchedule1").hide();
+              if( !tueFreeScheduleString)  $("#freeSchedule2").hide();
+              if( !wedFreeScheduleString)  $("#freeSchedule3").hide();
+              if( !thuFreeScheduleString)  $("#freeSchedule4").hide();
+              if( !friFreeScheduleString)  $("#freeSchedule5").hide();
+              if( !satFreeScheduleString)  $("#freeSchedule6").hide();
+              if( !sunFreeScheduleString)  $("#freeSchedule7").hide();
+
+              $("#freeSchedule1").text("Mon: "+ monFreeScheduleString);
+              $("#freeSchedule2").text("Tue: "+ tueFreeScheduleString);
+              $("#freeSchedule3").text("Wed: "+ wedFreeScheduleString);
+              $("#freeSchedule4").text("Thu: "+ thuFreeScheduleString);
+              $("#freeSchedule5").text("Fri: "+ friFreeScheduleString);
+              $("#freeSchedule6").text("Sat: "+ satFreeScheduleString);
+              $("#freeSchedule7").text("Sun: "+ sunFreeScheduleString);
+
+            //Add Listeners to view Profile Modal
+            $(document).attr("tutorObj",JSON.stringify(usrObj));
+            $("#tutorProfileName").click(function(){
+              tutorProfileModal();
+            });
+            $("#tutorProfileImageHeader").click(function(){
+              tutorProfileModal();
+            });
+            //Add Opacity hover effect
+            $('#tutorProfileName').hover(function() {
+              $(this).stop().animate({ opacity: 0.6 }, "fast"); //on mouse hover
+              $('#tutorProfileImageHeader').stop().animate({ opacity: 0.6 }, "fast");
+            },
+            function() {
+              $(this).stop().animate({ opacity: 1.0 }, "fast"); //on mouse out
+              $('#tutorProfileImageHeader').stop().animate({ opacity: 1.0 }, "fast");
+            });
+            $('#tutorProfileImageHeader').hover(function() {
+              $(this).stop().animate({ opacity: 0.6 }, "fast"); //on mouse hover
+              $('#tutorProfileName').stop().animate({ opacity: 0.6 }, "fast");
+            },
+            function() {
+              $(this).stop().animate({ opacity: 1.0 }, "fast"); //on mouse out
+              $('#tutorProfileName').stop().animate({ opacity: 1.0 }, "fast");
+            });
+
+
+            if(parseFloat(stars) == 0){
+              //0.5
+              $("#tutorProfileStar1").text("No Reviews");
+              $("#tutorProfileStar1").removeClass();
+              $("#tutorProfileStar2").removeClass();
+              $("#tutorProfileStar3").removeClass();
+              $("#tutorProfileStar4").removeClass();
+              $("#tutorProfileStar5").removeClass();
+            }
+            if(parseFloat(stars) < 0.75 && parseFloat(stars) >0){
+              //0.5
+              $("#tutorProfileStar1").removeClass().addClass( "fa fa-star-half-o" );
+              $("#tutorProfileStar2").removeClass().addClass( "fa fa-star-o" );
+              $("#tutorProfileStar3").removeClass().addClass( "fa fa-star-o" );
+              $("#tutorProfileStar4").removeClass().addClass( "fa fa-star-o" );
+              $("#tutorProfileStar5").removeClass().addClass( "fa fa-star-o" );
+            }
+            if(parseFloat(stars) >= 0.75 && parseFloat(stars) < 1.25){
+              //1.0
+              $("#tutorProfileStar1").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar2").removeClass().addClass( "fa fa-star-o" );
+              $("#tutorProfileStar3").removeClass().addClass( "fa fa-star-o" );
+              $("#tutorProfileStar4").removeClass().addClass( "fa fa-star-o" );
+              $("#tutorProfileStar5").removeClass().addClass( "fa fa-star-o" );
+            }
+            if(parseFloat(stars) >= 1.25 && parseFloat(stars) < 1.75){
+              //1.5
+              $("#tutorProfileStar1").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar2").removeClass().addClass( "fa fa-star-half-o" );
+              $("#tutorProfileStar3").removeClass().addClass( "fa fa-star-o" );
+              $("#tutorProfileStar4").removeClass().addClass( "fa fa-star-o" );
+              $("#tutorProfileStar5").removeClass().addClass( "fa fa-star-o" );
+            }
+            if(parseFloat(stars) >= 1.75 && parseFloat(stars) < 2.25){
+              //2.0
+              $("#tutorProfileStar1").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar2").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar3").removeClass().addClass( "fa fa-star-o" );
+              $("#tutorProfileStar4").removeClass().addClass( "fa fa-star-o" );
+              $("#tutorProfileStar5").removeClass().addClass( "fa fa-star-o" );
+            }
+            if(parseFloat(stars) >= 2.25 && parseFloat(stars) < 2.75){
+              //2.5
+              $("#tutorProfileStar1").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar2").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar3").removeClass().addClass( "fa fa-star-half-o" );
+              $("#tutorProfileStar4").removeClass().addClass( "fa fa-star-o" );
+              $("#tutorProfileStar5").removeClass().addClass( "fa fa-star-o" );
+            }
+            if(parseFloat(stars) >= 2.75 && parseFloat(stars) < 3.25){
+              //3.0
+              $("#tutorProfileStar1").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar2").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar3").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar4").removeClass().addClass( "fa fa-star-o" );
+              $("#tutorProfileStar5").removeClass().addClass( "fa fa-star-o" );
+            }
+            if(parseFloat(stars) >= 3.25 && parseFloat(stars) < 3.75){
+              //3.5
+              $("#tutorProfileStar1").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar2").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar3").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar4").removeClass().addClass( "fa fa-star-half-o" );
+              $("#tutorProfileStar5").removeClass().addClass( "fa fa-star-o" );
+            }
+            if(parseFloat(stars) >= 3.75 && parseFloat(stars) < 4.25){
+              //4.0
+              $("#tutorProfileStar1").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar2").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar3").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar4").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar5").removeClass().addClass( "fa fa-star-o" );
+            }
+            if(parseFloat(stars) >= 4.25 && parseFloat(stars) < 4.75){
+              //4.5
+              $("#tutorProfileStar1").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar2").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar3").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar4").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar5").removeClass().addClass( "fa fa-star-half-o" );
+            }
+            if(parseFloat(stars) >= 4.75){
+              //5.0
+              $("#tutorProfileStar1").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar2").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar3").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar4").removeClass().addClass( "fa fa-star" );
+              $("#tutorProfileStar5").removeClass().addClass( "fa fa-star" );
+            }
+
+            //Hack - This supposes that everytime we update Tutor Profile, we want to display it as well.
+            setTutorProfileTabActive();
+        }); 
+      }
+
+
+      // --TODO--
+      function asap(){
+        //Contact all tutors, even offline tutors 
+        alert("Coming Soon. This will contact all tutors (offline or online) to get you help as soon as possible.")
+      }
+
+      function tutorProfileModal(){
+        //pop up modal and set tutor name
+        $('#tutorProfileModal').modal(); 
+        var tutorObj = JSON.parse($(document).attr("tutorObj"));
+        console.log(tutorObj);
+        $("#tutorImageModal").attr("src",tutorObj.imgUrl);
+        $("#tutorNameModal").text(tutorObj.displayName);
+        $("#memberSinceDateProfileModal").text("Member since "+ moment(tutorObj.creationDate).format("MMM. YYYY"));
+        $("#emailModal").text("Request");//(tutorObj.email);
+        $("#phoneNumberModal").text("Request");//(tutorObj.phoneNumber);
+        $("#currentStatusModal").text(tutorObj.userType.charAt(0).toUpperCase() + tutorObj.userType.slice(1) + " since " + moment(tutorObj.creationDate).format("MMMM Do, YYYY"));
+        $("#educationModal").text(tutorObj.education);
+        $("#locationModal").text(tutorObj.city+", "+tutorObj.state);
+        $("#biographyModal").text(tutorObj.biography);
+        $("#courseExpertiseModal").empty();
+        $("#skillsModal").empty();
+        $("#starsModal").text("("+tutorObj.reviewAvgStars + ") Average Stars out of " + tutorObj.numOfReviews + " reviews.");
+
+        $("#emailModal").click(function(){alert("Coming Soon...");});
+        $("#phoneNumberModal").click(function(){alert("Coming Soon...");});
+    
+        var skillsArray = tutorObj.skills.split(",");
+        var courseExpertiseArray = tutorObj.courseExpertise.split(",");
+        $.each(skillsArray, function(index, value){
+          $("#skillsModal").prepend(getRandomSpan(value));
+        });
+        $.each(courseExpertiseArray, function(index, value){
+          $("#courseExpertiseModal").prepend(getRandomSpan(value));
+        });
+      }
+        function getRandomSpan(text){
+          //Generate Random Number between 1 and 5 inclusive
+          var randomNum = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+          switch(randomNum) {
+              case 1:
+                  return " <span class='label label-danger'>"+text+"</span> ";
+              case 2:
+                  return " <span class='label label-success'>"+text+"</span> ";
+              case 3:
+                  return " <span class='label label-info'>"+text+"</span> ";
+              case 4:
+                  return " <span class='label label-warning'>"+text+"</span> ";
+              case 5:
+                  return " <span class='label label-primary'>"+text+"</span> ";
+          }         
+        }
+
+      function requestAppointment(){ 
+        $("#redirecting").show();
+        //get Time, Day, latlng, duration, course, questionTopic
+        var time = $("#tutorTime").val();
+        var day = $("#tutorDay").val();
+        var latlng = $("#eventPos").attr("latlng") || loggedInUserLatLng;
+        var latlngAddress = $("#eventPos").val().replace("(", "").replace(")","").replace(" ","");
+        var duration = $("#duration").text();
+        var courses = $("#select2ClassSelection").select2('val')+"";
+        var questionTopic = "Disabled For Now";//$("#topicQuestion").val();
+        var cost = parseFloat(duration) * parseInt($("#bookingHourlyCost").text());
+
+
+        //Run some basic Checks Before Creating Appointments
+        //1) Any Outstanding Balances? TODO
+        //2) At least 1 Course Matches up TODO
+        
+        //set status=AwaitingResponse, cost=null, declineMessage=null
+        var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+
+        //Saves Appointment and Creates Appointment UID
+        var appointment = ref.child("appointments").push({
+          studentID: loggedInUserID,
+          tutorID: selectedTutorID,
+          time: time,
+          day: day,
+          latlng: latlng,
+          latlngAddress: latlngAddress || "Latitute, Longitude: "+latlng,
+          duration: duration,
+          cost: cost + "",
+          status: "Awaiting Response",
+          courses: courses || "None Selected",
+          declineMessage: "null",
+          questionTopic:  questionTopic,
+          creationDate: moment().format("M/D/YYYY h:m:s a"),
+          tutorDisplayName: $("#tutorProfileName").text(),
+          studentDisplayName: $("p.studentName").text(),
+          feedbackLeft: "false",
+          feedbackMessage: "null",
+          feedbackRating: "0",
+          flexibility: $("#flexibility").text(),
+          costHourly: $("#bookingHourlyCost").text(),
+          sessionStartTime: "",
+          sessionEndTime: "",
+          isTutorPaid: "NA"
+        });
+        var appointmentID = appointment.key();
+        var onComplete = function(error) {
+          if (error) {
+            alert('Something went wrong. Please refresh page and try again.');
+          } else {
+            window.location = 'mybookings.html';
+            console.log('Synchronization succeeded');
+          }
+        };
+
+        //Sends Text to Tutor Saying they got a request!
+        sendSmsMessage(selectedTutorID, "You got a tutor request for "+duration+"hr on "+day+" @"+time+". Login our website to chat or accept!");
+        //Saves AppointmentUID for Student
+        ref.child("users").child(loggedInUserID).child("appointmentIDs").child(appointmentID).set({
+          tutorID: selectedTutorID
+        });
+        //Saves AppointmentUID for Tutor
+        ref.child("users").child(selectedTutorID).child("appointmentIDs").child(appointmentID).set({
+          studentID: loggedInUserID
+        }, function(error) {
+          if (error) {
+            alert('Something went wrong. Please refresh page and try again.');
+          } else {
+            setTimeout(function(){ window.location = 'mybookings.html'; }, 2000);
+          }
+        });
+
+      }
+      //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+      //:::                                                                         :::
+      //:::  This routine calculates the distance between two points (given the     :::
+      //:::  latitude/longitude of those points). It is being used to calculate     :::
+      //:::  the distance between two locations using GeoDataSource (TM) prodducts  :::
+      //:::                                                                         :::
+      //:::  Definitions:                                                           :::
+      //:::    South latitudes are negative, east longitudes are positive           :::
+      //:::                                                                         :::
+      //:::  Passed to function:                                                    :::
+      //:::    lat1, lon1 = Latitude and Longitude of point 1 (in decimal degrees)  :::
+      //:::    lat2, lon2 = Latitude and Longitude of point 2 (in decimal degrees)  :::
+      //:::    unit = the unit you desire for results                               :::
+      //:::           where: 'M' is statute miles (default)                         :::
+      //:::                  'K' is kilometers                                      :::
+      //:::                  'N' is nautical miles                                  :::
+      //:::                                                                         :::
+      //:::  Worldwide cities and other features databases with latitude longitude  :::
+      //:::  are available at http://www.geodatasource.com                          :::
+      //:::                                                                         :::
+      //:::  For enquiries, please contact sales@geodatasource.com                  :::
+      //:::                                                                         :::
+      //:::  Official Web site: http://www.geodatasource.com                        :::
+      //:::                                                                         :::
+      //:::               GeoDataSource.com (C) All Rights Reserved 2015            :::
+      //:::                                                                         :::
+      //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+      function calcDistance(lat1, lon1, lat2, lon2, unit) {
+        var radlat1 = Math.PI * lat1/180;
+        var radlat2 = Math.PI * lat2/180;
+        var radlon1 = Math.PI * lon1/180;
+        var radlon2 = Math.PI * lon2/180;
+        var theta = lon1-lon2;
+        var radtheta = Math.PI * theta/180;
+        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        dist = Math.acos(dist);
+        dist = dist * 180/Math.PI;
+        dist = dist * 60 * 1.1515;
+        if (unit=="K") { dist = dist * 1.609344; }
+        if (unit=="N") { dist = dist * 0.8684; }
+        return dist;
+      }
+    </script>
+
+
+  </body>
+</html>

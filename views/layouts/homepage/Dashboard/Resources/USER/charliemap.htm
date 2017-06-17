@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+		<meta content="width=device-width, initial-scale=1" name="viewport" />
+		<meta content="en-us" http-equiv="Content-Language" />
+		<title>CharMap</title>
+        <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="http://maps.googleapis.com/maps/api/js"></script>
+        
+        <script src="charliemap.js"></script>
+        <style>
+        
+        #tables_container{
+            height:300px;
+            overlap:scroll;
+        }
+        
+        .tdclked{
+           background-color:#cccccc;
+        }
+        table:nth-child(1){
+            background-color:#ffeedd;
+        }
+        table:nth-child(2){
+            background-color:#eeeeff;
+        }
+        .test {
+    background:gray;
+    width:200px;
+    height:200px;
+    cursor:url('http://upload.wikimedia.org/wikipedia/commons/d/de/POL_apple.jpg');
+}
+        </style>
+        
+        
+	</head>
+	<body>
+		<div id="googleMap" style="width:800px;height:500px;"></div>
+        <button id='resetMap'>resetMap</button><input id='eventPos'></input>
+        <button id='cursorChange'>cursorChange</button>
+
+	</body>
+</html>

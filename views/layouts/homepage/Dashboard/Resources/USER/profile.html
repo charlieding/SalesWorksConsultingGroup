@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Stackster</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+     <!-- bootstrap slider -->
+    <link rel="stylesheet" href="plugins/bootstrap-slider/slider.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+             <!--   <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css"> -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+  <style>
+    #classSelection {
+      top:8px;
+      left:50px;
+      right:60px;
+    }
+    @media screen and (min-width: 768px) {
+        #classSelection {
+          top:8px;
+          right:170px;
+          left:50px;
+        }
+    }
+.schedule-rows td {
+  width: 80px;
+  height: 30px;
+  margin: 3px;
+  padding: 5px;
+  background-color: #B2E0FF;
+  cursor: pointer;
+  border: 1px solid white;
+}
+
+.schedule-rows td:first-child {
+  background-color: transparent;
+  text-align: right;
+  position: relative;
+  top: -12px;
+}
+
+.schedule-rows td[data-selected],
+.schedule-rows td[data-selecting] { background-color: #E74C3C; }
+
+.schedule-rows td[data-disabled] { opacity: 0.55; }
+
+  </style>
+  </head>
+  <!--
+  BODY TAG OPTIONS:
+  =================
+  Apply one or more of the following classes to get the
+  desired effect
+  |---------------------------------------------------------|
+  | SKINS         | skin-blue                               |
+  |               | skin-black                              |
+  |               | skin-purple                             |
+  |               | skin-yellow                             |
+  |               | skin-red                                |
+  |               | skin-green                              |
+  |---------------------------------------------------------|
+  |LAYOUT OPTIONS | fixed                                   |
+  |               | layout-boxed                            |
+  |               | layout-top-nav                          |
+  |               | sidebar-collapse                        |
+  |               | sidebar-mini                            |
+  |---------------------------------------------------------|
+  -->
+  <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+      <!-- Main Header -->
+      <header class="main-header">
+
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>S</b>T</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><small><b>Stack</b></small>ster</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account Menu -->
+              <li class="dropdown user user-menu">
+                <!-- Menu Toggle Button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <!-- The user image in the navbar-->
+                  <img src="dist/img/l.gif" class="user-image userImage" alt="User Image">
+                  <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                  <span class="hidden-xs userName"></span>
+                </a>
+                <ul class="dropdown-menu" style="right:0px;">
+                  <!-- The user image in the menu -->
+                  <li class="user-header">
+                    <img src="dist/img/l.gif" class="img-circle userImage" alt="User Image">
+                    <p>
+                      <span class="userName"></span>
+                      <small id="memberSinceDateProfile"></small>
+                    </p>
+                  </li>
+                  <!-- Menu Body -->
+                  <li class="user-body">
+                    <div class="col-xs-6 text-center">
+                      <a href="help.html">Need Help?</a>
+                    </div>
+                    <div class="col-xs-6 text-center">
+                      <a class="tutorRemoveItems" href="index.html">Dashboard</a>
+                    </div>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      <a onclick="signOut();" class="btn btn-default btn-flat">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img style="height:45px;" src="dist/img/l.gif" class="img-circle userImage" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p class="userName"></p>
+              <!-- Status -->
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <ul class="sidebar-menu">
+            <li class="header">MENU</li>
+            <!-- Optionally, you can add icons to the links -->
+              <li><a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+              <li><a href="crawlsimulation.html"><i class="fa fa-bug"></i> <span>Crawl Simulation Test</span></a></li>
+              <li><a onclick="alert('Coming Soon...');" href="#"><i class="fa fa-key"></i> <span>Key Management</span></a></li>
+              <li><a href="payment.html"><i class="fa fa-money"></i> <span>Payment</span></a></li>
+              <li><a href="help.html"><i class="fa fa-question"></i> <span>Help</span></a></li>
+          </ul><!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div id="maincontentwrapper" class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1> Profile
+            <small href="#" data-toggle="control-sidebar">Put in Email and Phone to get Alerts/Notifications</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li class="tutorRemoveItems"><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+            <li class="active">Profile</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <!-- Your Page Content Here -->
+          <div class="row">
+            <div class="col-md-12">
+
+              <!-- Profile Image -->
+              <div class="box box-primary">
+                <div class="box-body box-profile">
+                  <img class="profile-user-img img-responsive img-circle userImage" src="dist/img/l.gif" alt="User profile picture">
+                  <h3 class="profile-username text-center userName"></h3>
+                  <p id="currentStatus" class="text-muted text-center"></p>
+
+                  <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                      <i class="fa fa-linkedin-square"></i><b> LinkedIn</b> <a id="linkedinUrl" class="pull-right"></a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Phone Number</b> (<i class="fa fa-lock"></i> Only You Can See) <a id="phoneNumber" class="pull-right"></a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Email</b> (<i class="fa fa-lock"></i> Only You Can See) <a id="email" class="pull-right"></a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Member Since</b> <a id="joinDate" class="pull-right"></a>
+                    </li>
+                  </ul>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div>
+            <div class="col-md-12">
+              <!-- About Me Box -->
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">About Me</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <strong><i class="fa fa-university margin-r-5"></i>  Education</strong>
+                  <p id="education" class="text-muted">
+                  </p>
+
+                  <hr>
+
+                  <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+                  <p id="location" class="text-muted"></p>
+
+                  <hr>
+
+                  <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+                  <p id="skills">
+                    <span class="label label-danger">UI Design</span>
+                    <span class="label label-success">Coding</span>
+                    <span class="label label-info">Javascript</span>
+                    <span class="label label-warning">PHP</span>
+                    <span class="label label-primary">Node.js</span>
+                  </p>
+                  <hr>
+                  <strong><i class="fa fa-book margin-r-5"></i> Courses Expertise</strong>
+                  <p id="courseExpertise">
+                    <span class="label label-danger">CS 1001</span>
+                    <span class="label label-success">PSYC 2001</span>
+                    <span class="label label-info">MATH 3001</span>
+                    <span class="label label-warning">MATH 2001</span>
+                    <span class="label label-primary">CS 2001</span>
+                  </p>
+                  <hr>
+
+                  <strong><i class="fa fa-file-text-o margin-r-5"></i> Biography</strong>
+                  <p id="biography" ></p>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+            <div class="col-md-12 tutorDisplayOnly">
+              <!-- About Me Box -->
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Payment Method</h3>  ( <i style="font-size:15px;" class="fa fa-lock"></i>Only You Can See)
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                      <i class="fa fa-cc-paypal"></i> <b>Paypal</b> (<i class="fa fa-lock"></i>) <a id="depositPaypalMethod" class="pull-right"></a>
+                    </li>
+                    <li class="list-group-item">
+                      <i class="fa fa-vimeo"></i> <b>Venmo</b> (<i class="fa fa-lock"></i>) <a id="depositVenmoMethod" class="pull-right"></a>
+                    </li>
+                    <li class="list-group-item">
+                      <i class="fa fa-cc-visa"></i> <b>Chase Quick Pay</b> (<i class="fa fa-lock"></i>) <a id="depositChaseQuickPayMethod" class="pull-right"></a>
+                    </li>
+                  </ul>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+            <div class="col-md-12">
+              <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+                </ul>
+                <div class="tab-content">
+                  <div class="active tab-pane" id="settings">
+                    <form class="form-horizontal" onsubmit="return saveProfile();">
+                      <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputName" placeholder="Name you want others to see">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputPhoneNumber" class="col-sm-2 control-label">Phone Number</label>
+                        <div class="col-sm-10">
+                          <input type="tel" class="form-control" id="inputPhoneNumber" placeholder="Get Alert/Notification of Upcoming Sessions">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                          <input type="email" class="form-control" id="inputEmail" placeholder="Get Alert/Notifications of Upcoming Sessions">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputEducation" class="col-sm-2 control-label">Education</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputEducation" placeholder="Eg: B.S. in Computer Science from Stanford Univerity '14">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputSkills" placeholder="Separate with a comma (Eg: PHP,Python,Java)">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputCourseExpertise" class="col-sm-2 control-label">Course Expertise</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputCourseExpertise" placeholder="Separate with a comma (Eg: CS 1001, MATH 3001, PSYC 1001)">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputBiography" class="col-sm-2 control-label">Biography</label>
+                        <div class="col-sm-10">
+                          <textarea class="form-control" id="inputBiography" placeholder="Biography you want others to see"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputImgUrl" class="col-sm-2 control-label">Profile Picture</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" id="inputImgUrl" placeholder="Image Url (Eg: http://amazon.com/cool_image.jpg)"></input>
+                          <input type="file" onchange="uploadImage()" id="file-chooser"/>
+                          <div class="progress xs" style="background-color:#FFD9D9;">
+                            <div id="uploadProgressBar" class="progress-bar progress-bar-yellow" style="width: 0%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                              <span class="sr-only">80% Complete</span>
+                            </div><div id="results"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputLinkedInUrl" class="col-sm-2 control-label">LinkedIn</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputLinkedInUrl" placeholder="LinkedIn Url (Eg: www.linkedin.com/example)">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group tutorDisplayOnly">
+                        <label for="inputVenmo" class="col-sm-2 control-label">Venmo</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputVenmo" placeholder="Venmo Deposit Email (Eg: example@gmail.com)">
+                        </div>
+                      </div>
+                      <div class="form-group tutorDisplayOnly">
+                        <label for="inputPaypal" class="col-sm-2 control-label">Paypal</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputPaypal" placeholder="Paypal Deposit Email (Eg: example@gmail.com)">
+                        </div>
+                      </div>
+                      <div class="form-group tutorDisplayOnly">
+                        <label for="inputChaseQuickPay" class="col-sm-2 control-label">Chase QuickPay</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputChaseQuickPay" placeholder="Chase QuickPay Deposit Email (Eg: example@gmail.com)">
+                        </div>
+                      </div>
+                      <div class="form-group tutorDisplayOnly" style="text-align:center;visibility: hidden;">
+                        <label class="col-md-2 control-label"> <i class="fa fa-calendar"></i> Free Schedule  <i class="fa fa-calendar"></i></label>
+                        <div class="col-md-10" id="weekly-schedule"></div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-danger">Save</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div><!-- /.tab-pane -->
+                </div><!-- /.tab-content -->
+              </div><!-- /.nav-tabs-custom -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+<!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+          <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+
+          <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <!-- Home tab content -->
+          <div class="tab-pane" id="control-sidebar-home-tab">
+            <h3 class="control-sidebar-heading">Recent Activity</h3>
+            <ul class="control-sidebar-menu">
+              <li>
+                <a href="javascript::;">
+                  <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+                    <p>Will be 23 on April 24th</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript::;">
+                  <i class="menu-icon fa fa-user bg-yellow"></i>
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+                    <p>New phone +1(800)555-1234</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript::;">
+                  <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+                    <p>nora@example.com</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript::;">
+                  <i class="menu-icon fa fa-file-code-o bg-green"></i>
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+                    <p>Execution time 5 seconds</p>
+                  </div>
+                </a>
+              </li>
+            </ul><!-- /.control-sidebar-menu -->
+
+            <h3 class="control-sidebar-heading">Tasks Progress</h3>
+            <ul class="control-sidebar-menu">
+              <li>
+                <a href="javascript::;">
+                  <h4 class="control-sidebar-subheading">
+                    Custom Template Design
+                    <span class="label label-danger pull-right">70%</span>
+                  </h4>
+                  <div class="progress progress-xxs">
+                    <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript::;">
+                  <h4 class="control-sidebar-subheading">
+                    Update Resume
+                    <span class="label label-success pull-right">95%</span>
+                  </h4>
+                  <div class="progress progress-xxs">
+                    <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript::;">
+                  <h4 class="control-sidebar-subheading">
+                    Laravel Integration
+                    <span class="label label-warning pull-right">50%</span>
+                  </h4>
+                  <div class="progress progress-xxs">
+                    <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript::;">
+                  <h4 class="control-sidebar-subheading">
+                    Back End Framework
+                    <span class="label label-primary pull-right">68%</span>
+                  </h4>
+                  <div class="progress progress-xxs">
+                    <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+                  </div>
+                </a>
+              </li>
+            </ul><!-- /.control-sidebar-menu -->
+
+          </div><!-- /.tab-pane -->
+          <!-- Stats tab content -->
+          <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div><!-- /.tab-pane -->
+          <!-- Settings tab content -->
+          <div class="tab-pane" id="control-sidebar-settings-tab">
+            <form method="post">
+              <h3 class="control-sidebar-heading">General Settings</h3>
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Report panel usage
+                  <input type="checkbox" class="pull-right" checked>
+                </label>
+                <p>
+                  Some information about this general settings option
+                </p>
+              </div><!-- /.form-group -->
+
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Allow mail redirect
+                  <input type="checkbox" class="pull-right" checked>
+                </label>
+                <p>
+                  Other sets of options are available
+                </p>
+              </div><!-- /.form-group -->
+
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Expose author name in posts
+                  <input type="checkbox" class="pull-right" checked>
+                </label>
+                <p>
+                  Allow the user to show his name in blog posts
+                </p>
+              </div><!-- /.form-group -->
+
+              <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Show me as online
+                  <input type="checkbox" class="pull-right" checked>
+                </label>
+              </div><!-- /.form-group -->
+
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Turn off notifications
+                  <input type="checkbox" class="pull-right">
+                </label>
+              </div><!-- /.form-group -->
+
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Delete chat history
+                  <a href="javascript::;" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+                </label>
+              </div><!-- /.form-group -->
+            </form>
+          </div><!-- /.tab-pane -->
+        </div>
+      </aside><!-- /.control-sidebar -->
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div class="control-sidebar-bg"></div>
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b >Version</b> Alpha 0.0.1
+        </div>
+        <strong>Follow Us!</strong>&nbsp;&nbsp;&nbsp;<i href"#ComingSoon" onclick="alert('Coming Soon...');" style="cursor:pointer" class="fa fa-facebook-official"> Facebook</i>&nbsp;&nbsp;&nbsp;<i href"#ComingSoon" onclick="alert('Coming Soon...');" style="cursor:pointer" class="fa fa-twitter-square"> Twitter</i>&nbsp;&nbsp;&nbsp;<i href"#ComingSoon" onclick="alert('Coming Soon...');"  style="cursor:pointer" class="fa fa-instagram"> Instagram</i>
+      </footer>
+    </div><!-- ./wrapper -->
+
+    <!-- REQUIRED JS SCRIPTS -->
+
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Firebase -->
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.min.js"></script>
+    <!-- Bootstrap slider -->
+    <script src="plugins/bootstrap-slider/bootstrap-slider.js"></script>
+    <!-- Select2 -->
+    <script src="plugins/select2/select2.full.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="plugins/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!--Moment Time-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <!-- Scheduler Plugin -->
+    <script src="dist/js/scheduler.js"></script>  
+
+    <!-- AWS!!-->
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.28.min.js"></script>
+    <script type="text/javascript">
+      // See the Configuring section to configure credentials in the SDK
+      //AWS.config.credentials = new AWS.Credentials('AKIAJ3LLAJ64NQGWA3IA', 'fnZES6FVWmuToD/e4xzckkjyDbeq1jr/BJM5FByj');
+      AWS.config.update({accessKeyId: 'AKIAJ2MWV4MLXEZNKWWQ', secretAccessKey: 'qCotF8dTiZhTlv+bGngoRstk6gaHr9iMLnjOBARK'});
+
+      // Configure your region
+      AWS.config.region = 'us-east-1';
+    </script>
+
+    <script>
+      $(function () {
+        /* BOOTSTRAP SLIDER */
+        $("#ex6").slider();
+        $("#ex6").on("slide", function(slideEvt) {
+          $("#ex6SliderVal").text(slideEvt.value);
+        });
+        /*Initialize Select2 Elements */
+        $(".select2").select2();
+        /*Initialize Time Free selector*/
+        $("#weekly-schedule").dayScheduleSelector({
+          // Sun - Sat
+          days        : [0, 1, 2, 3, 4, 5, 6],  
+
+          // HH:mm format
+          startTime   : '0:00',         
+
+          // HH:mm format       
+          endTime     : '24:00',
+
+          // minutes                
+          interval    : 60,    
+
+          stringDays  : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+
+          // Custom template                 
+          template    : '<div class="day-schedule-selector">'         +
+                          '<table class="schedule-table">'            +
+                            '<thead class="schedule-header"></thead>' +
+                            '<tbody class="schedule-rows"></tbody>'   +
+                          '</table>'                                  +
+                        '<div>'
+        });
+
+      });
+
+      $( document ).ready(function() {
+      });
+
+      function uploadImage(){
+        /** AWS UPLOAD FILES/IMAGES FOR CHATTING **/
+        var params = {Bucket: 'asaptutor.us/UPLOADFILES/'+loggedInUserID, Expires:3153600000};
+        var bucket = new AWS.S3({params: params});
+
+        var fileChooser = document.getElementById('file-chooser');
+        var results = document.getElementById('results');
+          var file = fileChooser.files[0];
+          if (file) {
+            results.innerHTML = '';
+            //uploadProgressBar
+            var params = {Key: file.name, ContentType: file.type, Body: file};
+            bucket.upload(params).on('httpUploadProgress', function(evt) {
+              console.log("Uploaded :: " + parseInt((evt.loaded * 100) / evt.total)+'%');
+              $("#uploadProgressBar").width(parseInt((evt.loaded * 100) / evt.total)+"%");
+              }).send(function(err, data) {
+              results.innerHTML = err ? 'ERROR!' : 'UPLOADED.';
+              console.log(data);
+              console.log(data.Location);
+              console.log(data.key);
+              var isImage = false;
+              if (file.name.match(/\.(jpg|jpeg|png|gif)$/)){
+                //alert('IS an image');
+                isImage = true;
+              }    
+              $("#inputImgUrl").val(data.Location);
+            });
+          }
+      }
+
+    /******* FIREBASE CODE - MOVE TO JS FILE *******/
+      var loggedInUserLatLng = null;
+      var loggedInUserID = null;
+      $( document ).ready(function() {
+          // Register the callback to be fired every time auth state changes
+          var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+          ref.onAuth(authDataCallback);
+
+          // Get a database reference to our posts
+          var authData = ref.getAuth();
+
+          if (authData) {
+            console.log("Authenticated user with uid:", authData.uid);
+            loggedInUserID = authData.uid;
+            var ref = new Firebase("https://ubertutoralpha.firebaseio.com/users/"+authData.uid);
+
+            // Attach an asynchronous callback to read the data at our posts reference
+            ref.on("value", function(snapshot) {
+              console.log(snapshot.val());
+              updateUserImages(snapshot.val().imgUrl);
+              updateUserName(snapshot.val().displayName);
+              initProfile(snapshot);
+              loggedInUserID = snapshot.key();
+              loggedInUserLatLng = snapshot.val().latlng;
+              if(snapshot.val().userType == "tutor"){
+                $(".tutorRemoveItems").remove();
+                $("#depositVenmoMethod").text(snapshot.val().venmo);
+                $("#depositPaypalMethod").text(snapshot.val().paypal);
+                $("#depositChaseQuickPayMethod").text(snapshot.val().chasequickpay);
+              } else {
+                $(".tutorDisplayOnly").remove();
+              }
+            }, function (errorObject) {
+              console.log("The read failed: " + errorObject.code);
+            });
+          }
+
+          // Create a callback which logs the current auth state
+          function authDataCallback(authData) {
+            if (authData) {
+              console.log("User " + authData.uid + " is logged in with " + authData.provider);
+            } else {
+              console.log("User is logged out");
+              window.location = '../../../../index.html'
+            }
+          }
+      });
+      function updateUserImages(imgURL){
+        if (imgURL){
+          $(".userImage").attr("src", imgURL);
+        }
+      }
+      function initProfile(snapshot){
+        $("#memberSinceDateProfile").text("Member since "+ moment(snapshot.val().creationDate).format("MMM. YYYY"));
+        $("#joinDate").text(moment(snapshot.val().creationDate).format("MMMM Do, YYYY"));
+        $("#email").text(snapshot.val().email);
+        $("#linkedinUrl").text(snapshot.val().linkedinUrl);
+        $("#phoneNumber").text(snapshot.val().phoneNumber);
+        $("#currentStatus").text("Preferred User");
+        $("#education").text(snapshot.val().education);
+        $("#location").text(snapshot.val().city+", "+snapshot.val().state);
+        $("#biography").text(snapshot.val().biography);
+        $("#courseExpertise").empty();
+        $("#skills").empty();
+
+        //Fetch Schedule and Display It
+        var mon = [];
+        var tues = [];
+        var wed = [];
+        var thu = [];
+        var fri = [];
+        var sat = [];
+        var sund = [];
+        $.each(snapshot.val().freeSchedule.monday.freehours.split(","), function(index, value){
+          var time = parseInt(value);
+          var timePlusOne = time+1;
+          if(time <10){
+            time = "0"+time;
+          }
+          if(timePlusOne < 10){
+            timePlusOne= "0"+timePlusOne;
+          }
+          mon.push([time+":00",timePlusOne+":00"]);
+        });
+        $.each(snapshot.val().freeSchedule.tuesday.freehours.split(","), function(index, value){
+          var time = parseInt(value);
+          var timePlusOne = time+1;
+          if(time <10){
+            time = "0"+time;
+          }
+          if(timePlusOne < 10){
+            timePlusOne= "0"+timePlusOne;
+          }
+          tues.push([time+":00",timePlusOne+":00"]);
+        });
+        $.each(snapshot.val().freeSchedule.wednesday.freehours.split(","), function(index, value){
+          var time = parseInt(value);
+          var timePlusOne = time+1;
+          if(time <10){
+            time = "0"+time;
+          }
+          if(timePlusOne < 10){
+            timePlusOne= "0"+timePlusOne;
+          }
+          wed.push([time+":00",timePlusOne+":00"]);
+        });
+        $.each(snapshot.val().freeSchedule.thursday.freehours.split(","), function(index, value){
+          var time = parseInt(value);
+          var timePlusOne = time+1;
+          if(time <10){
+            time = "0"+time;
+          }
+          if(timePlusOne < 10){
+            timePlusOne= "0"+timePlusOne;
+          }
+          thu.push([time+":00",timePlusOne+":00"]);
+        });
+        $.each(snapshot.val().freeSchedule.friday.freehours.split(","), function(index, value){
+          var time = parseInt(value);
+          var timePlusOne = time+1;
+          if(time <10){
+            time = "0"+time;
+          }
+          if(timePlusOne < 10){
+            timePlusOne= "0"+timePlusOne;
+          }
+          fri.push([time+":00",timePlusOne+":00"]);
+        });
+        $.each(snapshot.val().freeSchedule.saturday.freehours.split(","), function(index, value){
+          var time = parseInt(value);
+          var timePlusOne = time+1;
+          if(time <10){
+            time = "0"+time;
+          }
+          if(timePlusOne < 10){
+            timePlusOne= "0"+timePlusOne;
+          }
+          sat.push([time+":00",timePlusOne+":00"]);
+        });
+        $.each(snapshot.val().freeSchedule.sunday.freehours.split(","), function(index, value){
+          var time = parseInt(value);
+          var timePlusOne = time+1;
+          if(time <10){
+            time = "0"+time;
+          }
+          if(timePlusOne < 10){
+            timePlusOne= "0"+timePlusOne;
+          }
+          sund.push([time+":00",timePlusOne+":00"]);
+        });
+
+
+        $("#weekly-schedule").data('artsy.dayScheduleSelector').deserialize({
+          '1': mon,
+          '2': tues,
+          '3': wed,
+          '4': thu,
+          '5': fri,
+          '6': sat,
+          '0': sund,
+        });
+    
+        var skillsArray = snapshot.val().skills.split(",");
+        var courseExpertiseArray = snapshot.val().courseExpertise.split(",");
+        $.each(skillsArray, function(index, value){
+          $("#skills").prepend(getRandomSpan(value));
+        });
+        $.each(courseExpertiseArray, function(index, value){
+          $("#courseExpertise").prepend(getRandomSpan(value));
+        });
+
+        function getRandomSpan(text){
+          //Generate Random Number between 1 and 5 inclusive
+          var randomNum = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+          switch(randomNum) {
+              case 1:
+                  return " <span class='label label-danger'>"+text+"</span> ";
+              case 2:
+                  return " <span class='label label-success'>"+text+"</span> ";
+              case 3:
+                  return " <span class='label label-info'>"+text+"</span> ";
+              case 4:
+                  return " <span class='label label-warning'>"+text+"</span> ";
+              case 5:
+                  return " <span class='label label-primary'>"+text+"</span> ";
+          }         
+        }
+      }
+      function updateUserName(userName){
+        if(userName){
+          $(".userName").text(userName);
+        }
+      }
+      function signOut(){
+        var ref = new Firebase('https://ubertutoralpha.firebaseio.com');
+        ref.unauth();
+        window.location = '../../../../index.html';
+      }
+      function saveProfile(){
+        var name = $("#inputName").val();
+        var phone = $("#inputPhoneNumber").val();
+        var email = $("#inputEmail").val();
+        var edu = $("#inputEducation").val();
+        var skills = $("#inputSkills").val();
+        var courses = $("#inputCourseExpertise").val();
+        var bio = $("#inputBiography").val();
+        var img = $("#inputImgUrl").val();
+        var lnkd = $("#inputLinkedInUrl").val();
+        var venmo = $("#inputVenmo").val();
+        var paypal = $("#inputPaypal").val();
+        var chase = $("#inputChaseQuickPay").val();
+        if(name)(new Firebase("https://ubertutoralpha.firebaseio.com/users/"+loggedInUserID+"/displayName")).set(name);
+        if(phone)(new Firebase("https://ubertutoralpha.firebaseio.com/users/"+loggedInUserID+"/phoneNumber")).set(phone);
+        if(email)(new Firebase("https://ubertutoralpha.firebaseio.com/users/"+loggedInUserID+"/email")).set(email);
+        if(edu)(new Firebase("https://ubertutoralpha.firebaseio.com/users/"+loggedInUserID+"/education")).set(edu);
+        if(skills)(new Firebase("https://ubertutoralpha.firebaseio.com/users/"+loggedInUserID+"/skills")).set(skills);
+        if(courses)(new Firebase("https://ubertutoralpha.firebaseio.com/users/"+loggedInUserID+"/courseExpertise")).set(courses);
+        if(bio)(new Firebase("https://ubertutoralpha.firebaseio.com/users/"+loggedInUserID+"/biography")).set(bio);
+        if(img)(new Firebase("https://ubertutoralpha.firebaseio.com/users/"+loggedInUserID+"/imgUrl")).set(img);
+        if(lnkd)(new Firebase("https://ubertutoralpha.firebaseio.com/users/"+loggedInUserID+"/linkedinUrl")).set(lnkd);
+        if(venmo)(new Firebase("https://ubertutoralpha.firebaseio.com/users/"+loggedInUserID+"/venmo")).set(venmo);
+        if(paypal)(new Firebase("https://ubertutoralpha.firebaseio.com/users/"+loggedInUserID+"/paypal")).set(paypal);
+        if(chase)(new Firebase("https://ubertutoralpha.firebaseio.com/users/"+loggedInUserID+"/chasequickpay")).set(chase);
+        updateFreeSchedule();
+        alert("Success, Profile Saved!");
+      }
+      function updateFreeSchedule(){
+        if( !$("#weekly-schedule").data('artsy.dayScheduleSelector') ) return;
+        var cal = $("#weekly-schedule").data('artsy.dayScheduleSelector').serialize();
+        var mon = "";
+        var tue = "";
+        var wed = "";
+        var thu = "";
+        var fri = "";
+        var sat = "";
+        var sund = "";
+
+        $.each(cal, function(dayIndex, dayIndexVal){
+          $.each(dayIndexVal, function(index, value){
+            var startHour = value[0].split(':')[0];
+            var endHour = value[1].split(':')[0];
+            for(var a = parseInt(startHour); a<parseInt(endHour); a++){
+              if(dayIndex == 1){
+                //monday
+                if(mon){
+                  mon = mon + "," + a;
+                } else { 
+                  mon = "" + a;
+                }
+              }
+              if(dayIndex == 2){
+                if(tue){
+                  tue = tue + "," + a;
+                } else { 
+                  tue = "" + a;
+                }
+              }
+              if(dayIndex == 3){
+                if(wed){
+                  wed = wed + "," + a;
+                } else { 
+                  wed = "" + a;
+                }
+              }
+              if(dayIndex == 4){
+                if(thu){
+                  thu = thu + "," + a;
+                } else { 
+                  thu = "" + a;
+                }
+              }
+              if(dayIndex == 5){
+                if(fri){
+                  fri = fri + "," + a;
+                } else { 
+                  fri = "" + a;
+                }
+              }
+              if(dayIndex == 6){
+                if(sat){
+                  sat = sat + "," + a;
+                } else { 
+                  sat = "" + a;
+                }
+              }
+              if(dayIndex == 0){
+                if(sund){
+                  sund = sund + "," + a;
+                } else { 
+                  sund = "" + a;
+                }
+              }
+            }
+          });
+        });
+
+        var ref = new Firebase("https://ubertutoralpha.firebaseio.com");
+        var authData = ref.getAuth();
+        //Todo, build hours free for tutors scheduling system.
+        ref.child("users").child(authData.uid).child("freeSchedule").set({
+          monday: {
+            freehours: mon
+          },
+          tuesday: {
+            freehours: tue
+          },
+          wednesday: {
+            freehours: wed
+          },
+          thursday: {
+            freehours: thu
+          },
+          friday: {
+            freehours: fri
+          },
+          saturday: {
+            freehours: sat
+          },
+          sunday: {
+            freehours: sund
+          }
+        });
+      }
+
+    </script>
+
+    <!-- Optionally, you can add Slimscroll and FastClick plugins.
+         Both of these plugins are recommended to enhance the
+         user experience. Slimscroll is required when using the
+         fixed layout. -->
+  </body>
+</html>
