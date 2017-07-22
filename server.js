@@ -11,7 +11,7 @@ app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname, 'views/layouts')));
 
 app.get('/', function (req, res) {
-    res.render('home');
+    res.render('home', {layout: 'homepage.handlebars'});
 });
 
 app.get('/test', function (req, res) {
