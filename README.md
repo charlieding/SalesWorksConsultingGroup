@@ -1,4 +1,4 @@
-Experts in Global Sales Distrubtion. E-Commerce Gurus here to make your business succeeed.
+Experts in Global Sales Distribution. E-Commerce Gurus here to make your business succeeed.
 
 CopyRight SalesWorksConsultingGroup
 
